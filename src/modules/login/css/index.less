@@ -1,0 +1,48 @@
+@fontSize: 16px;
+
+.login{
+    position: relative;
+    left: 30%;
+}
+
+.login h3{
+    text-align: center;
+}
+
+.login .login-form {
+    margin-top: 60px;
+}
+
+.login .form-control {
+    position: relative;
+    font-size: @fontSize;
+    height: auto;
+    padding: 10px;
+    &:focus {
+        z-index: 2;
+    }
+}
+
+.login form[role=login] {
+    color: #5d5d5d;
+    background: #f2f2f2;
+    padding: 26px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.login form[role=login] input,
+.login form[role=login] button {
+    font-size: @fontSize;
+    margin: 16px 0;
+}
+
+.login form[role=login]>div {
+    text-align: center;
+}
+
+.login form[role=login] button{
+    display: table;
+    margin: 0 auto;
+}
