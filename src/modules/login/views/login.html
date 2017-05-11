@@ -12,17 +12,32 @@
 <body>
     <div class="col-md-4 login">
         <section class="login-form">
-            <form role="login" ng-submit="validateLogin()" name="loginForm">
+            <form role="login" ng-submit="validateLogin()" name="loginForm" novalidate>
                 <H3 translate="TITLE_LOGIN_NEARSHORE"></H3>
-
-                <input type="text" name="text" placeholder="{{'USER' | translate}}" class="form-control input-lg" ng-model="user" required>
-                <input type="password" class="form-control input-lg" ng-model="password"  placeholder="{{'PASSWORD' | translate}}"  ng-minlength="8" required>
+                <span translate="ErrorUserRequired"  ng-show="loginForm.user.$dirty && loginForm.user.$error.required" class="alert alert-danger"></span>
+                <br>
+                <input type="text" name="user"
+                       placeholder="{{'USER' | translate}}"
+                       autofocus=""
+                       class="form-control input-lg"
+                       ng-model="user"
+                       required>
+                <span translate="ErrorPasswordRequired" ng-show="loginForm.password.$dirty && loginForm.password.$error.required" class="alert alert-danger"></span>
+                <span translate="ErrorLengthPassword" ng-show="loginForm.password.$error.minlength" class="alert alert-danger"></span>
+                <br>
+                <input type="password"
+                       name="password"
+                       class="form-control input-lg"
+                       ng-model="password"
+                       placeholder="{{'PASSWORD' | translate}}"
+                       ng-minlength="8" required>
 
                 <br><button class="btn btn-lg btn-primary" translate="LOGIN" ng-disabled="!loginForm.$valid"></button>
+
+
+
             </form>
-            <br><div translate="ErrorUserRequired"  ng-show="loginForm.user.$error.required" class="alert alert-danger"></div>
-            <div translate="ErrorPasswordRequired" ng-show="loginForm.password.$error.required" class="alert alert-danger"></div>
-            <div translate="ErrorLengthPassword" ng-show="loginForm.password.$error.minlength" class="alert alert-danger"></div>
+
         </section>
     </div>
 </body>

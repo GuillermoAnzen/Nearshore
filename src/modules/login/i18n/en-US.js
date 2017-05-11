@@ -6,6 +6,7 @@ module.exports = {
         TITLE_LOGIN_NEARSHORE: 'Login Nearshore',
         LOGIN: 'Log in',
         ErrorUserRequired: 'Write an username',
-        ErrorPasswordRequired: 'Write a password'
+        ErrorPasswordRequired: 'Write a password',
+        ErrorLengthPassword:'Password is too short'
     }
 };
