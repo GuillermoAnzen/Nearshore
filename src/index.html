@@ -11,11 +11,15 @@
 <body ng-app="app">
     
     <div class="container">
+        <div class="col-sm-3" ng-show="loged">
+            <div mi-navbar></div>
+        </div>
+        <div id="navbarMain" class="col-sm-12">
         <nav-bar data="myNavbarV"></nav-bar>
         <div ng-view="">
 
         </div>
-
+        </div>
     </div>
 
 </body>
