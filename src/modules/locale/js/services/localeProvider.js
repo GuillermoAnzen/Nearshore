@@ -48,7 +48,7 @@ var localeProvider = function($translateProvider) {
             $translateProvider.translations(translates(translates.keys()[i]).language, translates(translates.keys()[i]).translate);
         }
         $translateProvider.preferredLanguage(this.getDefaultLaguage());
-        $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
     };
 
     this.$get = function() {
