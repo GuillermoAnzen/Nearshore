@@ -23,7 +23,7 @@ var loginCtrl = function($scope, $location,localeService) {
     $scope.validateLogin = function() {
         var user = "Hector";
         var password = "F2h*f3H_4";
-        if (user === document.getElementById("user").value && password === document.getElementById("password").value) {
+        if (user == $scope.user && password == $scope.password) {
             $location.path("/principal");
         } else {
             $location.path("/inicio");

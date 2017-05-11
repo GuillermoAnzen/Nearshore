@@ -12,14 +12,18 @@
 <body>
     <div class="col-md-4 login">
         <section class="login-form">
-            <form role="login">
-                <H3 translate="TITLE_LOGIN_NEARSHORE"></H3>
-                <input id="user" type="text" name="text" placeholder="{{'USER' | translate}}" class="form-control input-lg">
+            <form role="login" ng-submit="validateLogin()" name="loginForm">
+                <h3 translate="TITLE_LOGIN_NEARSHORE"></h3>
+                <input type="text" name="text" placeholder="{{'USER' | translate}}" class="form-control input-lg" ng-model="user" required>
 
-                <input type="password" class="form-control input-lg" id="password"  placeholder="{{'PASSWORD' | translate}}">
 
-                <br><button class="btn btn-lg btn-primary" ng-click="validateLogin()" translate="LOGIN"></button>
+                <input type="password" class="form-control input-lg" ng-model="password"  placeholder="{{'PASSWORD' | translate}}"  ng-minlength="8" required>
+
+                <br><button class="btn btn-lg btn-primary" ng-click="validateLogin()" translate="LOGIN" ng-disabled="!loginForm.$valid"></button>
             </form>
+            <br><div translate="ErrorUserRequired"  ng-show="loginForm.user.$error.required" class="alert alert-danger"></div>
+            <div translate="ErrorPasswordRequired" ng-show="loginForm.password.$error.required" class="alert alert-danger"></div>
+            <div translate="ErrorLengthPassword" ng-show="loginForm.password.$error.minlength" class="alert alert-danger"></div>
         </section>
     </div>
 </body>
