@@ -1,12 +1,12 @@
 'use strict'
 
-module.exports = function ($translate, locale) {
-  console.log(locale.getDefaultLaguage());
+module.exports = function ($translate, locale,localeService) {
+  console.log("Language local:"+locale.getDefaultLaguage());
 
   this.language = locale.getDefaultLaguage();
 
   this.changeLanguage = function () {
-    $translate.use(this.language);
+    locale.setDefaultLanguage.call((this.language).toString());
   }
 
 };
