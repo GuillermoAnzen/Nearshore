@@ -1,12 +1,13 @@
 <div class="navbar-vertical">
       <div class="" role="navigation">
-        
+        <h3> Nearshore </h3>
+        <br/><br/>
         <div class="">
           <ul class="">
-            <li class="active"><a href="#">Usuarios</a></li>
-            <span></span><li><a href="#">Aplicaciones</a></li>
-            <li><a href="#">Proveedores</a></li>
-            <li><a href="#">Citi Usuarios</a></li>
-            <li><a href="#">Catálogos </a></li>
+            <li><a href="" ng-click="$ctrl.navbarMenuView('users')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{'USERS' | translate}}</a></li>
+            <li><a href="" ng-click="$ctrl.navbarMenuView('applications')"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>{{'APPLICATIONS' | translate}}</a></li>
+            <li><a href="" ng-click="$ctrl.navbarMenuView('providers')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{'PROVIDERS' | translate}}</a></li>
+            <li><a href="" ng-click="$ctrl.navbarMenuView('usersCiti')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{'USERS_CITI' | translate}} </a></li>
+            <li><a href="" ng-click="$ctrl.changeView()"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> {{'CATALOGS' | translate}} </a></li>
           </ul>
         </div><!--/.nav-collapse -->
