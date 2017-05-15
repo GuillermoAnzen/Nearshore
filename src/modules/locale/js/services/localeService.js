@@ -18,8 +18,8 @@ var localeService = function($translate) {
      * @param {null} this This function does not get parameters.
      * @returns {String} Return the default language.
      */
-    this.useLanguage = function() {
-        $translate.use(this.toString());
+    this.useLanguage = function(language) {
+        $translate.use(language);
     };
 
     return {

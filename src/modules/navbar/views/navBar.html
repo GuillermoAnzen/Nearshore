@@ -21,13 +21,13 @@
                 <option value="en-US" translate="LANGUAGE_ENGLISH"></option>
             </select>
           </div>
-          <div id="userProfile" class="form-group dropdown" ng-show="loged">
+          <div id="userProfile" class="form-group dropdown" ng-show="{{$parent.getLoged}}">
             <button class="btn btn-default dropdown-toggle" type="button" id="userProfileName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             </button>
             <ul class="dropdown-menu" aria-labelledby="userProfileName">
               <!--li><a href="#">{{'MY_ACCOUNT' | translate}}</a></li-->
               <li role="separator" class="divider"></li>
-              <li><a ng-click="" href="#">{{'LOGOUT' | translate}}</a></li>
+              <li><a ng-click="$ctrl.logout()" href="#">{{'LOGOUT' | translate}}</a></li>
             </ul>
           </div>
         </form>

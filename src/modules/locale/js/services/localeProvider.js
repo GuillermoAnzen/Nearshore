@@ -17,6 +17,7 @@ var localeProvider = function($translateProvider) {
     var defaultLanguage = languages[0];
 
     this.setDefaultLanguage = function(){
+        console.log("Set default language");
         defaultLanguage = this.toString();
     };
 

@@ -3,6 +3,6 @@ module.exports = {
     translate: {
         LANGUAGE_SPANISH: 'Español',
         LANGUAGE_ENGLISH: 'Inglés',
-        CHANGE_LANGUAGE: 'Choose language'
+        LOGOUT: 'Logout'
     }
 };

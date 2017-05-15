@@ -11,7 +11,9 @@ var angular = require('angular');
 
 var mainCtrl = function($scope, $location) {
 
-    $scope.validateLengthPassword = function(password) {
+    var $this = this;
+
+    $this.validateLengthPassword = function(password) {
         console.log("Entra a la funcion");
         var flag = false;
         if (password.length >= 8) {
@@ -20,7 +22,7 @@ var mainCtrl = function($scope, $location) {
         return flag;
     }
 
-    $scope.validateLogin = function() {
+    $this.validateLogin = function() {
         var user = "Hector";
         var password = "F2h*f3H_4";
         if (user === document.getElementById("user").value && password === document.getElementById("password").value) {
@@ -30,8 +32,12 @@ var mainCtrl = function($scope, $location) {
         }
     }
 
-    this.navbarMenuView = function(page){
+    $this.navbarMenuView = function(page){
         $location.path("/"+page);
+    }
+
+    $this.changeView = function(){
+        $location.path("/change");
     }
    
 };

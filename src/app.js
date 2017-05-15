@@ -30,7 +30,7 @@ $(function() {
 var app = angular.module('app', [
     require('angular-route'),
     require('angular-sanitize'),
-    require('angular-translate')
+    require('angular-translate'),
 ].concat(getModuleDependencies()));
 
 app.config(['$translateProvider',
@@ -43,17 +43,22 @@ app.config(['$translateProvider',
         $locationProvider,
         localeProvider
     ) {
-
+        
         /***** i18n Configuration *****/
         localeProvider.init(require.context('./i18n/', false, /.js$/));
         /***** i18n Configuration *****/
 
         /***** routes Configuration *****/
         //$locationProvider.hashPrefix('!');
+        //$locationProvider.html5Mode(true);
         $routeProvider.otherwise({ redirectTo: '/login' });
-
+        
     }
 ]);
+
+app.controller("app.controller",["$scope","sessionManager",function($scope,sessionManager){
+    $scope.getLoged=sessionManager.getLoged();
+}]);
 
 /**
  * @ngdoc function
@@ -65,16 +70,13 @@ app.config(['$translateProvider',
  */
 
 function getModuleDependencies() {
-    console.log("Before load modules");
     var moduleDep = [];
     var loadModules = require.context('./modules', true, /main.js$/);
     for (var i = 0; i < loadModules.keys().length; i++) {
         moduleDep.push(loadModules(loadModules.keys()[i]).name);
-        console.log((loadModules.keys()[i]).name);
     }
     return moduleDep;
 }
-
 //require('./css/index.scss');
 
 /**
