@@ -11,10 +11,6 @@ var angular = require('angular');
 
 var mainCtrl = function($scope, $location) {
 
-    this.changeView = function(){
-        $location.path("/change");
-    };
-   
     $scope.validateLengthPassword = function(password) {
         console.log("Entra a la funcion");
         var flag = false;
@@ -33,6 +29,11 @@ var mainCtrl = function($scope, $location) {
             $location.path("/inicio");
         }
     }
+
+    this.navbarMenuView = function(page){
+        $location.path("/"+page);
+    }
+   
 };
 
 module.exports = angular.module("app.main").controller('mainCtrl', mainCtrl);

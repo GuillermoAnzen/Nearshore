@@ -4,7 +4,8 @@ var angular = require("angular");
 var navbarDirective = function (){
     return {
         template: require("../../views/navBarVertical.html"),
-        controller: 'mainCtrl'
+        controller: 'mainCtrl',
+        controllerAs: '$ctrl'
     };
 };
 
