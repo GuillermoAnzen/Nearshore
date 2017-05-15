@@ -28,7 +28,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                         if (loginValido) {
                             $rootScope.UserLogin = true;
                             $rootScope.$on( $scope.user);
-                            sessionManager.loged();
+                            sessionManager.loged(data.data[0].Primer_Nombre);
                             $location.path("/principal");
                          } else {
                             $location.path("/inicio");
