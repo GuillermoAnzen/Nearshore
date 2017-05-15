@@ -30,7 +30,16 @@ module.exports = angular.module('app.login', [
         template: require('./views/main.html'),
         controller: 'loginCtrl'
 });*/
-}]);
+}]).run(function($rootScope, $location){
+    $rootScope.$on("$routeChangeStart", function(event, next, current){
+        if($rootScope.UserLogin== null){
+        if(next.templateUrl==="views/login.html"){
+        }else{
+            $location.path("login");
+        }
+        }
+    })
+});
 
 
 var loadFiles = require.context('./js', true, /.js$/);
