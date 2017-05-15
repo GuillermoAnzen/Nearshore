@@ -9,7 +9,7 @@ var angular = require('angular');
  * @returns {undefinided} This function does not return values.
  */
 
-var loginCtrl = function($scope, $location,localeService,sessionManager) {
+var loginCtrl = function($scope, $location,localeService,$rootScope, $http, loginService,sessionManager) {
 
     $scope.validateLengthPassword = function(password) {
         console.log("Entra a la funcion");
@@ -21,14 +21,21 @@ var loginCtrl = function($scope, $location,localeService,sessionManager) {
     }
 
     $scope.validateLogin = function() {
-        var user = "Hector";
-        var password = "12345678";
-        if (user == $scope.user && password == $scope.password) {
-            sessionManager.loged();
-            $location.path("/principal");
-         } else {
-            $location.path("/inicio");
-         }
+        var loginValido= false
+        loginService.getLogin($scope.user, $scope.password)
+            .then(function(data){
+                loginValido= data.success
+                        if (loginValido) {
+                            $rootScope.UserLogin = true;
+                            $rootScope.$on( $scope.user);
+                            sessionManager.loged();
+                            $location.path("/principal");
+                         } else {
+                            $location.path("/inicio");
+                         }
+            });
+
+
     }
 };
 
