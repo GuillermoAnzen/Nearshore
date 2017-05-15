@@ -28,7 +28,6 @@ app.factory("sessionManager",function(){
                 if (window.location.href.indexOf("/login")==-1){
                     $("#navbarMain").attr("class","col-sm-9");
                     $("#userProfileName").html('USER_SESSION' + ' <span class="caret"></span>');
-                    this.loged2 = true;
                 }else
                     this.loged2 = false;
                 return this.loged2;
