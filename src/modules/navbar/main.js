@@ -1,10 +1,21 @@
-'use strict'
-  var angular = require('angular');
+var angular = require('angular');
 
-  module.exports = angular.module('app.navbar',[]).component('navBar', {
-    controller: require('./js/controllers/controller'),
-    template: require('./views/navBar.html'),
-    controllerAs: '$ctrl',
-  });
+module.exports = angular.module('app.navbar', [
+    require('angular-route'),
+    require('angular-sanitize'),
+    require('angular-translate')
+]).config(['$routeProvider', '$translateProvider', 'localeProvider', function($routeProvider, $translateProvider, localeProvider) {
 
-require("./css/main.less");
+    /***** i18n Configuration *****/
+    localeProvider.init(require.context('./i18n/', false, /.js$/));
+    /***** i18n Configuration *****/
+}]);
+
+
+var loadFiles = require.context('./js', true, /.js$/);
+for (var i = 0; i < loadFiles.keys().length; i++) {
+    loadFiles(loadFiles.keys()[i]);
+}
+require('./css/main.less');
+//require('./js/controllers/navbarController');
+//require('./js/components/navBar');
