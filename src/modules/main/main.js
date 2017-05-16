@@ -28,12 +28,6 @@ module.exports = angular.module('app.main', [
         controllerAs: '$ctrl'
     });
 
-    $routeProvider.when('/change', {
-        template: require('./views/test.html'),
-        controller: 'mainCtrl',
-        controllerAs: '$ctrl'
-    });
-
 }]);
 
 
