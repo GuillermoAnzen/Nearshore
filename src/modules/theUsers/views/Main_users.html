@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<div class="users" ng-controller="userCtrl">
+    <h1> {{'TITLE_USERS' | translate}} </h1>
+    <div>
+        <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="" ng-click="showUserTab(event,'administration')"> {{'DOMAINS_USERS' | translate}} </a></li>
+
+    </ul>
+    </div>
+
+    <div id="tabsUsers">
+        <!-- TABS provider_consult  -->
+        <div id="administration" class="tabcontent default">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Nombre </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> User Name </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

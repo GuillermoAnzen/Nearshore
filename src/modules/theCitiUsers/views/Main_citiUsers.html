@@ -1,17 +1,42 @@
 <!DOCTYPE HTML>
-<div class="applications" ng-controller="citiUsersCtrl">
+<div class="citiUsers" ng-controller="citiUsersCtrl">
     <h1> {{'TITLE_CITI_USERS' | translate}} </h1>
     <div>
         <ul class="nav nav-tabs">
-        <li id="active"><a data-toggle="tab" href="" ng-click="showApplicationTab('domains')"> {{'CITI_USERS_DOMAINS' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showApplicationTab('users_per_domain')"> {{'CITI_USERS_PER_DOMAIN' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showApplicationTab('specific_detail')"> {{'CITI_USERS_SPECIFIC_DETAIL' | translate}} </a></li>
+        <li class="active"><a data-toggle="tab" href="" ng-click="showCitiUsersTab(event,'domains')"> {{'CITI_USERS_DOMAINS' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCitiUsersTab(event,'users_per_domain')"> {{'CITI_USERS_PER_DOMAIN' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCitiUsersTab(event,'specific_detail')"> {{'CITI_USERS_SPECIFIC_DETAIL' | translate}} </a></li>
     </ul>
     </div>
 
-    <div id="tabsApplication">
+    <div id="tabsCitiUsers">
+        <!-- TABS domains  -->
+        <div id="domains" class="tabcontent default">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Nombre </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Domain </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        
+        <!-- TAB CATAusers_per_domainLOG2 -->
+        <div id="users_per_domain" class="tabcontent">
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+
+        <!-- TAB CATAspecific_detailLOG3 -->
+        <div id="specific_detail" class="tabcontent">
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
     </div>
 
 </div>

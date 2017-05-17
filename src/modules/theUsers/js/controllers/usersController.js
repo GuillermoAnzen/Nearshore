@@ -8,11 +8,11 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var providerCtrl = function($scope, $location,localeService) {
+var userCtrl = function($scope, $location,localeService) {
 
     var $this = $scope;
     
-    $this.showProviderTab = function(evt, tabName){
+    $this.showUserTab = function(evt, tabName){
         // Declare all variables
         var i, tabcontent, tablinks;
 
@@ -32,6 +32,7 @@ var providerCtrl = function($scope, $location,localeService) {
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     };
+
 };
 
-module.exports = angular.module("app.providers").controller('providerCtrl', providerCtrl);
+module.exports = angular.module("app.users").controller('userCtrl', userCtrl);

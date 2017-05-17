@@ -1,17 +1,42 @@
 <!DOCTYPE HTML>
-<div class="applications" ng-controller="providerCtrl">
+<div class="provider" ng-controller="providerCtrl">
     <h1> {{'TITLE_PROVIDERS' | translate}} </h1>
     <div>
         <ul class="nav nav-tabs">
-        <li id="active"><a data-toggle="tab" href="" ng-click="showApplicationTab('provider_consult')"> {{'PROVIDERS_CONSULT' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showApplicationTab('provider_details')"> {{'PROVIDER_DETAIL' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showApplicationTab('provider_specific_detail')"> {{'SPECIFIC_DETAIL_PROVIDER' | translate}} </a></li>
+        <li class="active"><a data-toggle="tab" href="" ng-click="showProviderTab(event,'provider_consult')"> {{'PROVIDERS_CONSULT' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showProviderTab(event,'provider_details')"> {{'PROVIDER_DETAIL' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showProviderTab(event,'provider_specific_detail')"> {{'SPECIFIC_DETAIL_PROVIDER' | translate}} </a></li>
     </ul>
     </div>
 
-    <div id="tabsApplication">
+    <div id="tabsProvider">
+        <!-- TABS provider_consult  -->
+        <div id="provider_consult" class="tabcontent default">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Nombre </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Provider </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        
+        <!-- TAB CATAusers_per_domainLOG2 -->
+        <div id="provider_details" class="tabcontent">
+            <h3>Provider Details</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        </div>
+
+        <!-- TAB CATAspecific_detailLOG3 -->
+        <div id="provider_specific_detail" class="tabcontent">
+            <h3>Specific Detail Provider</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
     </div>
 
 </div>
