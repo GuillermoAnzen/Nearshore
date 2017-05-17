@@ -20,8 +20,8 @@ var LoginService= function ($http, $q){
         var config = {
             headers : {'Content-Type': 'application/json; charset=utf-8'}
             }
-        $http.post(loginUri,data, config).then(function(response){
-            defered.resolve(response.data);
+        $http.post(loginUri,data).then(function(data){
+            defered.resolve(data);
         });
         return promise;
     }

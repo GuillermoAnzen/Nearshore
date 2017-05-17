@@ -1,6 +1,6 @@
 'use strict'
 
-var navController= function ($translate, locale,localeService,sessionManager,$location) {
+var navController= function ($translate, locale,localeService,sessionManager,$location,$cookies, logoutService) {
   
   var $this = this;
 
@@ -11,8 +11,16 @@ var navController= function ($translate, locale,localeService,sessionManager,$lo
   }
 
   $this.logout = function (){
-      sessionManager.notLoged();
-      $location.path("/login");
+      var applicationId= $cookies.get('applicationId');
+      logoutService.logout(applicationId)
+      .then(function(response){
+              if(response.data.success){
+              $cookies.put('IsLogged', 'false');
+              sessionManager.notLoged();
+              $location.path("/login");
+            }
+       });
+
     }
 
 };

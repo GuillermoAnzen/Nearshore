@@ -30,9 +30,10 @@ module.exports = angular.module('app.login', [
         template: require('./views/main.html'),
         controller: 'loginCtrl'
 });*/
-}]).run(function($rootScope, $location,sessionManager){
+}]).run(function($rootScope, $location,sessionManager, $cookies){
     $rootScope.$on("$routeChangeStart", function(event, next, current){
-        if($rootScope.UserLogin== null){
+        var UserLogin= $cookies.get('IsLogged');
+        if(UserLogin== null){
         if(next.templateUrl==="views/login.html"){
         }else{
             $location.path("login");

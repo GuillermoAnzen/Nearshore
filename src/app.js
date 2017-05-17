@@ -31,6 +31,7 @@ var app = angular.module('app', [
     require('angular-route'),
     require('angular-sanitize'),
     require('angular-translate'),
+    require('angular-cookies')
 ].concat(getModuleDependencies()));
 
 app.config(['$translateProvider',
