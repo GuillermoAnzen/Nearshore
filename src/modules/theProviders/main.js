@@ -12,7 +12,7 @@ var angular = require('angular');
  */
 
 
-module.exports = angular.module('app.applications', [
+module.exports = angular.module('app.providers', [
     require('angular-route'),
     require('angular-sanitize'),
     require('angular-translate')
@@ -22,9 +22,9 @@ module.exports = angular.module('app.applications', [
     localeProvider.init(require.context('./i18n/', false, /.js$/));
     /***** i18n Configuration *****/
 
-    $routeProvider.when('/applications', {
-        template: require('./views/Main_applications.html'),
-        controller: 'applicationCtrl'
+    $routeProvider.when('/providers', {
+        template: require('./views/Main_providers.html'),
+        controller: 'providerCtrl'
     });
 }]);
 

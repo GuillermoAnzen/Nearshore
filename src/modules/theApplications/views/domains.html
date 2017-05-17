@@ -1,0 +1,17 @@
+<div class="tabcontent">
+    <div id="respons"></div>
+    <table>
+        <thead>
+            <tr>
+                <th> Nombre </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{5+5}}
+            {{$parent.c}}
+            <tr ng-reapeat="x in domains.DESCRIPCION">
+                <td> {{x}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
