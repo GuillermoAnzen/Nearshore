@@ -10,6 +10,15 @@ var navController= function ($translate, locale,localeService,sessionManager,$lo
       $translate.use(this.language);
   }
 
+  if ($cookies.get('IsLogged')=='true'){
+    $this.getLoged = true;
+    $("#userProfile").attr("class","form-group dropdown");
+    $("#navbarMain").attr("class","col-sm-9");
+    $("#userProfileName").html($cookies.get('username') + ' <span class="caret"></span>');
+  }
+  else
+    $this.getLoged = false;
+
   $this.logout = function (){
       var applicationId= $cookies.get('applicationId');
       logoutService.logout(applicationId)

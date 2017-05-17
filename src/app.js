@@ -57,8 +57,14 @@ app.config(['$translateProvider',
     }
 ]);
 
-app.controller("app.controller",["$scope","sessionManager",function($scope,sessionManager){
-    $scope.getLoged=sessionManager.getLoged();
+app.controller("app.controller",["$scope","$cookies",function($scope,$cookies){
+    var IsLogged = $cookies.get('IsLogged');
+    var logged = false;
+    if (IsLogged == 'true'){
+        $("#navbarVertical").attr("class","col-sm-3");
+        logged = true;
+    }
+    $scope.getLoged = logged;
 }]);
 
 /**

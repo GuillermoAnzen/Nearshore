@@ -14,7 +14,7 @@
     
         <!-- TABS DOMAINS  -->
         <div id="domains" class="tabcontent default">
-            <table>
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th> Nombre </th>
@@ -36,8 +36,19 @@
 
         <!-- TAB DETAILS APPLICATION -->
         <div id="details_application" class="tabcontent">
-            <h3>Menu 1</h3>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th> CSI-ID </th>
+                        <th> {{'SHOR_DESCRIPTION' | translate}} </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in domains">
+                        <td> {{x.DESCRIPCION}} </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- TAB APPLICATION CONSULT -->

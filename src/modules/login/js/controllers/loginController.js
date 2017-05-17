@@ -27,11 +27,13 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                 loginValido= response.data.success;
                     if (loginValido) {
                         var applicationId = response.headers('applicationid');
+                        var username = response.data.data[0].Primer_Nombre + " " + response.data.data[0].Segundo_Nombre + " " + response.data.data[0].Apellido_Paterno;
                         $cookies.put('IsLogged', 'true');
                         $cookies.put('applicationId', applicationId);
+                        $cookies.put('username', username);
                          $rootScope.UserLogin = true;
                          $rootScope.$on( $scope.user);
-                         sessionManager.loged(response.data.data[0].Primer_Nombre);
+                         sessionManager.loged(username);
                          $location.path("/principal");
                             } else {
                                 $location.path("/inicio");
