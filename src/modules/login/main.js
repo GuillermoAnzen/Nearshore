@@ -16,7 +16,7 @@ module.exports = angular.module('app.login', [
     require('angular-route'),
     require('angular-sanitize'),
     require('angular-translate')
-]).config(['$routeProvider', '$translateProvider', 'localeProvider', function($routeProvider, $translateProvider, localeProvider) {
+]).config(['$routeProvider', '$translateProvider', 'localeProvider', '$httpProvider', function($routeProvider, $translateProvider, localeProvider, $httpProvider) {
 
     /***** i18n Configuration *****/
     localeProvider.init(require.context('./i18n/', false, /.js$/));
@@ -25,11 +25,28 @@ module.exports = angular.module('app.login', [
     $routeProvider.when('/login', {
         template: require('./views/login.html'),
         controller: 'loginCtrl'
+
+
     });
     /*$routeProvider.when('/principal', {
         template: require('./views/main.html'),
         controller: 'loginCtrl'
 });*/
+  $httpProvider.interceptors.push(function($q,$location, $cookies){
+                                  return{
+                                  'response': function(response){
+                                          if(response.data.success=="false" && response.data.mensaje == "Unauthorized"){
+                                              $cookies.remove('IsLogged');
+                                              $cookies.remove('applicationId');
+                                              $location.path("/login");
+                                          }
+                                          return response
+                                      },
+                                  'responseError': function(rejection){
+                                      return $q.reject(rejection);
+                                  }
+                                  };
+                                  });
 }]).run(function($rootScope, $location,sessionManager, $cookies){
     $rootScope.$on("$routeChangeStart", function(event, next, current){
         var UserLogin= $cookies.get('IsLogged');

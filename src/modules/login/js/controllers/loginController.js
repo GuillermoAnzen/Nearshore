@@ -22,7 +22,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
 
     $scope.validateLogin = function() {
         var loginValido= false
-        loginService.getLogin($scope.user, $scope.password)
+       loginService.getLogin($scope.user, $scope.password)
             .then(function(response){
                 loginValido= response.data.success;
                     if (loginValido) {
