@@ -12,6 +12,7 @@
     "angular": "^1.6.1",
     "angular-mocks": "^1.6.1",
     "angular-cookies":"^1.6.4",
+    "angular-utils-pagination":"^0.11.1",
     "bootstrap-loader": "^2.0.0-beta.20",
     "bootstrap-webpack": "0.0.5",
     "brfs": "^1.4.3",
