@@ -57,10 +57,12 @@ app.config(['$translateProvider',
     }
 ]);
 
-app.controller("app.controller",["$scope","$cookies",function($scope,$cookies){
+app.controller("app.controller",["$scope","$cookies","sessionManager",function($scope,$cookies,sessionManager){
     var IsLogged = $cookies.get('IsLogged');
     var logged = false;
-    if (IsLogged == 'true'){
+    if (window.location.href.indexOf("/login") != -1){
+        sessionManager.notLoged();
+    }else if (IsLogged == 'true'){
         $("#navbarVertical").attr("class","col-sm-3");
         logged = true;
     }
