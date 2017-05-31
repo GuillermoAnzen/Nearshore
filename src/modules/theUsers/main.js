@@ -15,9 +15,11 @@ var angular = require('angular');
 module.exports = angular.module('app.users', [
     require('angular-route'),
     require('angular-sanitize'),
-    require('angular-translate')
-]).config(['$routeProvider', '$translateProvider', 'localeProvider', function($routeProvider, $translateProvider, localeProvider) {
+    require('angular-translate'),
+    require('angular-utils-pagination')
+]).config(['$routeProvider', '$translateProvider', 'localeProvider','paginationTemplateProvider', function($routeProvider, $translateProvider, localeProvider, paginationTemplateProvider) {
 
+    //paginationTemplateProvider.setPath('/views/dirPagination.tpl.html');
     /***** i18n Configuration *****/
     localeProvider.init(require.context('./i18n/', false, /.js$/));
     /***** i18n Configuration *****/

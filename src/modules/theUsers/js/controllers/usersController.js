@@ -11,7 +11,48 @@ var angular = require('angular');
 var userCtrl = function($scope, $location,localeService) {
 
     var $this = $scope;
-    
+    $this.urlInclude='addNewUser.html';
+
+    $scope.currentPage = 1;
+    $scope.pageSize = 10;
+        //Objeto de ejemplo
+    $scope.usersList=[
+        {id: 1, nombre:'SuperUsuario', correo:'jfernandez@gmail.com', perfil: 'Administrador', estatus:'Activo'},
+        {id: 2,nombre:'Jorge', correo:'jfernandez@gmail.com', perfil:'Usuario', estatus:'Activo'},
+        {id: 3, nombre:'Guillermo Cruz', correo:'gcruz@anzen.com.mx', perfil:'SuperUsuario', estatus:'Activo'},
+        {id: 4,nombre:'Juan David', correo:'jdavid@anzen.com.mx', perfil:'Usuario', estatus:'Activo'},
+        {id: 5, nombre:'Anibal Gonzales', correo:'agonzales@anzen.com.mx', perfil:'Usuario', estatus:'Inactivo'},
+        {id: 6, nombre:'SuperUsuario', correo:'jfernandez@gmail.com', perfil: 'Administrador', estatus:'Activo'},
+        {id: 7,nombre:'Jorge', correo:'jfernandez@gmail.com', perfil:'Usuario', estatus:'Activo'},
+        {id: 8, nombre:'Guillermo Cruz', correo:'gcruz@anzen.com.mx', perfil:'SuperUsuario', estatus:'Activo'},
+        {id: 9,nombre:'Juan David', correo:'jdavid@anzen.com.mx', perfil:'Usuario', estatus:'Activo'},
+        {id: 10, nombre:'Anibal Gonzales', correo:'agonzales@anzen.com.mx', perfil:'Usuario', estatus:'Inactivo'},
+        {id: 11, nombre:'SuperUsuario2', correo:'jfernandez@gmail.com', perfil: 'Administrador', estatus:'Activo'},
+        {id: 12,nombre:'Jorge2', correo:'jfernandez@gmail.com', perfil:'Usuario', estatus:'Activo'},
+        {id: 13, nombre:'Guillermo Cruz2', correo:'gcruz@anzen.com.mx', perfil:'SuperUsuario', estatus:'Activo'},
+        {id: 14,nombre:'Juan David2', correo:'jdavid@anzen.com.mx', perfil:'Usuario', estatus:'Activo'},
+        {id: 15, nombre:'Anibal Gonzales2', correo:'agonzales@anzen.com.mx', perfil:'Usuario', estatus:'Inactivo'},
+        {id: 16, nombre:'SuperUsuario2', correo:'jfernandez@gmail.com', perfil: 'Administrador', estatus:'Activo'},
+        {id: 17,nombre:'Jorge2', correo:'jfernandez@gmail.com', perfil:'Usuario', estatus:'Activo'},
+        {id: 18, nombre:'Guillermo Cruz2', correo:'gcruz@anzen.com.mx', perfil:'SuperUsuario', estatus:'Activo'},
+        {id: 19,nombre:'Juan David2', correo:'jdavid@anzen.com.mx', perfil:'Usuario', estatus:'Activo'},
+        {id: 20, nombre:'Anibal Gonzales2', correo:'agonzales@anzen.com.mx', perfil:'Usuario', estatus:'Inactivo'}
+        ];
+
+
+
+    $scope.activeModifyButton=true;
+
+      $scope.pageChangeHandler = function(num) {
+        console.log('going to page ' + num);
+      };
+    $scope.checkUser= function(value){
+    $scope.activeModifyButton= false;
+    }
+    $scope.OrderBy= function(x){
+        $scope.MyOrderBy=x;
+    }
+
     $this.showUserTab = function(evt, tabName){
         // Declare all variables
         var i, tabcontent, tablinks;

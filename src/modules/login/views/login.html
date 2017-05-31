@@ -14,23 +14,35 @@
         <section class="login-form">
             <form role="login" ng-submit="validateLogin()" name="loginForm" novalidate>
                 <H3 translate="TITLE_LOGIN_NEARSHORE"></H3>
-                <span translate="ErrorUserRequired"  ng-show="loginForm.user.$dirty && loginForm.user.$error.required" class="alert alert-danger"></span>
+                <p translate="ErrorUserRequired"  ng-show="loginForm.user.$dirty && loginForm.user.$error.required" class="help-block"></p>
                 <br>
-                <input type="text" name="user"
-                       placeholder="{{'USER' | translate}}"
-                       autofocus=""
-                       class="form-control input-lg"
-                       ng-model="user"
-                       required>
-                <span translate="ErrorPasswordRequired" ng-show="loginForm.password.$dirty && loginForm.password.$error.required" class="alert alert-danger"></span>
-                <span translate="ErrorLengthPassword" ng-show="loginForm.password.$error.minlength" class="alert alert-danger"></span>
+                <div class="form-group form-group-lg">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+
+                    <input type="text" name="user"
+                           placeholder="{{'USER' | translate}}"
+                           autofocus=""
+                           class="form-control"
+                           ng-model="user"
+                           required>
+                    </div>
+
+                </div>
+
+                <p translate="ErrorPasswordRequired" ng-show="loginForm.password.$dirty && loginForm.password.$error.required" class="help-block"></p>
+                <p translate="ErrorLengthPassword" ng-show="loginForm.password.$error.minlength" class="help-block"></p>
                 <br>
-                <input type="password"
-                       name="password"
-                       class="form-control input-lg"
-                       ng-model="password"
-                       placeholder="{{'PASSWORD' | translate}}"
-                       ng-minlength="4" required>
+                <div class=" input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input type="password"
+                           name="password"
+                           class="form-control input-lg"
+                           ng-model="password"
+                           placeholder="{{'PASSWORD' | translate}}"
+                           ng-minlength="4" required>
+                </div>
+
 
                 <br><button class="btn btn-lg btn-primary" translate="LOGIN" ng-disabled="!loginForm.$valid"></button>
 
