@@ -12,6 +12,17 @@ var applicationCtrl = function($scope,domainService) {
 
     var $this = $scope;
 
+    var getDomains = function(){
+        var petitionSuccess = false;
+        var domains;
+        domainService.getDomain().then(function(data){
+            petitionSuccess = data.success;
+            if (petitionSuccess){
+                $scope.domains = data.data;
+            }
+        });
+    };
+
     $this.showApplicationTab = function(evt, tabName){
         // Declare all variables
         var i, tabcontent, tablinks;
@@ -34,18 +45,7 @@ var applicationCtrl = function($scope,domainService) {
 
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    };
-
-    var getDomains = function(){
-        var petitionSuccess = false;
-        var domains;
-        domainService.getDomain().then(function(data){
-            petitionSuccess = data.success;
-            if (petitionSuccess){
-                $scope.domains = data.data;
-            }
-        });
+        //evt.currentTarget.className += " active";
     };
 };
 
