@@ -2,9 +2,9 @@ module.exports = {
     language: 'en-US',
     translate: {
         TITLE_HOME: 'Main access page',
-        USERS: 'Users',
+        USERS: 'Admin',
         APPLICATIONS: 'Applications',
-        PROVIDERS: 'Providers',
+        PROVIDERS: 'Vendors',
         USERS_CITI: 'Users Citi',
         CATALOGS: 'Catalogs'
     }
