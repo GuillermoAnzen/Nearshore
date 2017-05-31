@@ -14,6 +14,7 @@ module.exports = {
         PROFILE: 'Perfil',
         STATUS: 'Estatus',
         PWD: 'Contraseña',
-        SAVE: 'Guardar'
+        SAVE: 'Guardar',
+        ITEMS_PER_PAGE: 'Filas por página'
     }
 };

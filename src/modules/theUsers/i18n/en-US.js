@@ -14,6 +14,7 @@ module.exports = {
         PROFILE:'Profile',
         STATUS:'Status',
         PWD:'Password',
-        SAVE: 'Save'
+        SAVE: 'Save',
+        ITEMS_PER_PAGE: 'Rows per page'
     }
 };
