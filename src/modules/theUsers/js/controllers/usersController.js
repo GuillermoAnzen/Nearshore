@@ -8,15 +8,38 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var userCtrl = function($scope, $location,localeService) {
+var userCtrl = function($scope, $location,localeService, userService) {
 
     var $this = $scope;
     $this.urlInclude='addNewUser.html';
 
     $scope.currentPage = 1;
     $scope.pageSize = 10;
+    $scope.usersList=[];
+    var index= 0,
+    pages;
+    do{
+    index++;
+    userService.getUsers(index,$scope.pageSize).then(function(response){
+            if(response.success){
+
+                pages= response.data[0].pages;
+                for(var i=0; i<response.data.length; i++){
+                var _estatus= response.data[i].Activo == "1" ? "Activo" : "Inactivo";
+                var _id= parseInt(response.data[i].Id_Usuarios);
+                var user= {id: _id, nombre:response.data[i].nombre, correo: response.data[i].Email, perfil: response.data[i].Descripcion, estatus:_estatus }
+                $scope.usersList.push(user);
+                }
+            }else{
+            $scope.error="Hubo un error en la conexión con la base de dato";
+            $console.log('Error');
+            }
+    });
+
+    }while(index===pages)
+
         //Objeto de ejemplo
-    $scope.usersList=[
+    /**$scope.usersList=[
         {id: 1, nombre:'SuperUsuario', correo:'jfernandez@gmail.com', perfil: 'Administrador', estatus:'Activo'},
         {id: 2,nombre:'Jorge', correo:'jfernandez@gmail.com', perfil:'Usuario', estatus:'Activo'},
         {id: 3, nombre:'Guillermo Cruz', correo:'gcruz@anzen.com.mx', perfil:'SuperUsuario', estatus:'Activo'},
@@ -37,7 +60,7 @@ var userCtrl = function($scope, $location,localeService) {
         {id: 18, nombre:'Guillermo Cruz2', correo:'gcruz@anzen.com.mx', perfil:'SuperUsuario', estatus:'Activo'},
         {id: 19,nombre:'Juan David2', correo:'jdavid@anzen.com.mx', perfil:'Usuario', estatus:'Activo'},
         {id: 20, nombre:'Anibal Gonzales2', correo:'agonzales@anzen.com.mx', perfil:'Usuario', estatus:'Inactivo'}
-        ];
+        ];**/
 
 
 

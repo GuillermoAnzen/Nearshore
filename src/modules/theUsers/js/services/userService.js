@@ -2,19 +2,23 @@ var angular = require("angular");
 
 var userService = function($http, $q, $cookies){
     
-    var userUri = 'http://54.153.120.183/catalogsms/usuarios/';
+    var getAllusersUri = 'http://54.153.120.183/catalogsms/usuarios/';
     var contentType = "application/json; charset=utf-8";
-    var applicationID = $cookies.get('applicationId');
     var data = "";
 
-    this.getUsers = function(){
+    this.getUsers = function(index, rows){
         var defered = $q.defer();
         var promise = defered.promise;
-        var config = {
-            'Content-Type': contentType,
-            'ApplicationID': applicationID
+        var data={
+            index: index,
+            rows: rows
         };
-        $http.get(userUri, config).then(function(response){
+        var applicationId=$cookies.get('applicationId');
+        var config = {
+        headers : {'Content-Type': 'application/json; charset=utf-8',
+                    'ApplicationID': applicationId
+        }};
+        $http.post(getAllusersUri,data,config).then(function(response){
             defered.resolve(response.data);
         });
         return promise;
