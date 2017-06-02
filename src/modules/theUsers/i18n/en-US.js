@@ -15,7 +15,7 @@ module.exports = {
         STATUS:'Status',
         PWD:'Password',
         SAVE: 'Save',
-        ITEMS_PER_PAGE: 'Rows per page'
+        ITEMS_PER_PAGE: 'Rows per page',
         SAVE: 'Save',
         SECOND_NAME:'Second Name',
         ENTER_SECOND_NAME:'Type second name',

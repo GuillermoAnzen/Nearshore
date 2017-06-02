@@ -15,7 +15,7 @@ module.exports = {
         STATUS: 'Estatus',
         PWD: 'Contraseña',
         SAVE: 'Guardar',
-        ITEMS_PER_PAGE: 'Filas por página'
+        ITEMS_PER_PAGE: 'Filas por página',
         SAVE: 'Guardar',
         SECOND_NAME:'Segundo nombre',
         ENTER_SECOND_NAME:'Ingresa segundo nombre',
