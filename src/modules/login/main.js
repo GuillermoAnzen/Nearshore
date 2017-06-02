@@ -32,21 +32,33 @@ module.exports = angular.module('app.login', [
         template: require('./views/main.html'),
         controller: 'loginCtrl'
 });*/
-  $httpProvider.interceptors.push(function($q,$location, $cookies){
-                                  return{
-                                  'response': function(response){
-                                          if(response.data.success=="false" && response.data.mensaje == "Unauthorized"){
-                                              $cookies.remove('IsLogged');
-                                              $cookies.remove('applicationId');
-                                              $location.path("/login");
-                                          }
-                                          return response
-                                      },
-                                  'responseError': function(rejection){
-                                      return $q.reject(rejection);
-                                  }
-                                  };
-                                  });
+    $httpProvider.interceptors.push(function($q,$location, $cookies,$rootScope,$timeout){
+        return{
+            'request': function(config) {
+                $timeout(function() {
+                    $rootScope.isLoading = true; 
+                }, 200);
+
+                return config || $q.when(config);
+            },
+            'requestError': function(rejection) {
+                /*...*/
+                return $q.reject(rejection);
+            },
+            'response': function(response){
+                if(response.data.success==false && response.data.mensaje == "Unauthorized"){
+                    $cookies.remove('IsLogged');
+                    $cookies.remove('applicationId');
+                    $location.path("/login");
+                }
+                $rootScope.isLoading = false; 
+                return response || $q.when(response);
+            },
+            'responseError': function(rejection){
+                return $q.reject(rejection);
+            }
+        };
+    });
 }]).run(function($rootScope, $location,sessionManager, $cookies){
     $rootScope.$on("$routeChangeStart", function(event, next, current){
         var UserLogin= $cookies.get('IsLogged');
