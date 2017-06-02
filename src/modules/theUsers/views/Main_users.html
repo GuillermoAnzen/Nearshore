@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<div class="users" ng-controller="userCtrl">
+<div class="users" >
     <h1> {{'TITLE_USERS' | translate}} </h1>
     <div>
         <ul class="nav nav-tabs">
@@ -51,7 +51,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr dir-paginate="x in usersList | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                    <tr dir-paginate="x in usersList | filter:q | itemsPerPage: pageSize" total-items="totalUsers" current-page="currentPage">
                         <td><input type="radio" ng-model="idUser" value="{{x.id}}" name="idUser" ng-change='checkUser(idUser)'></td>
                         <td>{{x.nombre}}</td>
                         <td>{{x.correo}}</td>
@@ -62,7 +62,7 @@
             </table>
         </div>
             <div class="text-center">
-            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
         </div>
             <div class="modal fade" id="NewUser" role="dialog">
             <div class="modal-dialog">
@@ -74,11 +74,29 @@
                     <div class="modal-body">
                         <form class="form-horizontal" name="AddUser" ng-submit="addNewUser()" novalidate>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="name" translate="NAME"></label>
+                                <label class="control-label col-sm-2" for="firstname" translate="NAME"></label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control" id="name" ng-model="name" placeholder="{{'ENTER_A_NAME'|translate}}">
+                                    <input type="text" name="firstname" class="form-control" id="firstname" ng-model="firstname" placeholder="{{'ENTER_A_NAME'|translate}}">
                                 </div>
 
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="secondName" translate="SECOND_NAME"></label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="secondName" class="form-control" id="secondName" ng-model="secondName" placeholder="{{'ENTER_SECOND_NAME'| translate}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="lastName" translate="LAST_NAME"></label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="lastName" class="form-control" id="lastName" ng-model="lastName" placeholder="{{'ENTER_LAST_NAME'| translate}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="mothersLastName" translate="MOTHERS_LAST_NAME"></label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="mothersLastName" class="form-control" id="mothersLastName" ng-model="mothersLastName" placeholder="{{'ENTER_MOTHERS_LAST_NAME'|translate}}">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="email" translate="EMAIL"></label>
@@ -102,7 +120,23 @@
                                 <div class="col-sm-10">
 
                                     <select class="form-control" ng-model="status" id="status">
-                                        <option ng-repeat="x in profiles" value="{{x.value}}">{{x.status}}</option>
+                                        <option ng-repeat="x in status" value="{{x.value}}">{{x.status}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="dominio" translate="DOMAIN"></label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" ng-model="domain" id="dominio">
+                                        <option ng-repeat="x in domains" value="{{x.value}}">{{x.domain}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="vendor" translate="VENDORS"></label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" ng-model="vendor" id="vendor">
+                                        <option ng-repeat="x in vendors" value="{{x.value}}">{{x.vendor}}</option>
                                     </select>
                                 </div>
                             </div>
