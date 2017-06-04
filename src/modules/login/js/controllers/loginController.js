@@ -25,7 +25,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
        loginService.getLogin($scope.user, $scope.password)
             .then(function(response){
                 loginValido= response.data.success;
-                    if (loginValido) {
+                    if (loginValido && response.data.data.length >0) {
                         var applicationId = response.headers('applicationid');
                         var username = response.data.data[0].Primer_Nombre + " " + response.data.data[0].Segundo_Nombre + " " + response.data.data[0].Apellido_Paterno;
                         $cookies.put('IsLogged', 'true');
@@ -36,6 +36,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                          sessionManager.loged(username);
                          $location.path("/principal");
                             } else {
+                                $scope.invalidLogin= true;
                                 $location.path("/inicio");
                          }
             });

@@ -7,6 +7,8 @@ module.exports = {
         LOGIN: 'Iniciar sesión',
         ErrorUserRequired: 'Ingresa un nombre de usuario',
         ErrorPasswordRequired: 'Ingresa una contraseña',
-        ErrorLengthPassword:'La contraseña es muy corta'
+        ErrorLengthPassword:'La contraseña es muy corta',
+        InvalidLogin: 'Usuario o contraseña invalida',
+        InactivityLogout: 'Logout por inactividad'
     }
 };

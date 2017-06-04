@@ -7,6 +7,8 @@ module.exports = {
         LOGIN: 'Log in',
         ErrorUserRequired: 'Write an username',
         ErrorPasswordRequired: 'Write a password',
-        ErrorLengthPassword:'Password is too short'
+        ErrorLengthPassword:'Password is too short',
+        InvalidLogin: 'User or Password invalid',
+        InactivityLogout:'Logout by inactivity'
     }
 };
