@@ -49,7 +49,6 @@ module.exports = angular.module('app.login', [
                 if(response.data.success==false && response.data.mensaje == "Unauthorized"){
                     $cookies.remove('IsLogged');
                     $cookies.remove('applicationId');
-                    $scope.inactivity;
                     $location.path("/login");
                 }
                 $rootScope.isLoading = false; 
