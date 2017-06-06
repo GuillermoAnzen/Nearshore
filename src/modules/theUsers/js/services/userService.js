@@ -5,6 +5,8 @@ var userService = function($http, $q, $cookies){
     var getAllusersUri = 'http://54.153.120.183/catalogsms/usuarios/';
     var getAllProfilesUri='http://54.153.120.183/catalogsms/perfiles/';
     var getAllDomainsUri='http://54.153.120.183/catalogsms/dominios/domainList';
+    var getAllVendorsUri= 'http://54.153.120.183/catalogsms/proveedores/';
+    var newUserUri='http://54.153.120.183/catalogsms/usuarios/newUser';
     var contentType = "application/json; charset=utf-8";
     var data = "";
 
@@ -29,7 +31,9 @@ var userService = function($http, $q, $cookies){
     return {
         getUsers: this.getUsers,
         getAllProfiles: getAllProfiles,
-        getAllDomains:getAllDomains
+        getAllDomains:getAllDomains,
+        getAllVendors:getAllVendors,
+        newUser:newUser
     };
 
         function getAllProfiles(){
@@ -63,6 +67,47 @@ var userService = function($http, $q, $cookies){
         });
             return promise;
         };
+
+        function getAllVendors(){
+            var defered= $q.defer();
+            var promise= defered.promise;
+            var applicationId= $cookies.get('applicationId');
+            var config = {
+            headers:{'Content-Type': 'application/json; charset=utf-8',
+                     'ApplicationID': applicationId
+            }};
+            $http.get(getAllVendorsUri,config).then(function(response){
+                defered.resolve(response.data);
+            });
+            return promise;
+        };
+        function newUser(firstName, secondName, lastName, lastMotherName, email, profile, clave){
+            var defered= $q.defer();
+            var promise= defered.promise;
+            var applicationId= $cookies.get('applicationId');
+            var config = {
+            headers:{'Content-Type': 'application/json; charset=utf-8',
+                     'ApplicationID': applicationId
+            }};
+            var data={
+                        perfil: {
+                      		id: profile
+                      	},
+                      	email: email,
+                        primerNombre: firstName,
+                        segundoNombre: secondName,
+                        apellidoPaterno: lastName,
+                        apellidoMaterno: lastMotherName,
+                        clave: clave,
+                        activo: 1
+
+            }
+            $http.post(newUserUri, data, config).then(function(response){
+                defered.resolve(response.data);
+            });
+            return promise;
+        }
+
 }
 
 module.exports = angular.module("app.locale").service("userService",userService);;

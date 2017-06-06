@@ -24,6 +24,14 @@ module.exports = {
         MOTHERS_LAST_NAME: 'Mothers Last Name',
         ENTER_MOTHERS_LAST_NAME: 'Type mothers last name',
         DOMAIN:'Domain',
-        VENDORS:'Vendors'
+        VENDORS:'Vendors',
+        ErrorFirstNameRequired: 'First name is required',
+        ErrorLastNameRequired: 'Last name is required',
+        ErrorEmailRequired: 'Email is required',
+        ErrorProfileRequiered: 'Profile is required',
+        ErrorPWDRequired:'Password is required',
+        ClearForm:'Clear form',
+        ErrorEmailFormat:'Invalid format',
+        ErrorPWDTooShort: 'Password too short'
     }
 };

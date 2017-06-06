@@ -18,13 +18,23 @@ var userCtrl = function($scope, $location,localeService, userService) {
     $scope.usersList=[];
     $scope.profiles=[];
     $scope.domains=[];
+    $scope.vendors=[];
     var index= 1;
     $scope.totalUsers= 0;
 
 
     getResultsPage($scope.currentPage);
 
-
+    $scope.clearFields= function(){
+        $scope.AddUser.$setPristine();
+        $scope.firstname= null;
+        $scope.secondName= null;
+        $scope.lastName= null;
+        $scope.mothersLastName= null;
+        $scope.email=null;
+        $scope.profile= null;
+        $scope.pwd= null;
+    }
     $scope.pageChanged= function(newPage){
         getResultsPage(newPage);
     };
@@ -74,7 +84,16 @@ var userCtrl = function($scope, $location,localeService, userService) {
         });
 
 
-
+        userService.getAllVendors().then(function(response){
+            if(response.success){
+            for(var i=0; i< response.data.length; i++){
+                var _value= parseInt(response.data[i].ID);
+                var vendor={value: _value,
+                            vendor: response.data[i].DESCRIPCION}
+                $scope.vendors.push(vendor);
+                }
+            }
+        });
 
 
 
