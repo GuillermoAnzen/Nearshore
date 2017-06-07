@@ -15,18 +15,19 @@
         <div id="navbarVertical" class="col-sm-3" ng-show="getLoged">
             <div mi-navbar></div>
         </div>
-        <div id="navbarMain" class="col-sm-12">
+        <div id="navbarMain" class="col-sm-12" ng-class="{navbarMain: getLoged}">
         <nav-bar data="myNavbarV"></nav-bar>
-        <!--div class="loading" ng-show="isLoading"> LOADING ...... </div-->
-            <!--div class="alert-dismissable" translate="" id="messagesHandler">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong id="message"></strong>
-            </div-->
+        <div class="loading" ng-show="isLoading"></div>
+            <div class="" id="messagesHandler">
+                <a href="" ng-if="translate" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p id="message" translate="{{translate}}"></p>
+            </div>
         <div class="bodyMain" ng-view="">
 
         </div>
         </div>
     </div>
+    <div class="panel-footer"></div>
 
 
 <!--div class="modal fade" id="messagesHandler" role="dialog">
@@ -41,7 +42,6 @@
         </div>
     </div>
 </div-->
-
 
 </body>
 

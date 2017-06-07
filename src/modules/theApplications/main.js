@@ -34,3 +34,4 @@ for (var i = 0; i < loadFiles.keys().length; i++) {
     loadFiles(loadFiles.keys()[i]);
 }
 require('./css/index.less');
+//require('./css/index.scss');

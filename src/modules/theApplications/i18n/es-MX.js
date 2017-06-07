@@ -39,6 +39,24 @@ module.exports = {
         PTF_PRIMARY: 'plataforma Primaria',
 
         SAVE_CHANGES_APP: 'Guardar Cambios',
-        CANCEL_APDATE_APP: 'Cancelar'
+        CANCEL_APDATE_APP: 'Cancelar',
+
+        UPDATEL1_APP: 'Actualizar Datos de Soporte Nivel L1',
+        UPDATEL2_APP: 'Actualizar Datos de Soporte Nivel L2',
+        UPDATEL3_APP: 'Actualizar Datos de Soporte Nivel L3',
+        APP_SUPPORT: 'Soporte',
+        ANALIST_APP: 'Analista',
+        CELULAR_NUMBER_APP: 'Celular',
+        EMAIL_BANAMEX: 'Email Banamex',
+        LEAD_APP: 'Líder Banamex',
+        VENDOR_APP: 'PROVEEDOR',
+        MANAGER_APP: 'Gerente',
+        RESP_APP: 'Responsable',
+        ANOTHER_NUMBER_APP: 'Otro',
+        EMAIL_VENDOR: 'email Prov.',
+        BACKUP_APP: 'Backup',
+        LEADER_APP: 'Líder',
+        P_MANAGER_APP: 'Project Manager',
+        D_MANAGER_APP: 'Delivery Manager'
     }
 };

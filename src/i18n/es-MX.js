@@ -5,7 +5,8 @@ module.exports = {
         LANGUAGE_ENGLISH: 'English',
         LOGOUT: 'Cerrar sesión',
         CLOSE_MESSAGES_HANDLER: 'Cerrar',
-        SUCCES_REGISTRY: 'Registro Exitoso',
+        SUCCESS_REGISTRY: 'Aplicación Registrada Exitosamente',
+        SUCCESS_UPDATE: 'Aplicación Actualizada Exitosamente',
         ERROR_OCURRED: 'Ocurrió un Error'
     }
 };
