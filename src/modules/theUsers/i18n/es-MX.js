@@ -32,7 +32,9 @@ module.exports = {
         ErrorPWDRequired: 'La contraseña es requerida',
         ClearForm:'Limpiar formulario',
         ErrorEmailFormat:'Formato invalido',
-        ErrorPWDTooShort: 'Contraseña muy corta'
+        ErrorPWDTooShort: 'Contraseña muy corta',
+        SuccessAddingUser:'Se agrego correctamente al usuario',
+        ErrorAddingUser: 'El proceso de agregar usuarios pudo tener errores'
 
     }
 };

@@ -32,6 +32,8 @@ module.exports = {
         ErrorPWDRequired:'Password is required',
         ClearForm:'Clear form',
         ErrorEmailFormat:'Invalid format',
-        ErrorPWDTooShort: 'Password too short'
+        ErrorPWDTooShort: 'Password too short',
+        SuccessAddingUser: 'The user was successfully added',
+        ErrorAddingUser: 'The process of adding a user could have errors'
     }
 };

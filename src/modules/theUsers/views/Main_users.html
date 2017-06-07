@@ -19,6 +19,14 @@
                     <button class="btn btn-default btn-block" translate="MODIFY" ng-disabled="activeModifyButton"></button>
                 </div>
             </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessAdd">
+                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p translate="SuccessAddingUser"></p>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorAdd">
+                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p translate="ErrorAddingUser"></p>
+            </div>
             <div class="row">
                 <br/>
                 <div class="col-xs-4">
