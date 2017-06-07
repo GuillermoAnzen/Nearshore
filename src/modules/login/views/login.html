@@ -14,6 +14,8 @@
         <section class="login-form">
             <form role="login" ng-submit="validateLogin()" name="loginForm" novalidate>
                 <H3 translate="TITLE_LOGIN_NEARSHORE"></H3>
+                <p translate="InactivityLogout" ng-show="inactivity" class="help-block"></p>
+                <p translate="InvalidLogin" ng-show="invalidLogin" class=" help-block"></p>
                 <p translate="ErrorUserRequired"  ng-show="loginForm.user.$dirty && loginForm.user.$error.required" class="help-block"></p>
                 <br>
                 <div class="form-group form-group-lg">

@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var userCtrl = function($scope, $location,localeService, userService) {
+var userCtrl = function($scope, $location,localeService, userService, $timeout) {
 
     var $this = $scope;
     $this.urlInclude='addNewUser.html';
@@ -18,13 +18,28 @@ var userCtrl = function($scope, $location,localeService, userService) {
     $scope.usersList=[];
     $scope.profiles=[];
     $scope.domains=[];
+    $scope.vendors=[];
     var index= 1;
     $scope.totalUsers= 0;
-
+    $scope.showSuccessAdd= false;
+    $scope.showErrorAdd= false;
 
     getResultsPage($scope.currentPage);
 
+    $scope.clearFields= function(){
+        pristineFields();
+    }
 
+    function pristineFields(){
+            $scope.AddUser.$setPristine();
+            $scope.firstname= null;
+            $scope.secondName= null;
+            $scope.lastName= null;
+            $scope.mothersLastName= null;
+            $scope.email=null;
+            $scope.profile= null;
+            $scope.pwd= null;
+    }
     $scope.pageChanged= function(newPage){
         getResultsPage(newPage);
     };
@@ -62,20 +77,6 @@ var userCtrl = function($scope, $location,localeService, userService) {
                    { value:0, status:'Inactivo'}];
 
 
-        userService.getAllDomains(index,10000).then(function(response){
-            if(response.success){
-                for(var i=0; i< response.data.length; i++){
-                var _value= parseInt(response.data[i].ID);
-                var domain={value: _value,
-                            domain: response.data[i].DESCRIPCION}
-                $scope.domains.push(domain);
-                }
-            }
-        });
-
-
-
-
 
 
     $scope.activeModifyButton=true;
@@ -85,6 +86,23 @@ var userCtrl = function($scope, $location,localeService, userService) {
     }
     $scope.OrderBy= function(x){
         $scope.MyOrderBy=x;
+    }
+    $scope.addNewUser= function(){
+        if($scope.secondName == null)
+            $scope.secondName="";
+        if($scope.mothersLastName== null)
+            $scope.mothersLastName="";
+        userService.newUser($scope.firstname, $scope.secondName, $scope.lastName, $scope.mothersLastName, $scope.email, $scope.profile, $scope.pwd)
+          .then(function(response){
+          if(response.success){
+                pristineFields();
+                $("#NewUser").modal('hide');
+                getResultsPage($scope.currentPage);
+                $scope.showSuccessAdd= true;
+          }else{
+                $scope.showErrorAdd= true;
+          }
+          })
     }
 
     $this.showUserTab = function(evt, tabName){
