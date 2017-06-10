@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="col-xs-3">
-                    <button class="btn btn-default btn-block" translate="MODIFY" ng-disabled="activeModifyButton"></button>
+                    <button class="btn btn-default btn-block" translate="MODIFY" ng-disabled="activeModifyButton" ng-click="showEditModal()"></button>
                 </div>
             </div>
             <div class="alert alert-success alert-dismissible" ng-show="showSuccessAdd">
@@ -148,6 +148,80 @@
                 </div>
             </div>
         </div>
+            <div class="modal fade" id="EditUser" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" translate="Edit_User_Title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" name="EditUser" ng-submit="EditUser()" novalidate>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="firstNameEdit" translate="NAME"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="firstNameEdit" class="form-control" id="firstNameEdit" ng-model="firstNameEdit" placeholder="{{'ENTER_A_NAME'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorFirstNameRequired" ng-show="EditUser.firstNameEdit.$dirty && EditUser.firstNameEdit.$error.required" class="help-block"></p>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="secondNameEdit" translate="SECOND_NAME"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="secondNameEdt" class="form-control" id="secondNameEdit" ng-model="secondNameEdit" placeholder="{{'ENTER_SECOND_NAME'| translate}}" ng-trim="true">
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="lastNameEdit" translate="LAST_NAME"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="lastNameEdit" class="form-control" id="lastNameEdit" ng-model="lastNameEdit" placeholder="{{'ENTER_LAST_NAME'| translate}}" required ng-trim="true">
+                                        <p translate="ErrorLastNameRequired" ng-show="EditUser.lastNameEdit.$dirty && EditUser.lastNameEdit.$error.required" class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="mothersLastNameEdit" translate="MOTHERS_LAST_NAME"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="mothersLastNameEdit" class="form-control" id="mothersLastNameEdit" ng-model="mothersLastNameEdit" placeholder="{{'ENTER_MOTHERS_LAST_NAME'|translate}}" ng-trim="true">
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="emailEdit" translate="EMAIL"></label>
+                                    <div class="col-sm-8">
+                                        <input type="email" name="emailEdit" class="form-control" id="emailEdit" ng-model="emailEdit" placeholder="{{'ENTER_AN_EMAIL'| translate}}" ng-trim="true" required>
+                                        <p translate="ErrorEmailFormat" ng-show="EditUser.email.$error.emailEdit" class="help-block"></p>
+                                        <p translate="ErrorEmailRequired" ng-show="EditUser.emailEdit.$dirty && EditUser.emailEdit.$error.required" class="help-block"></p>
+                                    </div>
+
+                                    <span></span>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="profileEdit" translate="PROFILE"></label>
+                                    <div class="col-sm-8">
+                                        <select name="profileEdit" class="form-control" ng-model="profileEdit" id="profileEdit" ng-options="x.value as x.profile for x in profiles" required></select>
+                                        <p translate="ErrorProfileRequiered" ng-show="EditUser.profileEdit.$dirty && EditUser.profileEdit.$error.required" class="help-block"></p>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="pwdEdit" translate="PWD"></label>
+                                    <div class="col-sm-8">
+                                        <input type="password" name="pwdEdit" class="form-control" id="pwdEdit" ng-model="pwdEdit" placeholder="{{'ENTER_A_PASSWORD'| translate}}"  ng-minlength="8" ng-trim="true" required>
+                                        <p translate="ErrorPWDRequired" ng-show="AddUser.pwdEdit.$dirty && AddUser.pwdEdit.$error.required" class="help-block"></p>
+                                        <p translate="ErrorPWDTooShort" ng-show="AddUser.pwdEdit.$error.minlength" class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default" translate="SAVEUPLOAD"></button>
+                                        <button class="btn btn-danger" ng-click="deleteUser()" translate="DeleteUser"></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

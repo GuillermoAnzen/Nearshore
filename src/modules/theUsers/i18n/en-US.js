@@ -34,6 +34,9 @@ module.exports = {
         ErrorEmailFormat:'Invalid format',
         ErrorPWDTooShort: 'Password too short',
         SuccessAddingUser: 'The user was successfully added',
-        ErrorAddingUser: 'The process of adding a user could have errors'
+        ErrorAddingUser: 'The process of adding a user could have errors',
+        Edit_User_Title:'Edit user',
+        SAVEUPLOAD:'Upload',
+        DeleteUser:'Delete user'
     }
 };

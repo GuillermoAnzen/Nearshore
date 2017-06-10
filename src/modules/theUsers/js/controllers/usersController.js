@@ -83,6 +83,25 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout) 
 
     $scope.checkUser= function(value){
     $scope.activeModifyButton= false;
+    $scope.idUser= value;
+    }
+    $scope.showEditModal= function(){
+        var userid= $scope.idUser;
+        $("#EditUser").modal('show');
+        returnObjectUser(userid);
+
+    }
+    function returnObjectUser(id){
+        userService.getUserById(id).then(function(response){
+        $scope.firstNameEdit= response.data[0].Primer_Nombre;
+        $scope.secondNameEdit= response.data[0].Segundo_Nombre;
+        $scope.lastNameEdit= response.data[0].Apellido_Paterno;
+        $scope.mothersLastNameEdit= response.data[0].ApellidoMaterno;
+        $scope.emailEdit=response.data[0].Email;
+        $scope.profileEdit= response.data[0].Id_Perfil;
+        $scope.pwdEdit= response.data[0].Clave;
+
+        });
     }
     $scope.OrderBy= function(x){
         $scope.MyOrderBy=x;
@@ -102,7 +121,17 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout) 
           }else{
                 $scope.showErrorAdd= true;
           }
-          })
+          });
+    }
+    $scope.EditUser= function(){
+        if($scope.secondNameEdit== null)
+            $scope.secondNameEdit="";
+        if($scope.mothersLastNameEdit== null)
+            $scope.mothersLastNameEdit="";
+         userService.updateUser($scope.idUser, $scope.firstNameEdit, $scope.secondNameEdit, $scope.lastNameEdit, $scope.mothersLastNameEdit, $scope.emailEdit, $scope.profileEdit, $scope.pwdEdit, $scope.activeEdit)
+            .then(function(response){
+
+            });
     }
 
     $this.showUserTab = function(evt, tabName){
