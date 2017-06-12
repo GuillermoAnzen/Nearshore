@@ -105,11 +105,58 @@ var applicationService = function ($http, $q, $cookies){
         return promise;
     };
 
+    this.updateSupportL = function(_id, _resp_prov, _back_prov, _lider_prov, _p_man_prov, _d_man_prov, _man_bnmx, _lead_bnmx, _analista_bnmx,_level){
+        var endpoint = server + "catalogsms/aplicaciones/detailsSupport/"+_level;
+        var appID = $cookies.get("applicationId");
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var data = {
+            "idAplicacion": _id,
+            "idAnalistaB": _analista_bnmx,
+            "idLiderB": _lead_bnmx,
+            "idGerenteB": _man_bnmx,
+            "idResponsableP": _resp_prov,
+            "idBackupP": _back_prov,
+            "idLiderP": _lider_prov,
+            "idPManagerP": _p_man_prov,
+            "idDManagerP": _d_man_prov
+        };
+        var config = {
+            headers: {
+                'Content-Type': content_type,
+                'ApplicationID': appID
+            }
+        };
+        $http.put(endpoint, data, config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+    };
+
+    this.deleteApplication = function(_id){
+        var endpoint = server + "catalogsms/aplicaciones/"+_id;
+        var appID = $cookies.get("applicationId");
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var config = {
+            headers: {
+                'Content-Type': content_type,
+                'ApplicationID': appID
+            }
+        };
+        $http.delete(endpoint, config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+    };
+
     return{
         getApplicationDetails: this.getApplicationDetails,
         addAplication: this.addAplication,
         updateApplication: this.updateApplication,
-        getDetailsL: this.getDetailsL
+        getDetailsL: this.getDetailsL,
+        updateSupportL: this.updateSupportL,
+        deleteApplication: this.deleteApplication
     };
 }
 module.exports= angular.module("app.locale").service("applicationService", applicationService);
