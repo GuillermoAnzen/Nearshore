@@ -28,12 +28,53 @@ var userService = function($http, $q, $cookies){
         return promise;
     };
 
+     function getUserById(id){
+        var defered= $q.defer();
+        var promise= defered.promise;
+        var applicationId= $cookies.get('applicationId');
+        var config={
+        headers:{ 'Content-Type': 'application/json; charset=utf-8',
+                    'ApplicationID': applicationId
+                 }};
+        var getUserByIdUri = getAllusersUri + id.toString();
+        $http.get(getUserByIdUri, config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+     };
+
+     function updateUser(id, firstName, secondName, lastName, lastMotherName, email, profile, clave, active){
+        var defered= $q.defer();
+        var promise= defered.promise;
+        var applicationId= cookies.get('aplicationId');
+        var config={
+        headers:{ 'Content-Type': 'application/json; charset=utf-8',
+                  'ApplicationID': applicationId
+                  }};
+        var updateUserUri= getAllusersUri + id.toString();
+        var data={
+            perfil: {
+                id: profile
+            },
+            email: email,
+            primerNombre: firstName,
+            segundoNombre: secondName,
+            apellidoPaterno: lastName,
+            apellidoMaterno: lastMotherName,
+            clave: clave,
+            activo: active}
+        $http.put(updateUserUri,data, config).then(function(response){
+                defered.resolve(response.data);
+            });
+            return promise
+        };
+
     return {
         getUsers: this.getUsers,
         getAllProfiles: getAllProfiles,
-        getAllDomains:getAllDomains,
-        getAllVendors:getAllVendors,
-        newUser:newUser
+        newUser:newUser,
+        getUserById:getUserById,
+        updateUser: updateUser
     };
 
         function getAllProfiles(){
@@ -50,37 +91,7 @@ var userService = function($http, $q, $cookies){
         return promise;
     };
 
-        function getAllDomains(index, rows){
-            var defered= $q.defer();
-            var promise= defered.promise;
-            var applicationId= $cookies.get('applicationId');
-            var data={
-                index: index,
-                rows: rows
-            }
-            var config = {
-            headers:{'Content-Type': 'application/json; charset=utf-8',
-                     'ApplicationID': applicationId
-            }};
-        $http.post(getAllDomainsUri,data,config).then(function(response){
-            defered.resolve(response.data);
-        });
-            return promise;
-        };
 
-        function getAllVendors(){
-            var defered= $q.defer();
-            var promise= defered.promise;
-            var applicationId= $cookies.get('applicationId');
-            var config = {
-            headers:{'Content-Type': 'application/json; charset=utf-8',
-                     'ApplicationID': applicationId
-            }};
-            $http.get(getAllVendorsUri,config).then(function(response){
-                defered.resolve(response.data);
-            });
-            return promise;
-        };
         function newUser(firstName, secondName, lastName, lastMotherName, email, profile, clave){
             var defered= $q.defer();
             var promise= defered.promise;

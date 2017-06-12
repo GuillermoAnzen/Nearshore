@@ -34,7 +34,10 @@ module.exports = {
         ErrorEmailFormat:'Formato invalido',
         ErrorPWDTooShort: 'Contraseña muy corta',
         SuccessAddingUser:'Se agrego correctamente al usuario',
-        ErrorAddingUser: 'El proceso de agregar usuarios pudo tener errores'
+        ErrorAddingUser: 'El proceso de agregar usuarios pudo tener errores',
+        Edit_User_Title:'Edita usuario',
+        SAVEUPLOAD:'Actualizar',
+        DeleteUser: 'Eliminar usuario'
 
     }
 };
