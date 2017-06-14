@@ -20,6 +20,7 @@ module.exports = {
         COMMENTS: 'Comments',
         NEW_APP: 'New Application',
         MODIFY_APP: 'Modify Application',
+        DELETE_APP: 'Delete Application',
 
         NEW_APP_TITLE: 'Registry Aplicación',
         ENTER_CSI_ID: 'Type CSI-ID',
@@ -41,6 +42,7 @@ module.exports = {
         SAVE_CHANGES_APP: 'Save Changes',
         CANCEL_APDATE_APP: 'Cancel',
 
+        UPDATE_APP_TITLE: 'Update Application Data',
         UPDATEL1_APP: 'Update Support Data L1',
         UPDATEL2_APP: 'Update Support Data L2',
         UPDATEL3_APP: 'Update Support Data L3',
@@ -57,6 +59,23 @@ module.exports = {
         BACKUP_APP: 'Backup',
         LEADER_APP: 'Leader',
         P_MANAGER_APP: 'Project Manager',
-        D_MANAGER_APP: 'Delivery Manager'
+        D_MANAGER_APP: 'Delivery Manager',
+        APPLICATION_UPDATE_SUPPORT_SUCCESS: 'Data of support updated successfully',
+        APPLICATION_UPDATE_SUPPORT_ERROR: 'Error ocurred. Please, try again.',
+        NO_MANAGERS: 'No managers registered. Please update employees Citi catalog.',
+        NO_LEADERS: 'No leaders registered. Please update employees Citi catalog.',
+        NO_ANALIST: 'No analists registered. Please update employees Citi catalog.',
+        NO_EMPLOYEES_CONS_APP: 'No employees data of this vendor.',
+
+        DELETED_SUCCESS_APP: 'Application Deleted successfully',
+        ERROR_DELETE_APP: 'Application not deleted. Error ocurred',
+        SELECT_PMAN_PROV: 'Select a project manager',
+        SELECT_DMAN_PROV: 'Select a delivery manager',
+        SELECT_LEAD_PROV: 'Select a leader',
+        SELECT_BACK_PROV: 'Select a backup',
+        SELECT_RESP_PROV: 'Select a responsable',
+        SELECT_MAN_BNMX: 'Select a manager',
+        SELECT_ANALIST_BNMX: 'Select an analist',
+        SELECT_LEAD_BNMX: 'Select a leader'
     }
 };

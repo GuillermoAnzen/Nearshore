@@ -14,39 +14,52 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     var $this = $scope;
     $this.currentPage = 1;
     $this.pageSize = 10;
-    $this.my  = {  update : false,
-                    updateDetL: false};
     $this.level = 1;
+    $this.totalApps = 0;
+    $this.totalDomains = 0;
+    $this.domainSelected = 0;
+    $this.idDomainSelected = 0;
 
-    var test = function(data){
-        var array = {"value":{name:"value",value:12}};//{"name":"value",value:12};
-        $.each(array,function(i, attr){
-            var prueba = attr.name;
-            var otro = attr.value;
-            $("h1").attr(attr.name, attr.value);
-            $("h1").data(data);
-        });
+    var clearFieldsAddNewApp = function(){
+        $this.domain_app = null;
+        $this.csiId_app = null;
+        $this.ptbId = null;
+        $this.sDesc = null;
+        $this.lDesc = null;
+        $this.supportL1 = null;
+        $this.supportL2 = null;
+        $this.supportL3 = null;
+        $this.ptfPrimary = null;
+        $this.ptfSecondary = null;
+        $this.ptfTertiary = null;
+        $this.commentsApp = null;
     };
 
-    test();
-
-    var getDomains = function(){
+    var getDomains = function(newPage,pageSize){
         var petitionSuccess = false;
-        var domains;
-        domainService.getDomain($this.currentPage,$this.pageSize).then(function(data){
+        domainService.getDomain(newPage,pageSize).then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
                 $scope.domains = data.data;
+                $this.totalDomains = data.data[0].total;
             }
         });
     };
 
-    var getApplicationDomain = function(_idDomain){
+    $this.pageChangeHandlerDomain = function(newPage){
+        getDomains(newPage,$this.pageSize);
+    };
+
+    $this.pageChangeHandler = function(newPage){
+        getApplicationDomain(newPage,$this.idDomainSelected);
+    }
+    var getApplicationDomain = function(currentPage,_idDomain){
         var petitionSuccess = false;
-        domainService.getApplicationDomain($this.currentPage,$this.pageSize,_idDomain).then(function(data){
+        domainService.getApplicationDomain(currentPage,$this.pageSize,_idDomain).then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
                 $scope.aplicationD = data.data;
+                $this.totalApps = data.data[0].total;
             }
         });
     }
@@ -63,6 +76,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
 
     var getApplicationDetails = function(_csiId){
         var petitionSuccess = false;
+        $scope.app = [];
         applicationService.getApplicationDetails(_csiId).then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
@@ -91,14 +105,19 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         });
     };
 
-    var getDetailsL = function(_idapp,_level){
+    var getDetailsL = function(_idapp,_level,_idProv){
         var petitionSuccess = false;
+        //clearSelectCombos();
         var message = "";
         applicationService.getDetailsL(_idapp,_level).then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
                 if (data.data.length != 0){
                     $scope.detailsL = data.data;
+                    getAnalistas();
+                    getGerentes();
+                    getLideres();
+                    getEmployeesVendor(_idProv);
                 }else{
                     $scope.detailsL = [];
                     message = "No se han encontrado datos, por favor actualicelos.";
@@ -107,88 +126,113 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         });
     };
 
-    var getAnalistas = function(){
+    var getAnalistas = function(id_analista_bnmx){
         var petitionSuccess = false;
-        $("#analist_bnmx").editableSelect('clear');
+        var valDefault = "";
         employeesCitiService.getAnalistas().then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
                 $scope.analistList = data.data;
-                for (var i=1;i<=data.data.length;i++){
+                /*for (var i=1;i<=data.data.length;i++){
+                    if (data.data[i-1].id == id_analista_bnmx){
+                        valDefault  = data.data[i-1].analista;
+                    }
                     $("#analist_bnmx").editableSelect('add',data.data[i-1].analista,i-1,{"value":{name:"value",value:data.data[i-1].id}});
                 }
-            }else{
-                //$scope.analistList = [];
-                messagesService.handlerMessages("NO ANALISTS",false);
+                $("#analist_bnmx").val(valDefault);*/
             }
         });
     };
 
-    var getLideres = function(){
+    var getLideres = function(_id){
         var petitionSuccess = false;
-        $("#lead_bnmx").editableSelect('clear');
+        var valDefault = "";
         employeesCitiService.getLideres().then(function(data){
             petitionSuccess = data.success;
             $scope.leadList = [];
             if (petitionSuccess){
                 $scope.leadList = data.data;
-                for (var i=1;i<=data.data.length;i++){
+                /*for (var i=1;i<=data.data.length;i++){
+                    if (data.data[i-1].id == _id){
+                        valDefault  = data.data[i-1].lider;
+                    }
                     $("#lead_bnmx").editableSelect('add',data.data[i-1].lider,i-1,{"value":{name:"value",value:data.data[i-1].id}});
                 }
-            }else{
-                //$scope.leadList = [];
-                messagesService.handlerMessages("NO LEADER",false);
+                $("#lead_bnmx").val(valDefault);*/
             }
         });
     };
 
-    var getGerentes = function(){
+    var getGerentes = function(_id){
         var petitionSuccess = false;
-        $("#manager_bnmx").editableSelect('clear');
+        var valDefault = "";
         employeesCitiService.getGerentes().then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
-                $scope.managerList = data.data;
-                for (var i=1;i<=data.data.length;i++){
-                    $("#manager_bnmx").editableSelect('add',data.data[i-1].gerente,i-1,{"value":{name:"value",value:data.data[i-1].id}});
+                $scope.managerList = [];
+                if (data.data.length != 0){
+                    $scope.managerList = data.data;
+                    /*for (var i=1;i<=data.data.length;i++){
+                        if (data.data[i-1].id == _id){
+                            valDefault  = data.data[i-1].gerente;
+                        }
+                        $("#manager_bnmx").editableSelect('add',data.data[i-1].gerente,i-1,{"value":{name:"value",value:data.data[i-1].id}});
+                    }
+                    $("#manager_bnmx").val(valDefault);*/
                 }
-            }else{
-                //$scope.managerList = [];
-                messagesService.handlerMessages("NO MANAGERS",false);
             }
         });
     };
 
-    var getEmployeesVendor = function(_idProv){
+    var getEmployeesVendor = function(_idProv,id_resp,id_back,id_lid,id_pman,id_dman){
         var petitionSuccess = false;
+        employeesVendorService.getEmployeesPerVendor(_idProv).then(function(data){
+            petitionSuccess = data.success;
+            if (petitionSuccess){
+                $scope.EmpProvList = [];
+                if (data.data.length != 0){
+                    $scope.EmpProvList = data.data;
+                    /*for (var i=1;i<=data.data.length;i++){
+                        $("#resp_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
+                        $("#back_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
+                        $("#lider_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
+                        $("#p_man_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
+                        $("#d_man_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
+                    }
+                    $("#resp_prov").val(id_resp);
+                    $("#back_prov").val(id_back);
+                    $("#lider_prov").val(id_lid);
+                    $("#p_man_prov").val(id_pman);
+                    $("#d_man_prov").val(id_dman);*/
+                }else{
+                    messagesService.handlerMessages("NO_EMPLOYEES_CONS_APP",false);
+                }
+            }
+        });
+    };
+
+    /*var clearSelectCombos = function(){
         $("#resp_prov").editableSelect('clear');
         $("#back_prov").editableSelect('clear');
         $("#lider_prov").editableSelect('clear');
         $("#p_man_prov").editableSelect('clear');
         $("#d_man_prov").editableSelect('clear');
-        employeesVendorService.getEmployeesPerVendor(_idProv).then(function(data){
-            petitionSuccess = data.success;
-            if (petitionSuccess){
-                $scope.EmpProvList = data.data;
-                for (var i=1;i<=data.data.length;i++){
-                    if (i==10)
-                        $("#resp_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}}).val(data.data[i-1].nombre);
-                    else
-                        $("#resp_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                    $("#back_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                    $("#lider_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                    $("#p_man_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                    $("#d_man_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                }
-            }else{
-                //$scope.EmpProvList = [];
-                messagesService.handlerMessages("NO EMPLOYEES",false);
-            }
-        });
-    };
+        $("#analist_bnmx").editableSelect('clear');
+        $("#manager_bnmx").editableSelect('clear');
+        $("#lead_bnmx").editableSelect('clear');
+        
+        $("#resp_prov").val('');
+        $("#back_prov").val('');
+        $("#lider_prov").val('');
+        $("#p_man_prov").val('');
+        $("#d_man_prov").val('');
+        $("#analist_bnmx").val('');
+        $("#manager_bnmx").val('');
+        $("#lead_bnmx").val('');
+    };*/
 
     $this.prepareCombos = function(){
-        getDomains();
+        getDomains(1,100);
         getVendors();
         getPlatforms();
     };
@@ -200,6 +244,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
             getPlatforms();
         }else{
             $scope.my.update = false;
+            $("#UpdateApp").modal('hide');
         }
     };
 
@@ -211,17 +256,20 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         }
     };
 
-    $this.showApplicationsIdDomain = function(_id){
+    $this.showApplicationsIdDomain = function(_id,_domain){
         $(".applications ul :nth-child(1)").attr("class","");
         $(".applications ul :nth-child(2)").attr("class","active")
         $this.showApplicationTab( "applications_domain",true);
-        getApplicationDomain(_id);
+        $scope.domainSelected = _domain;
+        $scope.idDomainSelected = _id;
+        getApplicationDomain($this.currentPage ,_id);
     }
 
     $this.showApplicationsDetails = function(_csiId){
         $(".applications ul :nth-child(2)").attr("class","");
         $(".applications ul :nth-child(3)").attr("class","active")
         $this.showApplicationTab( "details_application",true);
+        $scope.idAppDel = _csiId;
         getApplicationDetails(_csiId);
     };
 
@@ -231,15 +279,14 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         $this.showApplicationTab( "application_consult",true);
         $rootScope.levelUpdate = 'UPDATEL'+ _level +'_APP';
         $this.level = _level;
-        getAnalistas();
-        getGerentes();
-        getLideres();
-        getEmployeesVendor(_idProv);
-        getDetailsL(_idApp,_level);
+        $this.idProv = _idProv;
+        $scope.detailsL = [];
+        getDetailsL(_idApp,_level,_idProv);
     };
 
     $this.addNewApp = function(){
         var petitionSuccess = false;
+        var idAppLocal = $this.csiId_app;
         applicationService.addAplication(
             $this.csiId_app,
             $this.domain_app,
@@ -256,7 +303,9 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         ).then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
+                clearFieldsAddNewApp();
                 messagesService.handlerMessages("SUCCESS_REGISTRY",true);
+                $this.showApplicationsDetails(idAppLocal);
             }else{
                 messagesService.handlerMessages("ERROR_OCURRED",false);
             }
@@ -267,8 +316,8 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     $this.saveChangesApplication = function(){
         var petitionSuccess = false;
         applicationService.updateApplication(
-            $("#domain_appUp").val(),
             $("#csiId_appUp").val(),
+            $("#domain_appUp").val(),
             $("#ptbIdUp").val(),
             $("#sDescUp").val(),
             $("#lDescUp").val(),
@@ -291,10 +340,54 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         });
     };
 
-    $this.saveChangesSupportApplication = function(idApp){
-        var id = idApp;
-        var idApp = $scope.detailsL[0].idApp;
+    $this.deleteApplication = function(_id){
+        var petitionSuccess = false;
+        applicationService.deleteApplication(
+            _id
+        ).then(function(data){
+            petitionSuccess = data.success;
+            if (petitionSuccess){
+                messagesService.handlerMessages("DELETED_SUCCESS_APP",true);
+                $this.showApplicationsIdDomain($scope.idDomainSelected,$scope.domainSelected);
+            }else
+                messagesService.handlerMessages("ERROR_DELETE_APP",false);
+        });
+    };
+
+    $this.saveChangesSupportApplication = function(){
+        var petitionSuccess = false;
+        var id = $("#csiId_appUp").val();
+        var resp_prov = $("#resp_prov").val();// ~ ul>li.es-visible").attr("value");
+        var back_prov = $("#back_prov").val();// ~ ul>li.es-visible").attr("value");
+        var lider_prov = $("#lider_prov").val();// ~ ul>li.es-visible").attr("value"); 
+        var p_man_prov = $("#p_man_prov").val();// ~ ul>li.es-visible").attr("value");
+        var d_man_prov = $("#d_man_prov").val();// ~ ul>li.es-visible").attr("value");
+        var man_bnmx = $("#manager_bnmx").val();// ~ ul>li.es-visible").attr("value");
+        var lead_bnmx = $("#lead_bnmx").val();// ~ ul>li.es-visible").attr("value");
+        var analista_bnmx = $("#analist_bnmx").val();// ~ ul>li.es-visible").attr("value");
         var level  = $this.level;
+        applicationService.updateSupportL(
+            id, 
+            resp_prov, 
+            back_prov, 
+            lider_prov, 
+            p_man_prov, 
+            d_man_prov, 
+            man_bnmx, 
+            lead_bnmx, 
+            analista_bnmx, 
+            level
+        ).then(function(data){
+            petitionSuccess = data.success;
+            if (petitionSuccess){
+                messagesService.handlerMessages("APPLICATION_UPDATE_SUPPORT_SUCCESS",true);
+                $this.showDetailsL(id,level,$this.idProv);
+                $this.updateDetailsL('false');
+                $("#UpdateSupport").modal('hide');
+            }else{
+                messagesService.handlerMessages("APPLICATION_UPDATE_SUPPORT_ERROR",false);
+            }
+        });
     };
 
     $this.showApplicationTab = function(tabName,flag){
@@ -315,11 +408,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         
         if (!flag){
             if (tabName == "domains"){
-                getDomains();
-            }else if(tabName == "applications_domain"){
-                getApplicationDomainAll();
-            }else if(tabName == "details_application"){
-                getApplicationDetails();
+                getDomains($this.currentPage,$this.pageSize);
             }
         }
 

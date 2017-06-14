@@ -44,15 +44,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr dir-paginate="x in domains | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                    <tr dir-paginate="x in domains | filter:q | itemsPerPage: pageSize" total-items="totalDomains" current-page="currentPage">
                         <!--td> </td-->
-                        <td> <a href="" ng-model="id[x.ID]" id="{{x.ID}}"  ng-click="showApplicationsIdDomain(x.ID)">{{x.DESCRIPCION}}</a></td>
+                        <td> <a href="" ng-model="id[x.ID]" id="{{x.ID}}"  ng-click="showApplicationsIdDomain(x.ID,x.DESCRIPCION)">{{x.DESCRIPCION}}</a></td>
                     </tr>
                 </tbody>
             </table>
             </div>
                 <div class="text-center">
-                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandlerDomain(newPageNumber)"></dir-pagination-controls>
             </div>
         </div>
 
@@ -60,22 +60,29 @@
         <div id="applications_domain" class="tabcontent">
             <!-- TABLe -->
             <div class="row">
-                <br/>
-                <div class="col-xs-4">
-                    <label ></label>
-                    <div class="input-group">
-                        <input type="text" ng-model="q" class="form-control" id="search" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-4">
+                        <h4> {{domainSelected}} </h4>
                     </div>
                 </div>
-                <div class="col-xs-4"></div>
-                <div class="col-xs-4">
-                    <label for="search">{{'ITEMS_PER_PAGE'|translate}}:</label>
-                    <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                <hr>
+                <div class="row search-domain">
+                    <div class="col-xs-4">
+                        <label ></label>
+                        <div class="input-group">
+                            <input type="text" ng-model="q" class="form-control" id="search" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-3">
+                        <label for="search">{{'ITEMS_PER_PAGE'|translate}}:</label>
+                        <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                    </div>
                 </div>
             </div>
             <br/>
@@ -88,7 +95,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="x in aplicationD | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                        <tr dir-paginate="x in aplicationD | filter:q | itemsPerPage: pageSize" total-items="totalApps" current-page="currentPage">
                             <td> <a href="" ng-model="id[CSI_ID]"  ng-click="showApplicationsDetails(x.CSI_ID)">{{x.CSI_ID}} </a></td>
                             <td> <a href="" ng-model="id[CSI_ID]"  ng-click="showApplicationsDetails(x.CSI_ID)">{{x.Descripcion_Corta}} </a></td>
                         </tr>
@@ -111,7 +118,12 @@
 
                 <div class="col-xs-3">
                     <!--button class="btn btn-default btn-lg glyphicon glyphicon-pencil" title="{{'MODIFY_APP' | translate}}'" ng-click="updateApplication('true')"></button-->
-                    <button class="btn btn-default btn-block" translate="MODIFY_APP" ng-click="updateApplication('true')"></button>
+                    <button class="btn btn-default btn-block" translate="MODIFY_APP" data-toggle="modal" data-target="#UpdateApp" ng-click="updateApplication('true')"></button>
+                </div>
+
+                <div class="col-xs-3">
+                    <!--button class="btn btn-default btn-lg glyphicon glyphicon-pencil" title="{{'MODIFY_APP' | translate}}'" ng-click="updateApplication('true')"></button-->
+                    <button class="btn btn-default btn-block" translate="DELETE_APP" ng-click="deleteApplication(idAppDel)"></button>
                 </div>
             </div>
             <!-- TABLe -->
@@ -121,113 +133,113 @@
                     <div class="grid-responsive">
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="APP_DOMAIN"></label> </div>
-                            <div class="col-md-6" ng-hide="my.update"> <p> {{app[0].dominio}} </p></div>
-                            <div class="col-sm-6" ng-hide="!my.update">
+                            <div class="col-md-6"> <p> {{app[0].dominio}} </p></div>
+                            <!--div class="col-sm-6" ng-hide="!my.update">
                                 <select class="form-control" name="domain_appUp" id="domain_appUp">
-                                    <option ng-repeat="domain in domains" ng-selected="{{domain.ID == app[0].idDominio}}" value="{{domain.ID}}">{{domain.DESCRIPCION}}</option>
+                                    <option ng-repeat="domain in domains" ng-selected="domain.ID == app[0].idDominio" value="{{domain.ID}}">{{domain.DESCRIPCION}} </option>
                                 </select>
-                            </div>
+                            </div-->
                             <div class="col-md-4"></div>
                         </div> <br>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for=""> CSI-ID </label> </div>
-                            <div class="col-md-3" ng-hide="my.update"> <p>{{app[0].Csi_Id}} </p></div>
+                            <div class="col-md-3"> <p>{{app[0].Csi_Id}} </p></div>
                             <!-- update -->
-                            <div  class="col-md-3" ng-hide="!my.update">
+                            <!--div  class="col-md-3" ng-hide="!my.update">
                                 <input type="number" value="{{app[0].Csi_Id}}" name="csiId_appUp" class="form-control" id="csiId_appUp" ng-model="csiId_appUp" disabled>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app" for=""> PTB-ID </label> </div>
-                            <div class="col-md-2" ng-hide="my.update"><p> {{app[0].Ptb_Id}}</p> </div>
+                            <div class="col-md-2"><p> {{app[0].Ptb_Id}}</p> </div>
                             <!-- update -->
-                            <div class="col-sm-3" ng-hide="!my.update">
+                            <!--div class="col-sm-3" ng-hide="!my.update">
                                 <input type="number" value="{{app[0].Ptb_Id}}" name="ptbIdUp" class="form-control" id="ptbIdUp">
-                            </div>
+                            </div-->
                             <!-- /update -->
                         </div> <br>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="SHORT_DESCRIPTION"></label> </div>
-                            <div class="col-md-8" ng-hide="my.update"> <p>{{app[0].Descripcion_Corta}}</p> </div>
+                            <div class="col-md-8"> <p>{{app[0].Descripcion_Corta}}</p> </div>
                             <!-- update -->
-                            <div class="col-sm-8" ng-hide="!my.update">
+                            <!--div class="col-sm-8" ng-hide="!my.update">
                                 <input type="text" value="{{app[0].Descripcion_Corta}}" name="sDescUp" class="form-control" id="sDescUp">
-                            </div>
+                            </div-->
                             <!-- /update -->
                         </div> <br>
                         <div class="row">  
                             <div class="col-md-3"> <label class="label-app" for="" translate="LARGE_DESCRIPTION"></label> </div>
-                            <div class="col-md-8" ng-hide="my.update"> <p>{{app[0].descripcionLarga}}</p> </div>
+                            <div class="col-md-8"> <p>{{app[0].descripcionLarga}}</p> </div>
                             <!-- update -->
-                            <div class="col-sm-8" ng-hide="!my.update">
+                            <!--div class="col-sm-8" ng-hide="!my.update">
                                 <textarea rows="2" name="lDescUp" class="form-control" id="lDescUp" placeholder="{{'ENTER_LARGE_DESCRIPTION'| translate}}">{{app[0].descripcionLarga}}</textarea>
-                            </div>
+                            </div-->
                             <!-- /update -->
                         </div> <br>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L1"></label> </div>
-                            <div class="col-md-4" ng-hide="my.update"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,1,app[0].idProvL1)" > {{app[0].provL1}} </a> </div>
-                            <div class="col-sm-4" ng-hide="!my.update">
+                            <div class="col-md-4"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,1,app[0].idProvL1)" > {{app[0].provL1}} </a> </div>
+                            <!--div class="col-sm-4" ng-hide="!my.update">
                                 <select class="form-control" name="supportL1Up" id="supportL1Up">
-                                    <option ng-repeat="vendor in vendors" ng-selected="{{vendor.ID == app[0].idProvL1}}"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
+                                    <option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL1"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
                                 </select>
-                            </div>
+                            </div-->
                         </div> <br>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L2"></label> </div>
-                            <div class="col-md-4" ng-hide="my.update"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,2,app[0].idProvL2)" > {{app[0].provL2}} </a> </div>
-                            <div class="col-sm-4" ng-hide="!my.update">
+                            <div class="col-md-4"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,2,app[0].idProvL2)" > {{app[0].provL2}} </a> </div>
+                            <!--div class="col-sm-4" ng-hide="!my.update">
                                 <select class="form-control" name="supportL2Up" id="supportL2Up">
-                                    <option ng-repeat="vendor in vendors" ng-selected="{{vendor.ID == app[0].idProvL2}}"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
+                                    <option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL2"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
                                 </select>
-                            </div>
+                            </div-->
                         </div> <br>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L3"></label> </div>
-                            <div class="col-md-4" ng-hide="my.update"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,3,app[0].idProvL3)" > {{app[0].provL3}} </a> </div>
-                            <div class="col-sm-4" ng-hide="!my.update">
+                            <div class="col-md-4"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,3,app[0].idProvL3)" > {{app[0].provL3}} </a> </div>
+                            <!--div class="col-sm-4" ng-hide="!my.update">
                                 <select class="form-control" name="supportL3Up" id="supportL3Up">
-                                    <option ng-repeat="vendor in vendors" ng-selected="{{vendor.ID == app[0].idProvL3}}"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
+                                    <option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL3"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
                                 </select>
-                            </div>
+                            </div-->
                         </div> <br>
                         <div class="row">
-                            <div class="col-md-4" ng-hide="my.update"><h4 translate="TECHNOLOGICAL_PLATFORM"></h4> </div>
+                            <div class="col-md-4"><h4 translate="TECHNOLOGICAL_PLATFORM"></h4> </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="PRIMARY"></label> </div>
-                            <div class="col-md-8" ng-hide="my.update"> <p>{{app[0].ptfPrimaria}}</p> </div>
-                            <div class="col-sm-8" ng-hide="!my.update">
+                            <div class="col-md-8"> <p>{{app[0].ptfPrimaria}}</p> </div>
+                            <!--div class="col-sm-8" ng-hide="!my.update">
                                 <select class="form-control" id="ptfPrimaryUp">
-                                    <option ng-repeat="platform in platforms" ng-selected="{{platform.Id == app[0].idPtfPrim}}" value="{{platform.Id}}">{{platform.Descripcion}}</option>
+                                    <option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfPrim" value="{{platform.Id}}">{{platform.Descripcion}}</option>
                                 </select>
-                            </div>
+                            </div-->
                         </div> <br>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="SECONDARY"></label> </div>
-                            <div class="col-md-8" ng-hide="my.update"> <p>{{app[0].ptfSecundaria}}</p> </div>
-                            <div class="col-sm-8" ng-hide="!my.update">
+                            <div class="col-md-8"> <p>{{app[0].ptfSecundaria}}</p> </div>
+                            <!--div class="col-sm-8" ng-hide="!my.update">
                                 <select class="form-control" id="ptfSecondaryUp">
-                                    <option ng-repeat="platform in platforms" ng-selected="{{platform.Id == app[0].idPtfSec}}" value="{{platform.Id}}">{{platform.Descripcion}}</option>
+                                    <option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfSec" value="{{platform.Id}}">{{platform.Descripcion}}</option>
                                 </select>
-                            </div>
+                            </div-->
                         </div> <br>
                         <div class="row">
                             <div class="col-md-3"> <label class="label-app" for="" translate="TERTIARY"></label> </div>
-                            <div class="col-md-8" ng-hide="my.update"> <p>{{app[0].ptfTerciaria}}</p> </div>
-                            <div class="col-sm-8" ng-hide="!my.update">
+                            <div class="col-md-8"> <p>{{app[0].ptfTerciaria}}</p> </div>
+                            <!--div class="col-sm-8" ng-hide="!my.update">
                                 <select class="form-control" id="ptfTertiaryUp">
-                                    <option ng-repeat="platform in platforms" ng-selected="{{platform.Id == app[0].idPtfTerc}}" value="{{platform.Id}}">{{platform.Descripcion}}</option>
+                                    <option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfTerc" value="{{platform.Id}}">{{platform.Descripcion}}</option>
                                 </select>
-                            </div>
+                            </div-->
                         </div> <br>
                         <div class="row">    
                             <div class="col-md-3"> <label class="label-app" for="" translate="COMMENTS"></label> </div>
-                            <div class="col-md-8" ng-hide="my.update"> <p>{{app[0].Comentarios}}</p> </div>
-                            <div class="col-md-8" ng-hide="!my.update"> 
+                            <div class="col-md-8"> <p>{{app[0].Comentarios}}</p> </div>
+                            <!--div class="col-md-8" ng-hide="!my.update"> 
                                 <input type="text" name="commentsAppUp" class="form-control" id="commentsAppUp" value="{{app[0].Comentarios}}" placeholder="{{'ENTER_COMMENTS_APP'| translate}}"> 
-                            </div>
+                            </div-->
                         </div> <br>
-                        <div class="row">
+                        <!--div class="row">
 
                             <div class="col-xs-3"></div>
                             <div class="col-xs-3" ng-hide="!my.update">
@@ -236,7 +248,7 @@
                             <div class="col-xs-3" ng-hide="!my.update">
                                 <button class="btn btn-default btn-block" translate="CANCEL_APDATE_APP" ng-click="updateApplication('false')"></button>
                             </div>
-                        </div>
+                        </div-->
                     </div>
                 </form>
             </div>
@@ -248,13 +260,13 @@
         <div id="application_consult" class="tabcontent">
             <div class="row page-header">
                 <div class="col-xs-3">
-                    <button class="btn btn-default btn-md" translate="{{levelUpdate}}" ng-click="updateDetailsL('true')"></button>
+                    <button class="btn btn-default btn-md" translate="{{levelUpdate}}" data-toggle="modal" data-target="#UpdateSupport" ng-click="updateDetailsL('true')"></button>
                 </div>
             </div>
             <!-- TABLe -->
             <div class="row">
                 <br/>
-                <form class="form-horizontal" name="UpdateApp" ng-submit="updateApp()" novalidat>
+                <form class="form-horizontal" novalidat>
                     <div class="grid-responsive">
                         
                         <div class="row">
@@ -268,12 +280,12 @@
                             <div class="col-md-12"> <label> BANAMEX </label> </div>
                             <!-- Analista bnmx -->
                             <div class="col-md-2"> <label class="label-app" translate="ANALIST_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].analista_bnmx}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].analista_bnmx}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="analist_bnmx" id="analist_bnmx" class="select-editable form-control">
                                     <option ng-repeat="analista in analistList" value="{{analista.id}}">{{analista.analista}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_analista_bnmx}}</p> </div>
@@ -291,12 +303,12 @@
                         <!-- Lider BNMX -->
                         <div class="row">
                             <div class="col-md-2"> <label class="label-app" translate="LEAD_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].lider_bnmx}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].lider_bnmx}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="lead_bnmx" id="lead_bnmx" class="form-control">
-                                    <!--option ng-repeat="lead in leadList" value="{{lead.id}}">{{lead.lider}}</option-->
+                                    <option ng-repeat="lead in leadList" value="{{lead.id}}">{{lead.lider}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_lider_bnmx}}</p> </div>
@@ -311,12 +323,12 @@
                         <!-- Gerente BNMX -->
                         <div class="row">
                             <div class="col-md-2"> <label class="label-app" translate="MANAGER_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].gerente_bnmx}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].gerente_bnmx}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="manager_bnmx" id="manager_bnmx" class="select-editable form-control">
-                                    <!--option ng-repeat="manager in managerList" value="{{manager.id}}">{{manager.gerente}}</option-->
+                                    <option ng-repeat="manager in managerList" value="{{manager.id}}">{{manager.gerente}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_gerente_bnmx}}</p> </div>
@@ -332,16 +344,16 @@
                         <!-- Responsable -->
                         <div class="row col-md-12">
                             <div class="col-md-3"> <label translate="VENDOR_APP"></label> </div>
-                            <div class="col-md-3" ng-hide="my.updateDetL"> <p>{{detailsL[0].proveedor}} </p></div>
+                            <div class="col-md-3"> <p>{{detailsL[0].proveedor}} </p></div>
                         </div>
                         <div class="row">
                             <div class="col-md-2"> <label class="label-app" translate="RESP_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].responsable_prov}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].responsable_prov}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="resp_prov" id="resp_prov" class="select-editable form-control">
                                     <option ng-repeat="empProv in EmpProvList" value="{{empProv.id}}">{{empProv.nombre}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_responsable_banamex_prov}}</p> </div>
@@ -364,12 +376,12 @@
                         <!-- Backup -->
                         <div class="row">
                             <div class="col-md-2"> <label class="label-app" translate="BACKUP_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].backup_prov}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].backup_prov}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="back_prov" id="back_prov" class="select-editable form-control">
                                     <option ng-repeat="empProv in EmpProvList" value="{{empProv.id}}">{{empProv.nombre}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_backup_banamex_prov}}</p> </div>
@@ -392,12 +404,12 @@
                         <!-- lider -->
                         <div class="row">
                             <div class="col-md-2"> <label class="label-app" translate="LEADER_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].lider_prov}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].lider_prov}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="lider_prov" id="lider_prov" class="select-editable form-control">
                                     <option ng-repeat="empProv in EmpProvList" value="{{empProv.id}}">{{empProv.nombre}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_lider_banamex_prov}}</p> </div> 
@@ -420,12 +432,12 @@
                         <!-- project Manager -->
                         <div class="row">
                             <div class="col-md-2"> <label class="label-app" translate="P_MANAGER_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].p_manager_prov}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].p_manager_prov}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="p_man_prov" id="p_man_prov" class="select-editable form-control">
                                     <option ng-repeat="empProv in EmpProvList" value="{{empProv.id}}">{{empProv.nombre}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_p_manager_banamex_prov}}</p> </div>
@@ -448,12 +460,12 @@
                         <!-- delivery Manager -->
                         <div class="row">
                             <div class="col-md-2"> <label class="label-app" translate="D_MANAGER_APP">  </label> </div>
-                            <div class="col-md-4" ng-hide="my.updateDetL"> <p>{{detailsL[0].d_manager_prov}} </p></div>
-                            <div  class="col-md-4" ng-hide="!my.updateDetL">
+                            <div class="col-md-4"> <p>{{detailsL[0].d_manager_prov}} </p></div>
+                            <!--div  class="col-md-4" ng-hide="!my.updateDetL">
                                 <select name="d_man_prov" id="d_man_prov" class="select-editable form-control">
                                     <option ng-repeat="empProv in EmpProvList" value="{{empProv.id}}">{{empProv.nombre}}</option>
                                 </select>
-                            </div>
+                            </div-->
                             <!-- /update -->
                             <div class="col-md-2"> <label class="label-app"> Ext. Banamex </label> </div>
                             <div class="col-md-3"><p> {{detailsL[0].ext_d_manager_banamex_prov}}</p> </div>
@@ -474,16 +486,16 @@
                         </div> <br>
                         <!-- /delivery manager -->
 
-                        <div class="row">
+                        <!--div class="row">
 
                             <div class="col-xs-3"></div>
                             <div class="col-xs-3" ng-hide="!my.updateDetL">
-                                <button class="btn btn-primary btn-block" translate="SAVE_CHANGES_APP" ng-click="saveChangesSupportApplication(detailsL[0].idApp)"></button>
+                                <button class="btn btn-primary btn-block" translate="SAVE_CHANGES_APP" ng-click="saveChangesSupportApplication()"></button>
                             </div>
                             <div class="col-xs-3" ng-hide="!my.updateDetL">
                                 <button class="btn btn-default btn-block" translate="CANCEL_APDATE_APP" ng-click="updateDetailsL('false')"></button>
                             </div>
-                        </div>
+                        </div-->
                     </div>
                 </form>
             </div>
@@ -491,7 +503,7 @@
     </div>
 
 
-<!-- MODAL -->
+<!-- MODAL NEW APP -->
 <div class="modal fade" id="NewApp" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -594,6 +606,265 @@
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-3">
                             <button type="submit" class="btn btn-primary btn-block" translate="SAVE"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL UPDATE APP -->
+<div class="modal fade" id="UpdateApp" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" translate="UPDATE_APP_TITLE"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" name="UpdateApp" novalidat>
+                    <div class="grid-responsive">
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="APP_DOMAIN"></label> </div>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="domain_appUp" id="domain_appUp">
+                                    <option ng-repeat="domain in domains" ng-selected="domain.ID == app[0].idDominio" value="{{domain.ID}}">{{domain.DESCRIPCION}} </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for=""> CSI-ID </label> </div>
+                            <!--div class="col-md-3" ng-hide="my.update"> <p>{{app[0].Csi_Id}} </p></div-->
+                            <!-- update -->
+                            <div  class="col-md-3">
+                                <input type="number" value="{{app[0].Csi_Id}}" name="csiId_appUp" class="form-control" id="csiId_appUp" ng-model="csiId_appUp" disabled>
+                            </div>
+                            <!-- /update -->
+                            <div class="col-md-2"> <label class="label-app" for=""> PTB-ID </label> </div>
+                            <!--div class="col-md-2" ng-hide="my.update"><p> {{app[0].Ptb_Id}}</p> </div-->
+                            <!-- update -->
+                            <div class="col-sm-3">
+                                <input type="number" value="{{app[0].Ptb_Id}}" name="ptbIdUp" class="form-control" id="ptbIdUp">
+                            </div>
+                            <!-- /update -->
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="SHORT_DESCRIPTION"></label> </div>
+                            <!--div class="col-md-8" ng-hide="my.update"> <p>{{app[0].Descripcion_Corta}}</p> </div-->
+                            <!-- update -->
+                            <div class="col-sm-8">
+                                <input type="text" value="{{app[0].Descripcion_Corta}}" name="sDescUp" class="form-control" id="sDescUp">
+                            </div>
+                            <!-- /update -->
+                        </div> <br>
+                        <div class="row">  
+                            <div class="col-md-3"> <label class="label-app" for="" translate="LARGE_DESCRIPTION"></label> </div>
+                            <!--div class="col-md-8" ng-hide="my.update"> <p>{{app[0].descripcionLarga}}</p> </div-->
+                            <!-- update -->
+                            <div class="col-sm-8">
+                                <textarea rows="2" name="lDescUp" class="form-control" id="lDescUp" placeholder="{{'ENTER_LARGE_DESCRIPTION'| translate}}">{{app[0].descripcionLarga}}</textarea>
+                            </div>
+                            <!-- /update -->
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L1"></label> </div>
+                            <!--div class="col-md-4" ng-hide="my.update"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,1,app[0].idProvL1)" > {{app[0].provL1}} </a> </div-->
+                            <div class="col-sm-4">
+                                <select class="form-control" name="supportL1Up" id="supportL1Up">
+                                    <option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL1"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L2"></label> </div>
+                            <!--div class="col-md-4" ng-hide="my.update"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,2,app[0].idProvL2)" > {{app[0].provL2}} </a> </div-->
+                            <div class="col-sm-4">
+                                <select class="form-control" name="supportL2Up" id="supportL2Up">
+                                    <option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL2"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L3"></label> </div>
+                            <!--div class="col-md-4" ng-hide="my.update"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,3,app[0].idProvL3)" > {{app[0].provL3}} </a> </div-->
+                            <div class="col-sm-4">
+                                <select class="form-control" name="supportL3Up" id="supportL3Up">
+                                    <option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL3"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="PRIMARY"></label> </div>
+                            <!--div class="col-md-8" ng-hide="my.update"> <p>{{app[0].ptfPrimaria}}</p> </div-->
+                            <div class="col-sm-8">
+                                <select class="form-control" id="ptfPrimaryUp">
+                                    <option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfPrim" value="{{platform.Id}}">{{platform.Descripcion}}</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="SECONDARY"></label> </div>
+                            <!--div class="col-md-8" ng-hide="my.update"> <p>{{app[0].ptfSecundaria}}</p> </div-->
+                            <div class="col-sm-8">
+                                <select class="form-control" id="ptfSecondaryUp">
+                                    <option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfSec" value="{{platform.Id}}">{{platform.Descripcion}}</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="TERTIARY"></label> </div>
+                            <!--div class="col-md-8" ng-hide="my.update"> <p>{{app[0].ptfTerciaria}}</p> </div-->
+                            <div class="col-sm-8">
+                                <select class="form-control" id="ptfTertiaryUp">
+                                    <option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfTerc" value="{{platform.Id}}">{{platform.Descripcion}}</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <div class="row">    
+                            <div class="col-md-3"> <label class="label-app" for="" translate="COMMENTS"></label> </div>
+                            <!--div class="col-md-8" ng-hide="my.update"> <p>{{app[0].Comentarios}}</p> </div-->
+                            <div class="col-md-8"> 
+                                <input type="text" name="commentsAppUp" class="form-control" id="commentsAppUp" value="{{app[0].Comentarios}}" placeholder="{{'ENTER_COMMENTS_APP'| translate}}"> 
+                            </div>
+                        </div> <br>
+                        <div class="row">
+
+                            <div class="col-xs-offset-2 col-xs-4">
+                                <button type="submit" class="btn btn-primary btn-block" translate="SAVE_CHANGES_APP" ng-click="saveChangesApplication()"></button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn btn-default btn-block" translate="CANCEL_APDATE_APP" data-dismiss="modal" ng-click="updateApplication('false')"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL UPDATE SUPPORT APP -->
+<div class="modal fade" id="UpdateSupport" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" translate="UPDATE_APP_TITLE"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" name="UpdateApp" ng-submit="updateApp()" novalidat>
+                    <div class="grid-responsive">
+                        
+                        <div class="row">
+                            <div class="col-md-3"> <label class="label-app" for="" translate="APP_DOMAIN"></label> </div>
+                            <div class="col-md-3"> <p> {{detailsL[0].dominio}} </p></div>
+                            <div class="col-md-3"> <label class="label-app" for="" translate="APP_SUPPORT"></label> </div>
+                            <div class="col-md-3"> <p> {{detailsL[0].L}} </p></div>
+                        </div> <hr>
+
+                        <div class="row">
+                            <div class="col-md-12"> <label> BANAMEX </label> </div>
+                            <!-- Analista bnmx -->
+                            <div class="col-md-2"> <label class="label-app" translate="ANALIST_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="analist_bnmx" id="analist_bnmx" class="select-editable form-control">
+                                    <option value=""> {{'SELECT_ANALIST_BNMX' | translate}} </option>
+                                    <option ng-repeat="analista in analistList" ng-selected="analista.id == detailsL[0].id_analista_bnmx" value="{{analista.id}}">{{analista.analista}}</option>
+                                </select>
+                            </div>
+                        </div> <br>
+                        <!-- /Analista -->
+                        <!-- Lider BNMX -->
+                        <div class="row">
+                            <div class="col-md-2"> <label class="label-app" translate="LEAD_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="lead_bnmx" id="lead_bnmx" class="form-control">
+                                    <option value=""> {{'SELECT_LEAD_BNMX' | translate}} </option>
+                                    <option ng-repeat="lead in leadList" ng-selected="lead.id == detailsL[0].id_lider_bnmx" value="{{lead.id}}">{{lead.lider}}</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <!-- Gerente BNMX -->
+                        <div class="row">
+                            <div class="col-md-2"> <label class="label-app" translate="MANAGER_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="manager_bnmx" id="manager_bnmx" class="select-editable form-control">
+                                    <option value=""> {{'SELECT_MAN_BNMX' | translate}} </option>
+                                    <option ng-repeat="manager in managerList" ng-selected="manager.id == detailsL[0].id_gerente_bnmx" value="{{manager.id}}">{{manager.gerente}}</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        </div> <hr>
+                        <!-- PROVEEDOR -->
+                        <!-- Responsable -->
+                        <div class="row col-md-12">
+                            <div class="col-md-3"> <label translate="VENDOR_APP"></label> </div>
+                            <div class="col-md-3"> <p>{{detailsL[0].proveedor}} </p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"> <label class="label-app" translate="RESP_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="resp_prov" id="resp_prov" class="select-editable form-control">
+                                    <option value=""> {{'SELECT_RESP_PROV' | translate}} </option>
+                                    <option ng-repeat="empProv in EmpProvList" ng-selected="empProv.id == detailsL[0].id_responsable_prov" value="{{empProv.id}}">{{empProv.nombre}}</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <!-- /Responsable -->
+                        <!-- Backup -->
+                        <div class="row">
+                            <div class="col-md-2"> <label class="label-app" translate="BACKUP_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="back_prov" id="back_prov" class="select-editable form-control">
+                                    <option value=""> {{'SELECT_BACK_PROV' | translate}} </option>
+                                    <option ng-repeat="empProv in EmpProvList" ng-selected="empProv.id == detailsL[0].id_backup_prov" value="{{empProv.id}}">{{empProv.nombre}}</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <!-- /backup -->
+                        <!-- lider -->
+                        <div class="row">
+                            <div class="col-md-2"> <label class="label-app" translate="LEADER_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="lider_prov" id="lider_prov" class="select-editable form-control">
+                                    <option value=""> {{'SELECT_LEAD_PROV' | translate}} </option>
+                                    <option ng-repeat="empProv in EmpProvList" ng-selected="empProv.id == detailsL[0].id_lider_prov" value="{{empProv.id}}">{{empProv.nombre}}</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <!-- project Manager -->
+                        <div class="row">
+                            <div class="col-md-2"> <label class="label-app" translate="P_MANAGER_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="p_man_prov" id="p_man_prov" class="select-editable form-control">
+                                    <option value=""> {{'SELECT_DMAN_PROV' | translate}} </option>
+                                    <option ng-repeat="empProv in EmpProvList" ng-selected="empProv.id == detailsL[0].id_p_manager_prov" value="{{empProv.id}}">{{empProv.nombre}}</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <!-- /project manager -->
+                        <!-- delivery Manager -->
+                        <div class="row">
+                            <div class="col-md-2"> <label class="label-app" translate="D_MANAGER_APP">  </label> </div>
+                            <div  class="col-md-7">
+                                <select name="d_man_prov" id="d_man_prov" class="select-editable form-control">
+                                    <option value=""> {{'SELECT_PMAN_PROV' | translate}} </option>
+                                    <option ng-repeat="empProv in EmpProvList" ng-selected="empProv.id == detailsL[0].id_d_manager_prov" value="{{empProv.id}}">{{empProv.nombre}}</option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <!-- /delivery manager -->
+
+                        <div class="row">
+                            <div class="col-xs-offset-2 col-xs-4">
+                                <button class="btn btn-primary btn-block" translate="SAVE_CHANGES_APP" ng-click="saveChangesSupportApplication()"></button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button class="btn btn-default btn-block" translate="CANCEL_APDATE_APP" data-dismiss="modal"></button>
+                            </div>
                         </div>
                     </div>
                 </form>
