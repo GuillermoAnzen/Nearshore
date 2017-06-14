@@ -2,9 +2,15 @@ module.exports = {
     language: 'en-US',
     translate: {
         TITLE_CATALOGS: 'Catalogs',
-        DOMAINS: 'Domains',
-        APPLICATIONS_PER_DOMAIN: 'Applications per Domain',
-        APPLICATION_DETAILS_PER_DOMAIN: 'Application details per Domain',
-        APPLICATION_CONSULT: 'Consult per Application'
+        CAT_CITI_EMPLOYEES: 'Citi Employees',
+        CAT_VENDOR_EMPLOYEES: 'Vendor Employees',
+        CAT_VENDORS: 'Vendors',
+        CAT_PLATFORMS: 'Platforms',
+        CAT_JOBS_CITI: 'Citi Jobs',
+        CAT_DOMAINS: 'Domains',
+        CAT_JOBS_VENDOR: 'Vendor Jobs',
+        CAT_PROFILES: 'Profiles',
+        CAT_CITIES: 'Cities',
+        CAT_COUNTRIES: 'Countries'
     }
 };
