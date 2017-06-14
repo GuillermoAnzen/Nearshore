@@ -20,28 +20,28 @@
                 </div>
             </div>
             <div class="alert alert-success alert-dismissible" ng-show="showSuccessAdd">
-                <a href="" class="close" ng-click="hideAlert()" aria-label="close">&times;</a>
+                <a href="" class="close" ng-click="hideSuccessAddAlert()" aria-label="close">&times;</a>
                 <p translate="SuccessAddingUser"></p>
             </div>
             <div class="alert alert-success alert-dismissible" ng-show="showSuccessEdit">
-                <a href="" class="close" ng-click="hideAlert()" aria-label="close">&times;</a>
+                <a href="" class="close" ng-click="hideSuccessEditAlert()" aria-label="close">&times;</a>
                     <p translate="SuccessEditUser"></p>
                 </a>
             </div>
             <div class="alert alert-success alert-dismissible" ng-show="showSuccessDelete">
-                <a href="" class="close" ng-click="hideAlert()" aria-label="close">&times;</a>
+                <a href="" class="close" ng-click="hideSuccessDeleteAlert()" aria-label="close">&times;</a>
                 <p translate="SuccesDeleteUser"></p>
             </div>
             <div class="alert alert-warning alert dismissible" ng-show="showErrorAdd">
-                <a href="" class="close" ng-click="hideAlert()" aria-label="close">&times;</a>
+                <a href="" class="close" ng-click="hideErrorAddAlert()" aria-label="close">&times;</a>
                 <p translate="ErrorAddingUser"></p>
             </div>
             <div class="alert alert-warning alert dismissible" ng-show="showErrorEdit">
-                <a href="" class="close" ng-click="hideAlert()" aria-label="close">&times;</a>
+                <a href="" class="close" ng-click="hideErrorEditAlert()" aria-label="close">&times;</a>
                 <p translate="ErrorEditUser"></p>
             </div>
             <div class="alert alert-warning alert dismissible" ng-show="showErrorDelete">
-                <a href="" class="close" ng-click="hideAlert()" aria-label="close">&times;</a>
+                <a href="" class="close" ng-click="hideErrorDeleteAlert()" aria-label="close">&times;</a>
                 <p translate="ErrorDeleteUser"></p>
             </div>
             <div class="row">
@@ -77,7 +77,7 @@
                 </thead>
                 <tbody>
                     <tr dir-paginate="x in usersList | filter:q | itemsPerPage: pageSize" total-items="totalUsers" current-page="currentPage">
-                        <td><input type="radio" ng-model="idUser" value="{{x.id}}" name="idUser" ng-change='checkUser(idUser)'></td>
+                        <td><input type="radio" ng-model="idUser" value="{{x.id}}" name="idUser" ng-click='checkUser(idUser)'></td>
                         <td>{{x.nombre}}</td>
                         <td>{{x.correo}}</td>
                         <td>{{x.perfil}}</td>

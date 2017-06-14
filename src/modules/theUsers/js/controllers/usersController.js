@@ -79,9 +79,27 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
                    { value:0, status:'Inactivo'}];
 
 
-    $scope.hideAlert= function(){
+    $scope.hideSuccessDeleteAlert= function(){
        $scope.showSuccessDelete= false;
        }
+
+     $scope.hideSuccessAddAlert= function(){
+       $scope.showSuccessAdd= false;
+     }
+
+     $scope.hideSuccessEditAlert= function(){
+        $scope.showSuccessEdit= false;
+     }
+
+     $scope.hideErrorDeleteAlert= function(){
+        $scope.showErrorDelete= false;
+     }
+     $scope.hideErrorAddAlert= function(){
+        $scope.showErrorAdd= false;
+     }
+     $scope.hideErrorEditAlert= function(){
+        $scope.showErrorEdit= false;
+     }
 
     $scope.activeModifyButton=true;
 
