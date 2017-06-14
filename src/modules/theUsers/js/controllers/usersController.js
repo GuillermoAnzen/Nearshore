@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var userCtrl = function($scope, $location,localeService, userService, $timeout) {
+var userCtrl = function($scope, $location,localeService, userService, $timeout, $window) {
 
     var $this = $scope;
     $this.urlInclude='addNewUser.html';
@@ -23,6 +23,8 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout) 
     $scope.totalUsers= 0;
     $scope.showSuccessAdd= false;
     $scope.showErrorAdd= false;
+    $scope.showSuccessEdit= false;
+    $scope.showErrorEdit= false;
 
     getResultsPage($scope.currentPage);
 
@@ -77,7 +79,27 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout) 
                    { value:0, status:'Inactivo'}];
 
 
+    $scope.hideSuccessDeleteAlert= function(){
+       $scope.showSuccessDelete= false;
+       }
 
+     $scope.hideSuccessAddAlert= function(){
+       $scope.showSuccessAdd= false;
+     }
+
+     $scope.hideSuccessEditAlert= function(){
+        $scope.showSuccessEdit= false;
+     }
+
+     $scope.hideErrorDeleteAlert= function(){
+        $scope.showErrorDelete= false;
+     }
+     $scope.hideErrorAddAlert= function(){
+        $scope.showErrorAdd= false;
+     }
+     $scope.hideErrorEditAlert= function(){
+        $scope.showErrorEdit= false;
+     }
 
     $scope.activeModifyButton=true;
 
@@ -100,8 +122,20 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout) 
         $scope.emailEdit=response.data[0].Email;
         $scope.profileEdit= response.data[0].Id_Perfil;
         $scope.pwdEdit= response.data[0].Clave;
+        $scope.statusEdit= response.data[0].Activo == 1 ? true: false ;
 
         });
+    }
+    function pristineEditFields(){
+        $scope.EditUser.$setPristine();
+        $scope.firstNameEdit= null;
+        $scope.secondNameEdit= null;
+        $scope.lastNameEdit= null;
+        $scope.mothersLastNameEdit= null;
+        $scope.emailEdit= null;
+        $scope.profileEdit= null;
+        $scope.pwdEdit= null;
+        $scope.statusEdit= null;
     }
     $scope.OrderBy= function(x){
         $scope.MyOrderBy=x;
@@ -119,20 +153,53 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout) 
                 getResultsPage($scope.currentPage);
                 $scope.showSuccessAdd= true;
           }else{
+                $("#NewUser").modal('hide');
                 $scope.showErrorAdd= true;
           }
           });
     }
-    $scope.EditUser= function(){
+    $scope.editUserProcess= function(){
         if($scope.secondNameEdit== null)
             $scope.secondNameEdit="";
         if($scope.mothersLastNameEdit== null)
             $scope.mothersLastNameEdit="";
-         userService.updateUser($scope.idUser, $scope.firstNameEdit, $scope.secondNameEdit, $scope.lastNameEdit, $scope.mothersLastNameEdit, $scope.emailEdit, $scope.profileEdit, $scope.pwdEdit, $scope.activeEdit)
+                var status= $scope.statusEdit? 1:0;
+         userService.updateUser($scope.idUser, $scope.firstNameEdit, $scope.secondNameEdit, $scope.lastNameEdit, $scope.mothersLastNameEdit, $scope.emailEdit, $scope.profileEdit, $scope.pwdEdit, status)
             .then(function(response){
+                if(response.success){
+                pristineEditFields();
+                $("#EditUser").modal('hide');
+                    getResultsPage($scope.currentPage);
+                    $scope.showSuccessEdit= true;
+                }else{
+                    $("#EditUser").modal('hide');
+                    $scope.showErrorEdit= true;
+                }
 
             });
     }
+    $scope.deleteUser= function(){
+        if($window.confirm('you are gonna delete this user, are you sure?')){
+            deleteUserProcess();
+        }
+    }
+
+    function deleteUserProcess(){
+        userService.deleteUser($scope.idUser)
+        .then(function(response){
+            if(response.success){
+                pristineEditFields();
+                $("#EditUser").modal('hide');
+                  getResultsPage($scope.currentPage);
+                  $scope.showSuccessDelete= true;
+            }else{
+               $("#EditUser").modal('hide');
+               $scope.showErrorDelete= true;
+            }
+        });
+
+    }
+
 
     $this.showUserTab = function(evt, tabName){
         // Declare all variables

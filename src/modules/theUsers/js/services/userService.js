@@ -43,10 +43,10 @@ var userService = function($http, $q, $cookies){
         return promise;
      };
 
-     function updateUser(id, firstName, secondName, lastName, lastMotherName, email, profile, clave, active){
+     function updateUser(id, firstName, secondName, lastName, lastMotherName, email, profile, clave, status){
         var defered= $q.defer();
         var promise= defered.promise;
-        var applicationId= cookies.get('aplicationId');
+        var applicationId= $cookies.get('applicationId');
         var config={
         headers:{ 'Content-Type': 'application/json; charset=utf-8',
                   'ApplicationID': applicationId
@@ -62,7 +62,7 @@ var userService = function($http, $q, $cookies){
             apellidoPaterno: lastName,
             apellidoMaterno: lastMotherName,
             clave: clave,
-            activo: active}
+            activo: status}
         $http.put(updateUserUri,data, config).then(function(response){
                 defered.resolve(response.data);
             });
@@ -74,9 +74,22 @@ var userService = function($http, $q, $cookies){
         getAllProfiles: getAllProfiles,
         newUser:newUser,
         getUserById:getUserById,
-        updateUser: updateUser
+        updateUser: updateUser,
+        deleteUser:deleteUser
     };
-
+        function deleteUser(userid){
+            var defered= $q.defer();
+            var promise= defered.promise;
+            var applicationId= $cookies.get('applicationId');
+            var config={        headers:{ 'Content-Type': 'application/json; charset=utf-8',
+                                           'ApplicationID': applicationId
+                                           }};
+            var deleteUserUri="http://54.153.120.183/catalogsms/usuarios/" + userid.toString();
+            $http.delete(deleteUserUri,config).then(function(response){
+                defered.resolve(response.data);
+            });
+            return promise;
+        }
         function getAllProfiles(){
         var defered= $q.defer();
         var promise= defered.promise;

@@ -37,7 +37,12 @@ module.exports = {
         ErrorAddingUser: 'El proceso de agregar usuarios pudo tener errores',
         Edit_User_Title:'Edita usuario',
         SAVEUPLOAD:'Actualizar',
-        DeleteUser: 'Eliminar usuario'
+        DeleteUser: 'Eliminar usuario',
+        Status: 'Activo',
+        SuccessEditUser:'Se actualizo correctamente al usuario',
+        SuccesDeleteUser: 'Se elimino correctamente al usuario',
+        ErrorEditUser: 'El proceso de editar usuarios tuvo errores',
+        ErrorDeleteUser: 'El proceso de borrar usuarios tuvo errores'
 
     }
 };
