@@ -1,6 +1,5 @@
 'use strict';
 var angular = require('angular');
-var select = require('jquery-editable-select');
 /**
  * @ngdoc controller
  * @name app.login.controller:loginCtrl
@@ -14,6 +13,8 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     var $this = $scope;
     $this.currentPage = 1;
     $this.pageSize = 10;
+    $this.currentPageD = 1;
+    $this.pageSizeD = 10;
     $this.level = 1;
     $this.totalApps = 0;
     $this.totalDomains = 0;
@@ -47,7 +48,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     };
 
     $this.pageChangeHandlerDomain = function(newPage){
-        getDomains(newPage,$this.pageSize);
+        getDomains(newPage,$this.pageSizeD);
     };
 
     $this.pageChangeHandler = function(newPage){
@@ -107,7 +108,6 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
 
     var getDetailsL = function(_idapp,_level,_idProv){
         var petitionSuccess = false;
-        //clearSelectCombos();
         var message = "";
         applicationService.getDetailsL(_idapp,_level).then(function(data){
             petitionSuccess = data.success;
@@ -133,13 +133,6 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
             petitionSuccess = data.success;
             if (petitionSuccess){
                 $scope.analistList = data.data;
-                /*for (var i=1;i<=data.data.length;i++){
-                    if (data.data[i-1].id == id_analista_bnmx){
-                        valDefault  = data.data[i-1].analista;
-                    }
-                    $("#analist_bnmx").editableSelect('add',data.data[i-1].analista,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                }
-                $("#analist_bnmx").val(valDefault);*/
             }
         });
     };
@@ -152,13 +145,6 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
             $scope.leadList = [];
             if (petitionSuccess){
                 $scope.leadList = data.data;
-                /*for (var i=1;i<=data.data.length;i++){
-                    if (data.data[i-1].id == _id){
-                        valDefault  = data.data[i-1].lider;
-                    }
-                    $("#lead_bnmx").editableSelect('add',data.data[i-1].lider,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                }
-                $("#lead_bnmx").val(valDefault);*/
             }
         });
     };
@@ -184,7 +170,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         });
     };
 
-    var getEmployeesVendor = function(_idProv,id_resp,id_back,id_lid,id_pman,id_dman){
+    var getEmployeesVendor = function(_idProv){
         var petitionSuccess = false;
         employeesVendorService.getEmployeesPerVendor(_idProv).then(function(data){
             petitionSuccess = data.success;
@@ -192,18 +178,6 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
                 $scope.EmpProvList = [];
                 if (data.data.length != 0){
                     $scope.EmpProvList = data.data;
-                    /*for (var i=1;i<=data.data.length;i++){
-                        $("#resp_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                        $("#back_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                        $("#lider_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                        $("#p_man_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                        $("#d_man_prov").editableSelect('add',data.data[i-1].nombre,i-1,{"value":{name:"value",value:data.data[i-1].id}});
-                    }
-                    $("#resp_prov").val(id_resp);
-                    $("#back_prov").val(id_back);
-                    $("#lider_prov").val(id_lid);
-                    $("#p_man_prov").val(id_pman);
-                    $("#d_man_prov").val(id_dman);*/
                 }else{
                     messagesService.handlerMessages("NO_EMPLOYEES_CONS_APP",false);
                 }
@@ -408,7 +382,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         
         if (!flag){
             if (tabName == "domains"){
-                getDomains($this.currentPage,$this.pageSize);
+                getDomains($this.currentPageD,$this.pageSizeD);
             }
         }
 

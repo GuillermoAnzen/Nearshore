@@ -9,9 +9,9 @@ var messagesService = function ($http, $q, $cookies,$rootScope){
         success: value to put in class attribute to change the alert color.
      */
     this.handlerMessages = function(translate,success){
-        var clase = "alert alert-danger alert-dismissable messagesHandler";
+        var clase = "alert alert-danger messagesHandler";
         if (success)
-            clase = "alert alert-success alert-dismissable messagesHandler";
+            clase = "alert alert-success messagesHandler";
         $("#messagesHandler").attr("class",clase);
         $rootScope.translate = translate;
         $("#messagesHandler").fadeIn(100);
