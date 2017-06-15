@@ -54,6 +54,7 @@
 .provider .label-app{
     color: #23527c;
 }
+
 /* Fade in tabs */
 @-webkit-keyframes fadeEffect {
     from {opacity: 0;}
@@ -63,4 +64,9 @@
 @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+.provider .form-group .control-label.required:after {
+  content:"*";
+  color:red;
 }

@@ -28,24 +28,61 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
         $this.catCities
         $this.catJobs
         $this.catCountries
+        $this.modeUpdate
      */
 
     $this.updateEmpVendor = function(){
-
+        var petition = false;
+        employeesVendorService.updateEmployee(
+            $this.idEmpProv,
+            $this.UPvendorEmpP,
+            $this.UPjobsEmpP,
+            $this.UPcodeEmpP,
+            $this.UPnameEmpP,
+            $this.UPSNameEmpP,
+            $this.UPPLnameEmpP,
+            $this.UPSSnameEmpP,
+            $this.UPcitiesEmpP,
+            $this.UPldCelEmpP,
+            $this.UPcelEmpP,
+            $this.UPldTelOEmpP,
+            $this.UPtelOEmpP,
+            $this.UPldOfficeEmpP,
+            $this.UPtelOfficeEmpP,
+            $this.UPextOfficeEmpP,
+            $this.UPemailEmpP,
+            $this.UPsoeidEmpP,
+            $this.UPemailCitiEmpP,
+            $this.UPtelCitiEmpP,
+            $this.UPextCitiEmpP,
+            $this.UPreports2EmpP,
+            $this.UPcommentEmpP
+        )
+        .then(function(data){
+            petition = data.success;
+            if (petition){
+                messagesService.handlerMessages("UPDATE_EMP_PROV_SUCCESS",true);
+                $("#UpdateEmpProv").modal('hide');
+                if ($this.modeUpdate == "all"){
+                    showDetailsProvider($this.currentPageEP,$this.pageSizeEP, $this.idProv);
+                }else{
+                    getEmpProvId($this.idEmpProv);
+                    getAppsByEmp($this.idEmpProv, $this.currentPageAEP, $this.pageSizeAEP);
+                }
+            }else{
+                messagesService.handlerMessages("ADD_EMP_PROV_ERROR",false);
+            }
+        });
     };
 
     $this.updateEmpProv = function(mode){
+        $this.modeUpdate = mode;
         getVendors();
         getCountries();
         getCities();
         getJobs();
         getEmployeesVendor($this.idProv);
         getEmpProvId($this.idEmpProv);
-        if (mode == "all"){
-
-        }else{
-
-        }
     };
 
     $this.getEmpsVendor = function(){
@@ -61,6 +98,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
         getCountries();
         getVendors();
         getEmployeesVendor($this.idProv);
+        $this.vendorEmpP = $this.idProv;
     };
 
     $this.addNewEmpProv = function(){
@@ -116,11 +154,12 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
     };
 
     $this.showSpecificDetailsEmp = function(_id){
-        $this.idEmp = _id;
+        $this.activeModifyButton = true;
+        $this.idEmpProv = _id;
         $this.showProviderTab('provider_specific_detail');
         showNHide(3,2);
         getEmpProvId(_id);
-        getAppsByEmp($this.idEmp, $this.currentPageAEP, $this.pageSizeAEP);
+        getAppsByEmp($this.idEmpProv, $this.currentPageAEP, $this.pageSizeAEP);
     };
 
     $this.showDetailsProviderId = function(_id, _desc){
@@ -206,6 +245,15 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
             petition = data.success;
             if (petition){
                 $this.empDet = data.data[0];
+                $this.UPvendorEmpP = data.data[0].Id_Proveedor;
+                $this.UPjobsEmpP = data.data[0].idPuesto;
+                $this.UPcodeEmpP = data.data[0].Clave_Empleado;
+                $this.UPnameEmpP = data.data[0].Primer_Nombre;
+                $this.UPPLnameEmpP = data.data[0].Apellido_Paterno;
+                $this.UPSSnameEmpP = data.data[0].Apellido_Materno;
+                $this.UPcountryEmpP = data.data[0].idPais;
+                $this.UPcitiesEmpP = data.data[0].idCiudad;
+                $this.UPreports2EmpP = data.data[0].idReporta;
             }
         });
     }
