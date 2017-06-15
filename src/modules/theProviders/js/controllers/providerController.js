@@ -70,7 +70,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
                     getAppsByEmp($this.idEmpProv, $this.currentPageAEP, $this.pageSizeAEP);
                 }
             }else{
-                messagesService.handlerMessages("ADD_EMP_PROV_ERROR",false);
+                messagesService.handlerMessages("UPDATE_EMP_PROV_ERROR",false);
             }
         });
     };
@@ -264,7 +264,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
         .then(function(data){
             petition = data.success;
             if (petition && data.data.length != 0){
-                $this.appsEmp = data.data[0];
+                $this.appsEmp = data.data;
                 $this.totalAppsEmpProvider = data.data[0].total;
             }
         });

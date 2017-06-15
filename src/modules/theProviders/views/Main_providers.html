@@ -179,7 +179,7 @@
                     </div>
                     <!-- Table aplications -->
                     <hr>
-                    <div class="row">
+                    <div class="row grid-responsive panel-margin-right">
                         <br/>
                         <div class="col-xs-4">
                             <label ></label>
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="table-responsive">
+                    <div class="table-responsive panel-margin-right">
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -221,7 +221,166 @@
             </div>
         </div>
     </div>
-    
+
+<!-- Modal Update Apps by Emp Provider -->
+<div class="modal fade" id="TableAppsByEmp" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" translate="APPS_BY_EMP_PROV_TITLE"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" name="AddEmpP" ng-submit="addNewEmpProv()" novalidate>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="VENDOR_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="vendorEmpP" id="vendorEmpP" ng-model="vendorEmpP" class="form-control" ng-change="getEmpsVendor()" required
+                                ng-options="x.ID as x.DESCRIPCION for x in vendors">
+                            </select>
+                            <p translate="REQUIRE_VENDOR_EMP_PROV" ng-show="AddEmpP.vendorEmpP.$dirty && AddEmpP.vendorEmpP.$error.required" class="help-block"></p>
+                        </div>
+                        <label class="control-label required col-sm-2" for="" translate="JOB_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="jobsEmpP" id="jobsEmpP" ng-model="jobsEmpP" class="form-control" ng-change="" required>
+                                <option ng-repeat="j in catJobs" value="{{j.ID}}"> {{j.DESCRIPCION}} </option>
+                            </select>
+                            <p translate="REQUIRE_JOB_EMP_PROV" ng-show="AddEmpP.jobsEmpP.$dirty && AddEmpP.jobsEmpP.$error.required" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="CODE_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="number" name="codeEmpP" id="codeEmpP" ng-model="codeEmpP" class="form-control" required>
+                            <p translate="REQUIRE_CODE_EMP_PROV" ng-show="AddEmpP.codeEmpP.$dirty && AddEmpP.codeEmpP.$error.required" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="FIRST_NAME_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="nameEmpP" class="form-control" id="nameEmpP" ng-model="nameEmpP" required>
+                            <p translate="REQUIRE_NAME_EMP_PROV" ng-show="AddEmpP.nameEmpP.$dirty && AddEmpP.nameEmpP.$error.required" class="help-block"></p>
+                        </div>
+						<label class="control-label col-sm-2" translate="SECOND_NAME_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="SNameEmpP" class="form-control form-control-danger" id="SNameEmpP" ng-model="SNameEmpP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="FIRST_LASTNAME_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="PLnameEmpP" class="form-control" id="PLnameEmpP" ng-model="PLnameEmpP" required>
+                            <p translate="REQUIRE_FIRST_NAME_EMP_PROV" ng-show="AddEmpP.PLnameEmpP.$dirty && AddEmpP.PLnameEmpP.$error.required" class="help-block"></p>
+                        </div>
+						<label class="control-label col-sm-2" translate="SECOND_LASTNAME_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="SSnameEmpP" class="form-control" id="SSnameEmpP" ng-model="SSnameEmpP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="COUNTRY_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="countryEmpP" id="countryEmpP" ng-model="countryEmpP" class="form-control"  ng-change="getCities(countryEmpP)">
+                                <option ng-repeat="x in catCountries" value="{{x.ID}}"> {{x.DESCRIPCION}} </option>
+                            </select>
+                        </div>
+						<label class="control-label required col-sm-2" translate="CITY_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <select name="citiesEmpP" id="citiesEmpP" ng-model="citiesEmpP" class="form-control" ng-change="" required>
+                                <option ng-repeat="c in catCities" value="{{c.Id}}"> {{c.Descripcion}} </option>
+                                <p translate="REQUIRE_CITY_EMP_PROV" ng-show="AddEmpP.citiesEmpP.$dirty && AddEmpP.citiesEmpP.$error.required" class="help-block"></p>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="CEL_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="ldCelEmpP" ng-model="ldCelEmpP" name="ldCelEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_LADA_CEL_EMP_PROV" ng-show="!AddEmpP.ldCelEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="celEmpP" class="form-control" id="celEmpP" ng-model="celEmpP" ng-maxlength="8" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_CELULAR_NUMBER_EMP_PROV" ng-show="!AddEmpP.celEmpP.$valid" class="help-block"></p>
+                        </div>
+						<label class="control-label col-sm-2" translate="TEL_OTHER_EMP_PROV">  </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="ldTelOEmpP" class="form-control" id="ldTelOEmpP" ng-model="ldTelOEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_LD_TEL_OTHER_EMP_PROV" ng-show="!AddEmpP.ldTelOEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="telOEmpP" class="form-control" id="telOEmpP" ng-model="telOEmpP" ng-maxlength="8" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
+                            <p translate="REQUIRE_TEL_OTRO_EMP_PROV" ng-show="!AddEmpP.telOEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="TEL_OFFICE_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="ldOfficeEmpP" class="form-control" id="ldOfficeEmpP" ng-model="ldOfficeEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
+                            <p translate="REQUIRE_LD_OFFICE_EMP_PROV" ng-show="!AddEmpP.ldOfficeEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="telOfficeEmpP" class="form-control" id="telOfficeEmpP" ng-model="telOfficeEmpP" ng-maxlength="8" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
+                            <p translate="REQUIRE_TEL_OFFICE_EMP_PROV" ng-show="!AddEmpP.telOfficeEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="EXT_OFFIC_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="extOfficeEmpP" class="form-control" id="extOfficeEmpP" ng-model="extOfficeEmpP" ng-maxlength="10">
+                            <p translate="REQUIRE_EXT_OFFICE_EMP_PROV" ng-show="!AddEmpP.extOfficeEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="EMAIL_PROV_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="emailEmpP" class="form-control" id="emailEmpP" ng-model="emailEmpP" ng-maxlength="60">
+                            <p translate="REQUIRE_EMAIL_P_EMP_PROV" ng-show="AddEmpP.emailEmpP.$error.email" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for=""> SOE-ID </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="soeidEmpP" class="form-control" id="soeidEmpP" ng-model="soeidEmpP" ng-maxlength="7">
+                            <p translate="REQUIRE_SOEID_EMP_PROV" ng-show="!AddEmpP.soeidEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="EMAIL_CITI_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="emailCitiEmpP" class="form-control" id="emailCitiEmpP" ng-model="emailCitiEmpP" ng-maxlength="60">
+                            <p translate="REQUIRE_EMAIL_CITI_EMP_PROV" ng-show="AddEmpP.emailCitiEmpP.$error.email" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="TEL_CITI_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="telCitiEmpP" class="form-control" id="telCitiEmpP" ng-model="telCitiEmpP" ng-maxlength="10" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
+                            <p translate="REQUIRE_TEL_CITI_EMP_PROV" ng-show="!AddEmpP.telCitiEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="extCitiEmpP" class="form-control" id="extCitiEmpP" ng-model="extCitiEmpP" ng-maxlength="10" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_EXT_CITI_EMP_PROV" ng-show="!AddEmpP.extCitiEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="REPORTS_TO_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="reports2EmpP" id="reports2EmpP" class="form-control" ng-model="reports2EmpP" ng-change="">
+                                <option ng-repeat="e in empsVendor" value="{{e.clave}}"> {{e.nombre}} </option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="COMMENTS_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="commentEmpP" class="form-control" id="commentEmpP" ng-model="commentEmpP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-3">
+                            <button type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!AddEmpP.$valid"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>    
+
 
 <!-- Modal New Emp Provider -->
 <div class="modal fade" id="NewEmpProv" role="dialog">

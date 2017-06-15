@@ -31,13 +31,12 @@ module.exports = {
         EXT_CITI_EMP_PROV: 'Ext. CitiBnx.',
         EMAIL_CITI_EMP_PROV: 'email CitiBnx.',
         WHO_REPORT_EMP_PROV: 'Reports to',
-        APLICATION_DEVELOPED_EMP_PROV: 'Application',
-        DESCRIPTION_APP_EMP_PROV: 'Description',
         COMMENTS_EMP_PROV: 'Comments',
 
         /* modal titles */
         NEW_EMP_PROV_TITLE: 'New Vendor Employee',
         UPDATE_EMP_PROV_TITLE: 'Update Vendor Employee',
+        APPS_BY_EMP_PROV_TITLE: 'Update Applications by employee',
 
         /* labels */
         VENDOR_EMP_PROV: 'Vendor',
@@ -70,6 +69,8 @@ module.exports = {
         EMPLOYEE_DELETE_ERROR: 'Error ocurred. No Employee deleted.',
         ADD_EMP_PROV_ERROR: 'Error ocurred. No employee added',
         ADD_EMP_PROV_SUCCESS: 'Employee added successfully',
+        UPDATE_EMP_PROV_SUCCESS: 'Employee updated successfully.',
+        UPDATE_EMP_PROV_ERROR: 'Error ocurred. No employee updated.',
         /* ng validations */
         REQUIRE_VENDOR_EMP_PROV: 'Vendor is required.',
         REQUIRE_JOB_EMP_PROV: 'The job of employee is necesary.',
@@ -88,6 +89,12 @@ module.exports = {
         REQUIRE_SOEID_EMP_PROV: 'SOE-ID cannot be larger than 7 caracters.',
         REQUIRE_EMAIL_CITI_EMP_PROV: 'Email cannot be larger than 60 caracters.',
         REQUIRE_TEL_CITI_EMP_PROV: 'The number cannot be larger than 10 digits.',
-        REQUIRE_EXT_CITI_EMP_PROV: 'Extention cannot be larger than 10 digits.'
+        REQUIRE_EXT_CITI_EMP_PROV: 'Extention cannot be larger than 10 digits.',
+
+        /* table apps by emp */
+        APLICATION_DEVELOPED_EMP_PROV: 'Application',
+        DESCRIPTION_APP_EMP_PROV: 'Description',
+        ROL_APP_EMP_PROV: 'Role',
+        LEVEL_APP_EMP_PROV: 'Support Level'
     }
 };

@@ -31,13 +31,12 @@ module.exports = {
         EXT_CITI_EMP_PROV: 'Ext. CitiBnx.',
         EMAIL_CITI_EMP_PROV: 'email CitiBnx.',
         WHO_REPORT_EMP_PROV: 'Reporta A',
-        APLICATION_DEVELOPED_EMP_PROV: 'Aplicación',
-        DESCRIPTION_APP_EMP_PROV: 'Descripción',
         COMMENTS_EMP_PROV: 'Comentarios',
 
         /* modal titles */
         NEW_EMP_PROV_TITLE: 'Nuevo Empleado Proveedor',
         UPDATE_EMP_PROV_TITLE: 'Actualizar Empleado Proveedor',
+        APPS_BY_EMP_PROV_TITLE: 'Actualizar Aplicaciones del empleado',
 
         /* labeles update and add */
         VENDOR_EMP_PROV: 'Proveedor',
@@ -70,6 +69,8 @@ module.exports = {
         ADD_EMP_PROV_SUCCESS: 'Empleado registrado exitosamente.',
         EMPLOYEE_DELETE_SUCCESS: 'Empleado eliminado exitosamente.',
         EMPLOYEE_DELETE_ERROR: 'Ocurrió un error. No se eliminó el empleado.',
+        UPDATE_EMP_PROV_SUCCESS: 'Empleado actualizado exitosamente.',
+        UPDATE_EMP_PROV_ERROR: 'Ocurrió un error. No se actualizó el empleado.',
         /* ng validations */
         REQUIRE_VENDOR_EMP_PROV: 'El proveedor es requerido.',
         REQUIRE_JOB_EMP_PROV: 'Se necesita el puesto del empleado.',
@@ -88,6 +89,12 @@ module.exports = {
         REQUIRE_SOEID_EMP_PROV: 'El SOE-ID no puede ser mayor a 7 caracteres.',
         REQUIRE_EMAIL_CITI_EMP_PROV: 'El email no puede ser mayor a 60 caracteres',
         REQUIRE_TEL_CITI_EMP_PROV: 'El número no puede ser mayor a 10 dígitos.',
-        REQUIRE_EXT_CITI_EMP_PROV: 'La extensión no puede ser mayor a 10 dígitos.'
+        REQUIRE_EXT_CITI_EMP_PROV: 'La extensión no puede ser mayor a 10 dígitos.',
+
+        /* table apps by emp */
+        APLICATION_DEVELOPED_EMP_PROV: 'ID Aplicación',
+        DESCRIPTION_APP_EMP_PROV: 'Description',
+        ROL_APP_EMP_PROV: 'Cargo empleado',
+        LEVEL_APP_EMP_PROV: 'Nivel de soporte'
     }
 };
