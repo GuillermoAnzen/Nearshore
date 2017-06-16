@@ -1,11 +1,13 @@
 module.exports = {
     language: 'es-MX',
     translate: {
+        /* main titles */
         TITLE_PROVIDERS: 'Proveedores',
         PROVIDERS_CONSULT: 'Consulta de Proveedores',
         PROVIDER_DETAIL: 'Detalle de Proveedores',
         SPECIFIC_DETAIL_PROVIDER: 'Detalle Específico Proveedor',
 
+        /* title buttons */
         VENDOR: 'Proveedor',
         JOB_EMP_PROV: 'Puesto',
         NAME_EMP_PROV: 'Nombre',
@@ -13,6 +15,8 @@ module.exports = {
         MODIFY_EMP_PROV: 'Modificar',
         DELETE_EMP_PROV: 'Eliminar',
 
+        /* laabels details */
+        CODE_EMP_PROV: 'Clave empleado',
         NAME_EMP_PROV: 'Nombre',
         JOB_EMP_PROV: 'Puesto',
         COUNTRY_EMP_PROV: 'País',
@@ -23,17 +27,18 @@ module.exports = {
         EXT_EMP_PROV: 'Ext.',
         EMAIL_EMP_PROV: 'Email Prov.',
         SOEID_EMP_PROV: 'SOE-ID',
+        TEL_CITI_EMP_PROV: 'Tel. Citi',
         EXT_CITI_EMP_PROV: 'Ext. CitiBnx.',
         EMAIL_CITI_EMP_PROV: 'email CitiBnx.',
         WHO_REPORT_EMP_PROV: 'Reporta A',
-        APLICATION_DEVELOPED_EMP_PROV: 'Aplicación',
-        DESCRIPTION_APP_EMP_PROV: 'Descripción',
         COMMENTS_EMP_PROV: 'Comentarios',
 
+        /* modal titles */
         NEW_EMP_PROV_TITLE: 'Nuevo Empleado Proveedor',
-        ADD_EMP_PROV_ERROR: 'Ocurrió un error. No se registro el empleado.',
-        ADD_EMP_PROV_SUCCESS: 'Empleado registrado exitosamente.',
+        UPDATE_EMP_PROV_TITLE: 'Actualizar Empleado Proveedor',
+        APPS_BY_EMP_PROV_TITLE: 'Actualizar Aplicaciones del empleado',
 
+        /* labeles update and add */
         VENDOR_EMP_PROV: 'Proveedor',
         JOB_EMP_PROV: 'Puesto',
         CODE_EMP_PROV: 'Clave Empleado',
@@ -59,7 +64,37 @@ module.exports = {
         REPORTS_TO_EMP_PROV: 'Reporta A',
         COMMENTS_EMP_PROV: 'Comentarios',
 
+        /*Handle messages */
+        ADD_EMP_PROV_ERROR: 'Ocurrió un error. No se registro el empleado.',
+        ADD_EMP_PROV_SUCCESS: 'Empleado registrado exitosamente.',
         EMPLOYEE_DELETE_SUCCESS: 'Empleado eliminado exitosamente.',
-        EMPLOYEE_DELETE_ERROR: 'Ocurrió un error. No se eliminó el empleado.'
+        EMPLOYEE_DELETE_ERROR: 'Ocurrió un error. No se eliminó el empleado.',
+        UPDATE_EMP_PROV_SUCCESS: 'Empleado actualizado exitosamente.',
+        UPDATE_EMP_PROV_ERROR: 'Ocurrió un error. No se actualizó el empleado.',
+        /* ng validations */
+        REQUIRE_VENDOR_EMP_PROV: 'El proveedor es requerido.',
+        REQUIRE_JOB_EMP_PROV: 'Se necesita el puesto del empleado.',
+        REQUIRE_CODE_EMP_PROV: 'La clave del empleado es necesaria.',
+        REQUIRE_NAME_EMP_PROV: 'Es necesario el nombre.',
+        REQUIRE_FIRST_NAME_EMP_PROV: 'Es necesario el primer apellido.',
+        REQUIRE_CITY_EMP_PROV: 'La ciudad es requerida.',
+        REQUIRE_LADA_CEL_EMP_PROV: 'La lada del celular no puede ser mayor a 3 dígitos.',
+        REQUIRE_CELULAR_NUMBER_EMP_PROV: 'El número de celular no puede ser mayor a 8 dígitos.',
+        REQUIRE_LD_TEL_OTHER_EMP_PROV: 'La lada no puede ser mayor a 3 dígitos.',
+        REQUIRE_TEL_OTRO_EMP_PROV: 'El número no puede ser mayor a 8 dígitos.',
+        REQUIRE_LD_OFFICE_EMP_PROV: 'La lada no puede ser mayor a 3 dígitos.',
+        REQUIRE_TEL_OFFICE_EMP_PROV: 'El número no puede ser mayor a 8 dígitos.',
+        REQUIRE_EXT_OFFICE_EMP_PROV: 'La extensión no puede ser mayor a 10 dígitos.',
+        REQUIRE_EMAIL_P_EMP_PROV: 'El email no puede ser mayor a 60 caracteres.',
+        REQUIRE_SOEID_EMP_PROV: 'El SOE-ID no puede ser mayor a 7 caracteres.',
+        REQUIRE_EMAIL_CITI_EMP_PROV: 'El email no puede ser mayor a 60 caracteres',
+        REQUIRE_TEL_CITI_EMP_PROV: 'El número no puede ser mayor a 10 dígitos.',
+        REQUIRE_EXT_CITI_EMP_PROV: 'La extensión no puede ser mayor a 10 dígitos.',
+
+        /* table apps by emp */
+        APLICATION_DEVELOPED_EMP_PROV: 'ID Aplicación',
+        DESCRIPTION_APP_EMP_PROV: 'Description',
+        ROL_APP_EMP_PROV: 'Cargo empleado',
+        LEVEL_APP_EMP_PROV: 'Nivel de soporte'
     }
 };
