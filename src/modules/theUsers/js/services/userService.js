@@ -75,7 +75,8 @@ var userService = function($http, $q, $cookies){
         newUser:newUser,
         getUserById:getUserById,
         updateUser: updateUser,
-        deleteUser:deleteUser
+        deleteUser:deleteUser,
+        getAllVendors:getAllVendors
     };
         function deleteUser(userid){
             var defered= $q.defer();
@@ -103,6 +104,20 @@ var userService = function($http, $q, $cookies){
         });
         return promise;
     };
+
+        function getAllVendors(){
+        var defered= $q.defer();
+        var promise= defered.promise;
+        var applicationId= $cookies.get('applicationId');
+        var config={
+            headers:{'Content-Type': 'application/json; charset=utf-8',
+                                        'ApplicationID': applicationId
+                                        }}
+        $http.get(getAllVendorsUri, config).then(function(response){
+            defered.resolve(response.data);
+        });
+            return promise;
+        }
 
 
         function newUser(firstName, secondName, lastName, lastMotherName, email, profile, clave){

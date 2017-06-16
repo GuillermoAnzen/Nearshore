@@ -75,6 +75,21 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
         }
     });
 
+    userService.getAllVendors().then(function(response){
+        if(response.success){
+            for(var i= 0; i < response.data.length; i++){
+                var _value= parseInt(response.data[i].ID);
+                var vendor={value: _value, vendor:response.data[i].DESCRIPCION};
+                $scope.vendors.push(vendor);
+            }
+        }
+    });
+    $scope.showVendors=false;
+    $scope.profileEval= function(profile){
+        if(profile>=2){
+            $scope.showVendors=true;
+        }
+    }
     $scope.status=[{ value:1, status:'Activo'},
                    { value:0, status:'Inactivo'}];
 

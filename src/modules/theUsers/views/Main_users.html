@@ -138,12 +138,19 @@
                             <div class="form-group required">
                                 <label class="control-label col-sm-3" for="profile" translate="PROFILE"></label>
                                 <div class="col-sm-8">
-                                    <select name="profile" class="form-control" ng-model="profile" id="profile" required>
+                                    <select name="profile" class="form-control" ng-model="profile" id="profile" ng-change="profileEval(profile)" required>
                                         <option ng-repeat="x in profiles"  value="{{x.value}}">{{x.profile}}</option>
                                     </select>
                                     <p translate="ErrorProfileRequiered" ng-show="AddUser.profile.$dirty && AddUser.profile.$error.required" class="help-block"></p>
                                 </div>
-
+                            </div>
+                            <div class="form-group required" ng-show="showVendors">
+                                <label class="control-label col-sm-3" for="vendor" translate="VENDOR"></label>
+                                <div class="col-sm-8">
+                                    <select name="vendor" class="form-control" ng-model="vendor" id="vendor">
+                                        <option ng-repeat="x in vendors" value="{{x.value}}">{{x.vendor}}</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group required">
