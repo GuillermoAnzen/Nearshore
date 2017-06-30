@@ -25,6 +25,7 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
     $scope.showErrorAdd= false;
     $scope.showSuccessEdit= false;
     $scope.showErrorEdit= false;
+    $scope.superUserEdit= true;
 
     getResultsPage($scope.currentPage);
 
@@ -53,11 +54,12 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
                 for(var i=0; i<response.data.length; i++){
                     var _estatus= response.data[i].Activo == "1" ? "Activo" : "Inactivo";
                     var _id= parseInt(response.data[i].Id_Usuarios);
-                    var user= {id: _id, nombre:response.data[i].nombre, correo: response.data[i].Email, perfil: response.data[i].Descripcion, estatus:_estatus };
+                    var _proovedor= response.data[i].Proveedores;
+                    var user= {id: _id, nombre:response.data[i].nombre, correo: response.data[i].Email, perfil: response.data[i].Descripcion, proveedor:_proovedor, estatus:_estatus };
                     $scope.usersList.push(user);
                 }
             }else{
-                $scope.error="Hubo un error en la conexión con la base de dato";
+                $scope.error="Hubo un error en la conexión con la base de datos";
                 $console.log('Error');
                 }
         });
@@ -75,19 +77,25 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
         }
     });
 
-    userService.getAllVendors().then(function(response){
-        if(response.success){
-            for(var i= 0; i < response.data.length; i++){
-                var _value= parseInt(response.data[i].ID);
-                var vendor={value: _value, vendor:response.data[i].DESCRIPCION};
-                $scope.vendors.push(vendor);
+    getAllVendors();
+    function getAllVendors(){
+        userService.getAllVendors().then(function(response){
+            if(response.success){
+                for(var i= 0; i < response.data.length; i++){
+                    var _value= parseInt(response.data[i].ID);
+                    var vendor={value: _value, vendor:response.data[i].DESCRIPCION};
+                    $scope.vendors.push(vendor);
+                }
             }
-        }
-    });
+        });
+    }
+
     $scope.showVendors=false;
     $scope.profileEval= function(profile){
         if(profile>=2){
             $scope.showVendors=true;
+        }else{
+            $scope.showVendors= false;
         }
     }
     $scope.status=[{ value:1, status:'Activo'},
@@ -136,9 +144,11 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
         $scope.mothersLastNameEdit= response.data[0].ApellidoMaterno;
         $scope.emailEdit=response.data[0].Email;
         $scope.profileEdit= response.data[0].Id_Perfil;
+        $scope.vendorEdit= response.data[0].Proveedores;
         $scope.pwdEdit= response.data[0].Clave;
         $scope.statusEdit= response.data[0].Activo == 1 ? true: false ;
-
+        $scope.vendorEdit= response.data[0].Proveedores
+        $scope.showVendorEdit= response.data[0].Proveedores!=0 ? true : false;
         });
     }
     function pristineEditFields(){
