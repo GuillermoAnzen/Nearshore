@@ -73,6 +73,7 @@
                         <th ng-click="OrderBy('correo')">E-mail</th>
                         <th ng-click="OrderBy('perfil')">Perfil</th>
                         <th ng-click="OrderBy('estatus')">Estatus</th>
+                        <th ng-click="OrderBy('proveedor')">Proveedor</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,6 +83,7 @@
                         <td>{{x.correo}}</td>
                         <td>{{x.perfil}}</td>
                         <td>{{x.estatus}}</td>
+                        <td>{{x.proveedor}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -224,7 +226,12 @@
                                         <select name="profileEdit" class="form-control" ng-model="profileEdit" id="profileEdit" ng-options="x.value as x.profile for x in profiles" required></select>
                                         <p translate="ErrorProfileRequiered" ng-show="EditUser.profileEdit.$dirty && EditUser.profileEdit.$error.required" class="help-block"></p>
                                     </div>
-
+                                </div>
+                                <div class="form-group required" ng-show="showVendorEdit">
+                                    <label class="control-label col-sm-3" for="vendorEdit" translate="VENDOR"></label>
+                                    <div class="col-sm-8">
+                                        <select name="vendorEdit" class="form-control" ng-model="vendorEdit" id="vendorEdit" ng-options="x.value as x.vendor for x in vendors" ng-disabled="superUserEdit"></select>
+                                    </div>
                                 </div>
 
                                 <div class="form-group required">
