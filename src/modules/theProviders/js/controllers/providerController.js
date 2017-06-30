@@ -8,7 +8,11 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var providerCtrl = function($scope, $location,localeService,vendorCatService,employeesVendorService,jobsVendorService,CitiesService,countryService,messagesService) {
+var providerCtrl = function($scope, $location,localeService,vendorCatService,employeesVendorService,jobsVendorService,CitiesService,countryService,messagesService, $cookies) {
+
+    if ($cookies.get("provs") != "true"){
+        $location.path("/principal");
+    }
 
     var $this = $scope;
     $this.totalProviders = 0;

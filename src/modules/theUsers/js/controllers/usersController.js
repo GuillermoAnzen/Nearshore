@@ -8,10 +8,14 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var userCtrl = function($scope, $location,localeService, userService, $timeout, $window) {
+var userCtrl = function($scope, $location,localeService, userService, $timeout, $window, $cookies) {
 
     var $this = $scope;
     $this.urlInclude='addNewUser.html';
+
+    if ($cookies.get("adm") != "true"){
+        $location.path("/principal");
+    }
 
     $scope.currentPage = 1;
     $scope.pageSize = 10;
