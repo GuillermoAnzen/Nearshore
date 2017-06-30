@@ -11,7 +11,7 @@ var domainService = function ($http, $q, $cookies){
         var promise= defered.promise;
         var data = {
             index: _index,
-            rows: _rows
+            rows: _rows || 1
         };
         var config = {
             headers : { 
@@ -34,7 +34,7 @@ var domainService = function ($http, $q, $cookies){
         var promise= defered.promise;
         var data = {
             index: _index,
-            rows: _rows,
+            rows: _rows || 1,
             idDomain: _idDomain
         };
         var config = {
