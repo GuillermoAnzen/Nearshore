@@ -23,6 +23,11 @@ var mainCtrl = function($scope, $location,$cookies, $window) {
     $this.navbarMenuView = function(page){
         $location.path("/"+page);
     }
+
+    if ($cookies.get("counter")!="2"){
+        $window.location.reload();
+        $cookies.put("counter","2");
+    }
 };
 
 module.exports = angular.module("app.main").controller('mainCtrl', mainCtrl);

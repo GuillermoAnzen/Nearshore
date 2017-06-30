@@ -17,12 +17,12 @@
         </div>
         <div id="navbarMain" class="col-sm-12" ng-class="{navbarMain: getLoged}">
         <nav-bar data="myNavbarV"></nav-bar>
-        <!--div class="loading" ng-show="isLoading"> Cargando datos... </div-->
+        <div class="loader" ng-show="isLoading"> </div>
             <div class="" id="messagesHandler">
                 <p id="message" translate="{{translate}}"></p>
             </div>
-        <!--div class="bodyMain" ng-view="" ng-class="{ opacar : isLoading}"-->
-        <div class="bodyMain" ng-view="">
+        <div class="bodyMain" ng-view="" ng-class="{ opacar : isLoading}">
+        <!--div class="bodyMain" ng-view=""-->
 
         </div>
         </div>
