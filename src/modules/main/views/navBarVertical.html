@@ -4,10 +4,10 @@
         <br/><br/>
         <div>
           <ul>
-            <li><a href="" ng-click="$ctrl.navbarMenuView('users')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{'USERS' | translate}}</a></li>
-            <li><a href="" ng-click="$ctrl.navbarMenuView('applications')"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>{{'APPLICATIONS' | translate}}</a></li>
-            <li><a href="" ng-click="$ctrl.navbarMenuView('providers')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{'PROVIDERS' | translate}}</a></li>
-            <li><a href="" ng-click="$ctrl.navbarMenuView('citiUsers')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{'USERS_CITI' | translate}} </a></li>
-            <li><a href="" ng-click="$ctrl.navbarMenuView('catalogs')"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> {{'CATALOGS' | translate}} </a></li>
+            <li><a href="" ng-show="$ctrl.adm" ng-click="$ctrl.navbarMenuView('users')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{'USERS' | translate}}</a></li>
+            <li><a href="" ng-show="$ctrl.app" ng-click="$ctrl.navbarMenuView('applications')"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>{{'APPLICATIONS' | translate}}</a></li>
+            <li><a href="" ng-show="$ctrl.provs" ng-click="$ctrl.navbarMenuView('providers')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{'PROVIDERS' | translate}}</a></li>
+            <li><a href="" ng-show="$ctrl.citiU" ng-click="$ctrl.navbarMenuView('citiUsers')"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{'USERS_CITI' | translate}} </a></li>
+            <li><a href="" ng-show="$ctrl.cat" ng-click="$ctrl.navbarMenuView('catalogs')"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> {{'CATALOGS' | translate}} </a></li>
           </ul>
         </div><!--/.nav-collapse -->
