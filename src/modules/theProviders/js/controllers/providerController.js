@@ -145,7 +145,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
     };
 
     $this.pageChangeHandlerAppsEmpProviders = function(newPage){
-        getAppsByEmp($this.idEmp, newPage, $this.currentPageAEP);
+        getAppsByEmp($this.idEmpProv, newPage, $this.pageSizeAEP);
     };
 
     $this.empSelected = function(_idEmp){
