@@ -64,6 +64,11 @@
                 </div>
                 <hr>
                 <div class="row margin-left">
+                    <div class="col-xs-3">
+                        <button ng-show="showButtons" class="btn btn-primary btn-block" translate="NEW_CITI_EMP" data-toggle="modal" data-target="#NewCitiEmp" ng-click="prepareCombosEmpCiti()"></button>
+                    </div>
+                </div>
+                <div class="row margin-left">
                     <div class="col-xs-4">
                         <label ></label>
                         <div class="input-group">
@@ -106,77 +111,257 @@
 
         <!-- TAB CATAspecific_detailLOG3 -->
         <div id="specific_detail" class="tabcontent">
-            <div id="details_application" class="tabcontent">
             <div class="row page-header">
                 <div class="col-xs-3">
-                    <button class="btn btn-primary btn-block" translate="NEW_APP" data-toggle="modal" data-target="#NewApp" ng-click="prepareCombos()"></button>
+                    <button ng-show="showButtons" class="btn btn-primary btn-block" translate="NEW_CITI_EMP" data-toggle="modal" data-target="#NewCitiEmp" ng-click="prepareCombosEmpCiti()"></button>
                 </div>
 
                 <div class="col-xs-3">
-                    <button class="btn btn-default btn-block" translate="MODIFY_APP" data-toggle="modal" data-target="#UpdateApp" ng-click="updateApplication('true')"></button>
+                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="UPDATE_CITI_EMP" data-toggle="modal" data-target="#UpdateCitiEmp" ng-click="updateCitiUsers()"></button>
                 </div>
 
                 <div class="col-xs-3">
-                    <button class="btn btn-default btn-block" translate="DELETE_APP" ng-click="deleteApplication(idAppDel)"></button>
+                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers()"></button>
                 </div>
             </div>
             <!-- TABLe -->
             <div class="row">
                 <br/>
-                <div class="grid-responsive">
+                <div class="margin-left">
                     <div class="row">
                         <label class="control-label col-md-2" translate="DOMAIN_CITI_U"></label>
-                        <div class="col-md-4"> <p ng-model="Dominio"></p></div>
+                        <div class="col-md-4"> <p> {{citiUData.Dominio}} </p></div>
                     </div> <br>
                     <div class="row">
                         <label class="control-label col-md-2"> SOE-ID </label>
-                        <div class="col-md-4"> <p ng-model="Soe_Id"></p></div>
-                        <div class="col-md-2"> <label class="label-app" for=""> PTB-ID </label> </div>
-                        <div class="col-md-2"><p> {{app[0].Ptb_Id}}</p> </div>
+                        <div class="col-md-4"> <p> {{citiUData.Soe_Id}} </p></div>
+                        <label class="control-label col-md-2" translate="NAME_CITI_U"> </label>
+                        <div class="col-md-2"><p> {{citiUData.nombre}}</p> </div>
                     </div> <br>
                     <div class="row">
-                        <div class="col-md-3"> <label class="label-app" for="" translate="SHORT_DESCRIPTION"></label> </div>
-                        <div class="col-md-8"> <p>{{app[0].Descripcion_Corta}}</p> </div>
-                    </div> <br>
-                    <div class="row">  
-                        <div class="col-md-3"> <label class="label-app" for="" translate="LARGE_DESCRIPTION"></label> </div>
-                        <div class="col-md-8"> <p>{{app[0].descripcionLarga}}</p> </div>
+                        <label class="control-label col-md-2" translate="JOB_CITI_U"></label>
+                        <div class="col-md-4"> <p>{{citiUData.puesto}}</p> </div>
                     </div> <br>
                     <div class="row">
-                        <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L1"></label> </div>
-                        <div class="col-md-4"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,1,app[0].idProvL1)" > {{app[0].provL1}} </a> </div>
+                        <label class="control-label col-md-2" translate="COUNTRY_CITI_U"></label>
+                        <div class="col-md-4"> <p>{{citiUData.Pais}}</p> </div>
+                        <label class="control-label col-md-2" translate="CITY_CITI_U"></label>
+                        <div class="col-md-4"> <p>{{citiUData.Ciudad}}</p> </div>
                     </div> <br>
                     <div class="row">
-                        <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L2"></label> </div>
-                        <div class="col-md-4"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,2,app[0].idProvL2)" > {{app[0].provL2}} </a> </div>
+                        <label class="control-label col-md-2" translate="EXT_OFIC_CITI_U"></label>
+                        <div class="col-md-4"> <p>{{citiUData.Ext}}</p> </div>
+                        <label class="control-label col-md-2" translate="TEL_CEL_CITI_U"></label>
+                        <div class="col-md-4"> <p>{{citiUData.Telefono}}</p> </div>
                     </div> <br>
                     <div class="row">
-                        <div class="col-md-3"> <label class="label-app" for="" translate="VENDOR_L3"></label> </div>
-                        <div class="col-md-4"> <a href="" ng-click="showDetailsL(app[0].Csi_Id,3,app[0].idProvL3)" > {{app[0].provL3}} </a> </div>
-                    </div> <br>
-                    <div class="row">
-                        <div class="col-md-4"><h4 translate="TECHNOLOGICAL_PLATFORM"></h4> </div>
+                        <label class="control-label col-md-2" translate="TEL_OTRO_CITI_U"></label>
+                        <div class="col-md-4"> <p>{{citiUData.Movil}}</p> </div>
+                        <label class="control-label col-md-2" translate="EMAIL_CITI_U"></label> 
+                        <div class="col-md-4"> <p>{{citiUData.Email}}</p> </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3"> <label class="label-app" for="" translate="PRIMARY"></label> </div>
-                        <div class="col-md-8"> <p>{{app[0].ptfPrimaria}}</p> </div>
-                    </div> <br>
-                    <div class="row">
-                        <div class="col-md-3"> <label class="label-app" for="" translate="SECONDARY"></label> </div>
-                        <div class="col-md-8"> <p>{{app[0].ptfSecundaria}}</p> </div>
-                    </div> <br>
-                    <div class="row">
-                        <div class="col-md-3"> <label class="label-app" for="" translate="TERTIARY"></label> </div>
-                        <div class="col-md-8"> <p>{{app[0].ptfTerciaria}}</p> </div>
-                    </div> <br>
-                    <div class="row">    
-                        <div class="col-md-3"> <label class="label-app" for="" translate="COMMENTS"></label> </div>
-                        <div class="col-md-8"> <p>{{app[0].Comentarios}}</p> </div>
-                    </div> <br>
+                    <hr>
+                    <div class="table-aplications">
+                        <div class="row margin-right">
+                            <br/>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <input type="text" ng-model="r" class="form-control" id="search" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-offset-4 col-xs-4">
+                                <label for="search">{{'ITEMS_PER_PAGE'|translate}}:</label>
+                                <input type="number" min="1" max="100" class="form-control" ng-model="pageSizeAEC">
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="table-responsive margin-right">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th> {{'APLICATION_DEVELOPED_EMP_PROV' | translate}} </th>
+                                        <th> {{'DESCRIPTION_APP_EMP_PROV' | translate}} </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr dir-paginate="x in appsEmp | filter:r | itemsPerPage: pageSizeAEC" total-items="totalAppsEmpCiti" current-page="currentPageAEC" pagination-id="AppsEmpCiti">
+                                        <th> <p> {{x.idAplicacion}} </p> </th>
+                                        <td> <p> {{x.Descripcion_Corta}} </p> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center">
+                            <dir-pagination-controls pagination-id="AppsEmpCiti" boundary-links="true" on-page-change="pageChangeHandlerAppsEmpCiti(newPageNumber)"></dir-pagination-controls>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+<!-- Modal New Emp Citi -->
+<div class="modal fade" id="NewCitiEmp" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" translate="NEW_CITI_EMP_TITLE"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" name="AddEmpC" ng-submit="addNewEmpCiti()" novalidate>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="VENDOR_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="vendorEmpP" id="vendorEmpP" ng-model="vendorEmpP" class="form-control" ng-change="getEmpsVendor()" required
+                                ng-options="x.ID as x.DESCRIPCION for x in vendors">
+                            </select>
+                            <p translate="REQUIRE_VENDOR_EMP_PROV" ng-show="AddEmpP.vendorEmpP.$dirty && AddEmpP.vendorEmpP.$error.required" class="help-block"></p>
+                        </div>
+                        <label class="control-label required col-sm-2" for="" translate="JOB_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="jobsEmpP" id="jobsEmpP" ng-model="jobsEmpP" class="form-control" ng-change="" required>
+                                <option ng-repeat="j in catJobs" value="{{j.ID}}"> {{j.DESCRIPCION}} </option>
+                            </select>
+                            <p translate="REQUIRE_JOB_EMP_PROV" ng-show="AddEmpP.jobsEmpP.$dirty && AddEmpP.jobsEmpP.$error.required" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="CODE_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="number" name="codeEmpP" id="codeEmpP" ng-model="codeEmpP" class="form-control" required>
+                            <p translate="REQUIRE_CODE_EMP_PROV" ng-show="AddEmpP.codeEmpP.$dirty && AddEmpP.codeEmpP.$error.required" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="FIRST_NAME_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="nameEmpP" class="form-control" id="nameEmpP" ng-model="nameEmpP" required>
+                            <p translate="REQUIRE_NAME_EMP_PROV" ng-show="AddEmpP.nameEmpP.$dirty && AddEmpP.nameEmpP.$error.required" class="help-block"></p>
+                        </div>
+						<label class="control-label col-sm-2" translate="SECOND_NAME_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="SNameEmpP" class="form-control form-control-danger" id="SNameEmpP" ng-model="SNameEmpP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-sm-2" for="" translate="FIRST_LASTNAME_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="PLnameEmpP" class="form-control" id="PLnameEmpP" ng-model="PLnameEmpP" required>
+                            <p translate="REQUIRE_FIRST_NAME_EMP_PROV" ng-show="AddEmpP.PLnameEmpP.$dirty && AddEmpP.PLnameEmpP.$error.required" class="help-block"></p>
+                        </div>
+						<label class="control-label col-sm-2" translate="SECOND_LASTNAME_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="SSnameEmpP" class="form-control" id="SSnameEmpP" ng-model="SSnameEmpP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="COUNTRY_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="countryEmpP" id="countryEmpP" ng-model="countryEmpP" class="form-control"  ng-change="getCities(countryEmpP)">
+                                <option ng-repeat="x in catCountries" value="{{x.ID}}"> {{x.DESCRIPCION}} </option>
+                            </select>
+                        </div>
+						<label class="control-label required col-sm-2" translate="CITY_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <select name="citiesEmpP" id="citiesEmpP" ng-model="citiesEmpP" class="form-control" ng-change="" required>
+                                <option ng-repeat="c in catCities" value="{{c.Id}}"> {{c.Descripcion}} </option>
+                                <p translate="REQUIRE_CITY_EMP_PROV" ng-show="AddEmpP.citiesEmpP.$dirty && AddEmpP.citiesEmpP.$error.required" class="help-block"></p>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="CEL_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="ldCelEmpP" ng-model="ldCelEmpP" name="ldCelEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_LADA_CEL_EMP_PROV" ng-show="!AddEmpP.ldCelEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="celEmpP" class="form-control" id="celEmpP" ng-model="celEmpP" ng-maxlength="8" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_CELULAR_NUMBER_EMP_PROV" ng-show="!AddEmpP.celEmpP.$valid" class="help-block"></p>
+                        </div>
+						<label class="control-label col-sm-2" translate="TEL_OTHER_EMP_PROV">  </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="ldTelOEmpP" class="form-control" id="ldTelOEmpP" ng-model="ldTelOEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_LD_TEL_OTHER_EMP_PROV" ng-show="!AddEmpP.ldTelOEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="telOEmpP" class="form-control" id="telOEmpP" ng-model="telOEmpP" ng-maxlength="8" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
+                            <p translate="REQUIRE_TEL_OTRO_EMP_PROV" ng-show="!AddEmpP.telOEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="TEL_OFFICE_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="ldOfficeEmpP" class="form-control" id="ldOfficeEmpP" ng-model="ldOfficeEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
+                            <p translate="REQUIRE_LD_OFFICE_EMP_PROV" ng-show="!AddEmpP.ldOfficeEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="telOfficeEmpP" class="form-control" id="telOfficeEmpP" ng-model="telOfficeEmpP" ng-maxlength="8" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
+                            <p translate="REQUIRE_TEL_OFFICE_EMP_PROV" ng-show="!AddEmpP.telOfficeEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="EXT_OFFIC_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="extOfficeEmpP" class="form-control" id="extOfficeEmpP" ng-model="extOfficeEmpP" ng-maxlength="10">
+                            <p translate="REQUIRE_EXT_OFFICE_EMP_PROV" ng-show="!AddEmpP.extOfficeEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="EMAIL_PROV_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="emailEmpP" class="form-control" id="emailEmpP" ng-model="emailEmpP" ng-maxlength="60">
+                            <p translate="REQUIRE_EMAIL_P_EMP_PROV" ng-show="AddEmpP.emailEmpP.$error.email" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for=""> SOE-ID </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="soeidEmpP" class="form-control" id="soeidEmpP" ng-model="soeidEmpP" ng-maxlength="7">
+                            <p translate="REQUIRE_SOEID_EMP_PROV" ng-show="!AddEmpP.soeidEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="EMAIL_CITI_EMP_PROV">  </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="emailCitiEmpP" class="form-control" id="emailCitiEmpP" ng-model="emailCitiEmpP" ng-maxlength="60">
+                            <p translate="REQUIRE_EMAIL_CITI_EMP_PROV" ng-show="AddEmpP.emailCitiEmpP.$error.email" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="TEL_CITI_EMP_PROV"> </label>
+                        <div class="col-sm-2">
+                            <input type="number" name="telCitiEmpP" class="form-control" id="telCitiEmpP" ng-model="telCitiEmpP" ng-maxlength="10" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
+                            <p translate="REQUIRE_TEL_CITI_EMP_PROV" ng-show="!AddEmpP.telCitiEmpP.$valid" class="help-block"></p>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" name="extCitiEmpP" class="form-control" id="extCitiEmpP" ng-model="extCitiEmpP" ng-maxlength="10" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
+                            <p translate="REQUIRE_EXT_CITI_EMP_PROV" ng-show="!AddEmpP.extCitiEmpP.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="REPORTS_TO_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <select name="reports2EmpP" id="reports2EmpP" class="form-control" ng-model="reports2EmpP" ng-change="">
+                                <option ng-repeat="e in empsVendor" value="{{e.clave}}"> {{e.nombre}} </option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="COMMENTS_EMP_PROV"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="commentEmpP" class="form-control" id="commentEmpP" ng-model="commentEmpP">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-3">
+                            <button type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!AddEmpP.$valid"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</div>
 
 </div>

@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var citiUsersCtrl = function($scope, $location,localeService,domainService, employeesCitiService, $cookies) {
+var citiUsersCtrl = function($scope, $location,localeService,domainService, employeesCitiService, $cookies, messagesService) {
 
     if ($cookies.get("citiU") != "true"){
         $location.path("/principal");
@@ -21,6 +21,10 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
     $this.totalUserCiti = 0;
     $this.currentPageCU = 1;
     $this.pageSizeCU = 10;
+    $this.totalAppsEmpCiti = 0;
+    $this.currentPageAEC = 1;
+    $this.pageSizeAEC = 5;
+    $this.showButtons = $cookies.get("showButtons") == "true" ? true : false;
 
     /*
     $this.idDomainCU
@@ -38,7 +42,9 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
         employeesCitiService.getDetailsEMployee(_id).then(function(data){
             petition = data.success;
             if (petition){
-
+                $this.citiUData = data.data[0];
+            }else{
+                messagesService.handlerMessages("CITI_USER_DETAILS_ERROR",false);
             }
         });
     };
@@ -68,9 +74,30 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
         });
     };
 
+    var getAppsByCitiEmployee = function(newPage){
+        var petition = false;
+        employeesCitiService.getAppsByCitiEmployee(newPage,$this.pageSizeAEC, $this.idUCiti)
+        .then(function(data){
+            petition = data.success;
+            $this.appsEmp = [];
+            if (petition){
+                $this.appsEmp = data.data;
+            }else{
+                messagesService.handlerMessages("CITI_USER_DETAILS_ERROR",false);
+            }
+        });
+    };
+
     /* Scope functions */
+    $this.pageChangeHandlerAppsEmpCiti = function(newPage){
+        getAppsByCitiEmployee(newPage);
+    };
     $this.showCitiUserDetails = function(_id){
         getDetailsEMployee(_id);
+        $this.idUCiti = _id;
+        getAppsByCitiEmployee($this.currentPageAEC);
+        changeTab(3, 2);
+        $this.showCitiUsersTab('specific_detail');
     };
 
     $this.showCitiUsersIdDomain = function(_id,_desc){
