@@ -49,7 +49,7 @@ var employeesVendorService = function ($http, $q, $cookies){
         var promise= defered.promise;
         var data = {
             'index': _index,
-            'rows': _rows,
+            'rows': _rows || 1,
             'idEmployee': _id
         };
         var config = {

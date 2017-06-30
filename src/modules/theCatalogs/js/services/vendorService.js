@@ -49,7 +49,7 @@ var vendorCatService = function ($http, $q, $cookies){
         var promise= defered.promise;
         var data = {
             'index': _index,
-            'rows': _size
+            'rows': _size || 1
         };
         var config = {
             headers : { 

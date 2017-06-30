@@ -83,7 +83,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     };
 
     this.getDetailsEMployee = function(_id){
-        var endpoint = "catalogsms/empleados/citi/"+_id;
+        var endpoint = server + "catalogsms/empleados/citi/"+_id;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();
@@ -100,12 +100,36 @@ var employeesCitiService = function ($http, $q, $cookies){
         return promise;
     };
 
+    this.getAppsByCitiEmployee = function(_index, _rows, _id){
+        var endpoint = server + "catalogsms/empleados/appsEmpleadoCiti/";
+        var appID = $cookies.get('applicationId');
+        var content_type = 'application/json; charset=utf-8';
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var data = {
+            index: _index,
+            rows: _rows || 1,
+            soeId: _id
+        };
+        var config = {
+            'headers': {
+                'content_type': content_type,
+                'ApplicationID': appID
+            }
+        };
+        $http.post(endpoint, data, config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+    };
+
     return{
         getGerentes: this.getGerentes,
         getLideres: this.getLideres,
         getAnalistas: this.getAnalistas,
         getEmployeesByDomain: this.getEmployeesByDomain,
-        getDetailsEMployee: this.getDetailsEMployee
+        getDetailsEMployee: this.getDetailsEMployee,
+        getAppsByCitiEmployee: this.getAppsByCitiEmployee
     };
 }
 module.exports= angular.module("app.locale").service("employeesCitiService", employeesCitiService);
