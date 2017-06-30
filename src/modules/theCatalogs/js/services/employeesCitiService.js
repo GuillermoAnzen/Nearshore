@@ -59,10 +59,53 @@ var employeesCitiService = function ($http, $q, $cookies){
         return promise;
     }
 
+    this.getEmployeesByDomain = function(idDomain,_index,_rows){
+        var endpoint = server + "catalogsms/empleados/citiDomainId/";
+        var appID = $cookies.get('applicationId');
+        var content_type = 'application/json; charset=utf-8';
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var data = {
+            'index': _index,
+            'rows': _rows,
+            'idDomain': idDomain
+        };
+        var config = {
+            'headers': {
+                'Content-Type': content_type,
+                'ApplicationID': appID
+            }
+        };
+        $http.post(endpoint, data, config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+    };
+
+    this.getDetailsEMployee = function(_id){
+        var endpoint = "catalogsms/empleados/citi/"+_id;
+        var appID = $cookies.get('applicationId');
+        var content_type = 'application/json; charset=utf-8';
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var config = {
+            'headers': {
+                'content_type': content_type,
+                'ApplicationID': appID
+            }
+        };
+        $http.get(endpoint, config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+    };
+
     return{
         getGerentes: this.getGerentes,
         getLideres: this.getLideres,
-        getAnalistas: this.getAnalistas
+        getAnalistas: this.getAnalistas,
+        getEmployeesByDomain: this.getEmployeesByDomain,
+        getDetailsEMployee: this.getDetailsEMployee
     };
 }
 module.exports= angular.module("app.locale").service("employeesCitiService", employeesCitiService);

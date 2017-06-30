@@ -76,6 +76,11 @@ module.exports = {
         SELECT_RESP_PROV: 'Select a responsable',
         SELECT_MAN_BNMX: 'Select a manager',
         SELECT_ANALIST_BNMX: 'Select an analist',
-        SELECT_LEAD_BNMX: 'Select a leader'
+        SELECT_LEAD_BNMX: 'Select a leader',
+        
+        /* Validation messages */
+        VALIDATE_DOMAIN_NEW_APP: 'Domain is required',
+        VALIDATE_CSI_ID_NEW_APP: 'The CSI-ID is necesary',
+        VALIDATE_SHORT_DESCRIPTION_NEW_APP: 'Application\' description is required'
     }
 };

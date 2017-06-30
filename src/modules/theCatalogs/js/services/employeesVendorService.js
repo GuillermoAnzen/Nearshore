@@ -153,12 +153,86 @@ var employeesVendorService = function ($http, $q, $cookies){
         return promise;
     };
 
+    this.updateEmployee = function(
+        _idEmp,
+        _vendorEmpP,
+            _jobsEmpP,
+            _codeEmpP,
+            _nameEmpP,
+            _SNameEmpP,
+            _PLnameEmpP,
+            _SSnameEmpP,
+            _citiesEmpP,
+            _ldCelEmpP,
+            _celEmpP,
+            _ldTelOEmpP,
+            _telOEmpP,
+            _ldOfficeEmpP,
+            _telOfficeEmpP,
+            _extOfficeEmpP,
+            _emailEmpP,
+            _soeidEmpP,
+            _emailCitiEmpP,
+            _telCitiEmpP,
+            _extCitiEmpP,
+            _reports2EmpP,
+            _commentEmpP
+    ){
+        var endpoint = server + "catalogsms/empProvider/update/";
+        var appID = $cookies.get('applicationId');
+        var content_type = 'application/json; charset=utf-8';
+        var defered=$q.defer();
+        var promise= defered.promise;
+        var data = {
+            'id': _idEmp,
+	        'idProvider': _vendorEmpP,
+	        'idEmployee': _codeEmpP,
+	        'firstLastName': _PLnameEmpP,
+	        'secondLastName': _SSnameEmpP || " ",
+            'firstName': _nameEmpP,
+	        'secondName': _SNameEmpP || " ",
+	        'ldCelular': _ldCelEmpP,
+	        'personalNumber': _celEmpP,
+	        'ldParticular': _ldTelOEmpP,
+	        'particularTelephone': _telOEmpP,
+	        'personalEmail': "",
+            'puesto': {
+                'id': _jobsEmpP
+            },
+            'country': {
+                'id': _citiesEmpP
+            },
+	        'ldProvider': _ldOfficeEmpP || " ",
+	        'telephoneProvider': _telOfficeEmpP || " ",
+	        'extension': _extOfficeEmpP,
+	        'emailProvider': _emailEmpP,
+	        'soeId': _soeidEmpP,
+	        'ldCiti': "",
+	        'citiTelephone': _telCitiEmpP,
+	        'extCiti': _extCitiEmpP,
+	        'emailCiti': _emailCitiEmpP,
+	        'idReportaA': _reports2EmpP,
+	        'comments': _commentEmpP 
+        };
+        var config = {
+            headers : { 
+                'Content-Type': content_type,
+                'ApplicationID': appID
+            }
+        };
+        $http.put(endpoint, data, config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+    };
+
     return{
         getEmployeesPerVendor: this.getEmployeesPerVendor,
         getDetailsEmp: this.getDetailsEmp,
         getAppsByEmployee: this.getAppsByEmployee,
         addEmployee: this.addEmployee,
-        deleteEmployee: this.deleteEmployee
+        deleteEmployee: this.deleteEmployee,
+        updateEmployee: this.updateEmployee
     };
 }
 module.exports= angular.module("app.locale").service("employeesVendorService", employeesVendorService);

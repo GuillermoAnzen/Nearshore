@@ -35,9 +35,9 @@ module.exports = angular.module('app.login', [
     $httpProvider.interceptors.push(function($q,$location, $cookies,$rootScope,$timeout){
         return{
             'request': function(config) {
-                $timeout(function() {
+                //$timeout(function() {
                     $rootScope.isLoading = true; 
-                }, 200);
+                //}, 200);
 
                 return config || $q.when(config);
             },
@@ -49,6 +49,7 @@ module.exports = angular.module('app.login', [
                 if(response.data.success==false && response.data.mensaje == "Unauthorized"){
                     $cookies.remove('IsLogged');
                     $cookies.remove('applicationId');
+                    $cookies.remove('counter');
                     $location.path("/login");
                 }
                 $rootScope.isLoading = false; 

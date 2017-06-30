@@ -31,14 +31,39 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                         $cookies.put('IsLogged', 'true');
                         $cookies.put('applicationId', applicationId);
                         $cookies.put('username', username);
-                         $rootScope.UserLogin = true;
-                         $rootScope.$on( $scope.user);
-                         sessionManager.loged(username);
-                         $location.path("/principal");
-                            } else {
-                                $scope.invalidLogin= true;
-                                $location.path("/inicio");
-                         }
+                        $rootScope.UserLogin = true;
+                        $rootScope.$on( $scope.user);
+                        sessionManager.loged(username);
+                        $location.path("/principal");
+                        /*Handle show options */
+                        var profile = response.data.data[0].Id_Perfil;
+                        $cookies.put("adm", false);
+                        $cookies.put("app", false);
+                        $cookies.put("provs", false);
+                        $cookies.put("citiU", false);
+                        $cookies.put("cat", false);
+                        $cookies.put("showButtons", false);
+                        if (profile == 1){
+                            $cookies.put("adm", true);
+                            $cookies.put("app", true);
+                            $cookies.put("provs", true);
+                            $cookies.put("citiU", true);
+                            $cookies.put("cat", true);
+                            $cookies.put("showButtons", true);
+                        }else if(profile == 2 || profile == 3){
+                            $cookies.put("app", true);
+                            $cookies.put("provs", true);
+                            $cookies.put("showButtons", true);
+                        }else if(profile == 4){
+                            $cookies.put("app", true);
+                            $cookies.put("provs", true);
+                        }else if (profile == 5){
+                            $cookies.put("citiU", true);
+                        }
+                     }else{
+                        $scope.invalidLogin= true;
+                        $location.path("/inicio");
+                    }
             });
 
 

@@ -8,7 +8,11 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatService,applicationService,messagesService,employeesCitiService,employeesVendorService) {
+var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatService,applicationService,messagesService,employeesCitiService,employeesVendorService,$cookies) {
+
+    if ($cookies.get("app") != "true"){
+        $location.path("/principal");
+    }
 
     var $this = $scope;
     $this.currentPage = 1;
@@ -20,6 +24,11 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     $this.totalDomains = 0;
     $this.domainSelected = 0;
     $this.idDomainSelected = 0;
+
+    var changeTab = function(show, hide){
+        $(".applications ul :nth-child("+hide+")").attr("class","");
+        $(".applications ul :nth-child("+show+")").attr("class","active")
+    };
 
     var clearFieldsAddNewApp = function(){
         $this.domain_app = null;
@@ -82,6 +91,18 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
             petitionSuccess = data.success;
             if (petitionSuccess){
                 $scope.app = data.data;
+                $this.domain_appUp = data.data[0].idDominio;
+                $this.csiId_appUp = data.data[0].Csi_Id;
+                $this.ptbIdUp = parseInt(data.data[0].Ptb_Id);
+                $this.sDescUp = data.data[0].Descripcion_Corta;
+                $this.lDescUp = data.data[0].descripcionLarga;
+                $this.supportL1Up = data.data[0].idProvL1;
+                $this.supportL2Up = data.data[0].idProvL2;
+                $this.supportL3Up = data.data[0].idProvL3;
+                $this.ptfPrimaryUp = data.data[0].idPtfPrim;
+                $this.ptfSecondaryUp = data.data[0].idPtfSec;
+                $this.ptfTertiaryUp = data.data[0].idPtfTerc;
+                $this.commentsAppUp = data.data[0].Comentarios;
             }
         });
     }
@@ -209,30 +230,25 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         getDomains(1,100);
         getVendors();
         getPlatforms();
+        $this.domain_app = $this.idDomainSelected;
     };
 
     $this.updateApplication = function(flag){
         if (flag == "true"){
-            $scope.my.update = true;
             getVendors();
             getPlatforms();
+            getApplicationDetails($scope.idAppDel);
         }else{
-            $scope.my.update = false;
             $("#UpdateApp").modal('hide');
         }
     };
 
     $this.updateDetailsL = function(flag){
-        if (flag == "true"){
-            $scope.my.updateDetL = true;
-        }else{
-            $scope.my.updateDetL = false;
-        }
+        
     };
 
     $this.showApplicationsIdDomain = function(_id,_domain){
-        $(".applications ul :nth-child(1)").attr("class","");
-        $(".applications ul :nth-child(2)").attr("class","active")
+        changeTab(2, 1);
         $this.showApplicationTab( "applications_domain",true);
         $scope.domainSelected = _domain;
         $scope.idDomainSelected = _id;
@@ -240,8 +256,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     }
 
     $this.showApplicationsDetails = function(_csiId){
-        $(".applications ul :nth-child(2)").attr("class","");
-        $(".applications ul :nth-child(3)").attr("class","active")
+        changeTab(3, 2);
         $this.showApplicationTab( "details_application",true);
         $scope.idAppDel = _csiId;
         getApplicationDetails(_csiId);
@@ -290,18 +305,18 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     $this.saveChangesApplication = function(){
         var petitionSuccess = false;
         applicationService.updateApplication(
-            $("#csiId_appUp").val(),
-            $("#domain_appUp").val(),
-            $("#ptbIdUp").val(),
-            $("#sDescUp").val(),
-            $("#lDescUp").val(),
-            $("#supportL1Up").val(),
-            $("#supportL2Up").val(),
-            $("#supportL3Up").val(),
-            $("#ptfPrimaryUp").val(),
-            $("#ptfSecondaryUp").val(),
-            $("#ptfTertiaryUp").val(),
-            $("#commentsAppUp").val()
+            $this.csiId_appUp,
+            $this.domain_appUp,
+            $this.ptbIdUp,
+            $this.sDescUp,
+            $this.lDescUp,
+            $this.supportL1Up,
+            $this.supportL2Up,
+            $this.supportL3Up,
+            $this.ptfPrimaryUp,
+            $this.ptfSecondaryUp,
+            $this.ptfTertiaryUp,
+            $this.commentsAppUp
         ).then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
@@ -322,6 +337,7 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
             petitionSuccess = data.success;
             if (petitionSuccess){
                 messagesService.handlerMessages("DELETED_SUCCESS_APP",true);
+                changeTab(2, 3);
                 $this.showApplicationsIdDomain($scope.idDomainSelected,$scope.domainSelected);
             }else
                 messagesService.handlerMessages("ERROR_DELETE_APP",false);
@@ -354,10 +370,10 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         ).then(function(data){
             petitionSuccess = data.success;
             if (petitionSuccess){
+                $("#UpdateSupport").modal('hide');
                 messagesService.handlerMessages("APPLICATION_UPDATE_SUPPORT_SUCCESS",true);
                 $this.showDetailsL(id,level,$this.idProv);
                 $this.updateDetailsL('false');
-                $("#UpdateSupport").modal('hide');
             }else{
                 messagesService.handlerMessages("APPLICATION_UPDATE_SUPPORT_ERROR",false);
             }

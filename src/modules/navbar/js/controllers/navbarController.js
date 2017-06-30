@@ -26,6 +26,7 @@ var navController= function ($translate, locale,localeService,sessionManager,$lo
               if(response.data.success){
               $cookies.remove('IsLogged');
               $cookies.remove('applicationId');
+              $cookies.remove('counter');
               sessionManager.notLoged();
               $location.path("/login");
             }
