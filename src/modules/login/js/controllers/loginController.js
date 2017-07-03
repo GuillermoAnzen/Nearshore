@@ -43,6 +43,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                         $cookies.put("citiU", false);
                         $cookies.put("cat", false);
                         $cookies.put("showButtons", false);
+                        $cookies.put("counter","1");
                         if (profile == 1){
                             $cookies.put("adm", true);
                             $cookies.put("app", true);
