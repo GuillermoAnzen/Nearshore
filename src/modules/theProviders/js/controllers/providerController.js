@@ -26,6 +26,8 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
     $this.activeModifyButton = true;
     $this.newEmpProv = true;
 
+    $this.showButtons = $cookies.get("showButtons") == "true" ? true : false;
+
     /*  $this.idEmp
         $this.desciption
         $this.idProv
@@ -287,7 +289,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
     var getCities = function(_id){
         var petition = false;
         if (_id){
-            CitiesService.getCitiesId(_id)
+            CitiesService.getCitiesId(_id,1,100)
             .then(function(data){
                 petition = data.success;
                 if (petition){
@@ -307,7 +309,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
 
     var getCountries = function(){
         var petition = false;
-        countryService.getCountries().then(function(data){
+        countryService.getCountries(1,100).then(function(data){
             petition = data.success;
             if (petition){
                 $this.catCountries = data.data;

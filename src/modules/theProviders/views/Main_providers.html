@@ -59,15 +59,15 @@
             <hr>
             <div class="row">
                 <div class="col-xs-3">
-                    <button class="btn btn-primary btn-block" translate="NEW_EMP_PROV" data-toggle="modal" data-target="#NewEmpProv" ng-click="prepareCombosEmpProv()"></button>
+                    <button ng-show="showButtons" class="btn btn-primary btn-block" translate="NEW_EMP_PROV" data-toggle="modal" data-target="#NewEmpProv" ng-click="prepareCombosEmpProv()"></button>
                 </div>
 
                 <div class="col-xs-3">
-                    <button class="btn btn-default btn-block" translate="MODIFY_EMP_PROV" data-toggle="modal" ng-disabled="activeModifyButton" data-target="#UpdateEmpProv" ng-click="updateEmpProv('all')"></button>
+                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="MODIFY_EMP_PROV" data-toggle="modal" ng-disabled="activeModifyButton" data-target="#UpdateEmpProv" ng-click="updateEmpProv('all')"></button>
                 </div>
 
                 <div class="col-xs-3">
-                    <button class="btn btn-default btn-block" translate="DELETE_EMP_PROV" ng-disabled="activeModifyButton" ng-click="deleteEmpProvider()"></button>
+                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="DELETE_EMP_PROV" ng-disabled="activeModifyButton" ng-click="deleteEmpProvider()"></button>
                 </div>
             </div>
             <hr>
@@ -117,7 +117,7 @@
         <div id="provider_specific_detail" class="tabcontent">
             <div class="row page-header">
                 <div class="col-xs-3">
-                    <button class="btn btn-default btn-md" translate="MODIFY_EMP_PROV" data-toggle="modal" data-target="#UpdateEmpProv" ng-click="updateEmpProv('spec')"></button>
+                    <button ng-show="showButtons" class="btn btn-default btn-md" translate="MODIFY_EMP_PROV" data-toggle="modal" data-target="#UpdateEmpProv" ng-click="updateEmpProv('spec')"></button>
                 </div>
             </div>
             <!-- TABLe APLICATION DEVELOPED BY EMPLOYEE -->
@@ -372,7 +372,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-3">
-                            <button type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!AddEmpP.$valid"></button>
+                            <button ng-show="showButtons" type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!AddEmpP.$valid"></button>
                         </div>
                     </div>
                 </form>
@@ -532,7 +532,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-3">
-                            <button type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!AddEmpP.$valid"></button>
+                            <button ng-show="showButtons" type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!AddEmpP.$valid"></button>
                         </div>
                     </div>
                 </form>
@@ -692,7 +692,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-3">
-                            <button type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!UpdateEmpPForm.$valid"></button>
+                            <button ng-show="showButtons" type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!UpdateEmpPForm.$valid"></button>
                         </div>
                     </div>
                 </form>

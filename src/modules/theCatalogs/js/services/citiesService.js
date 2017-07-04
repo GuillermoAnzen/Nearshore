@@ -23,19 +23,23 @@ var CitiesService = function ($http, $q, $cookies){
         return promise;
     };
 
-    this.getCitiesId = function(_id){
-        var endpoint = server + "catalogsms/ciudades/paises/"+ _id +"/ciudades";
+    this.getCitiesId = function(_id,_index, _rows){
+        var endpoint = server + "catalogsms/ciudades/paises/"+ _id;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
         var promise= defered.promise;
+        var data = {
+            'index': _index,
+            'rows': _rows
+        };
         var config = {
             headers : { 
                 'Content-Type': content_type,
                 'ApplicationID': appID
             }
         };
-        $http.get(endpoint, config).then(function(response){
+        $http.post(endpoint, data, config).then(function(response){
             defered.resolve(response.data);
         });
         return promise;

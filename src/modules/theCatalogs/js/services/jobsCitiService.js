@@ -1,18 +1,18 @@
 'use strict';
 var angular = require('angular');
 
-var countryService = function ($http, $q, $cookies){
+var jobsCitiService = function ($http, $q, $cookies){
 
     var server = "http://54.153.120.183/";
 
-    this.getCountries = function(_index, _rows){
-        var endpoint = server + "catalogsms/paises/list";
+    this.getJobs = function(_index, _rows){
+        var endpoint = server + "catalogsms/puestos/citi/list";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
         var promise= defered.promise;
-        var data = {
-            'index': _index,
+        var data  ={
+            'index':  _index,
             'rows': _rows
         };
         var config = {
@@ -28,7 +28,7 @@ var countryService = function ($http, $q, $cookies){
     };
 
     return{
-        getCountries: this.getCountries
+        getJobs: this.getJobs
     };
 }
-module.exports= angular.module("app.locale").service("countryService", countryService);
+module.exports= angular.module("app.locale").service("jobsCitiService", jobsCitiService);

@@ -31,6 +31,31 @@ module.exports = {
         DELETE_CITI_EMP: 'Eliminar',
         
         /*error messages */
-        CITI_USER_DETAILS_ERROR: 'Ha ocurrido un error. Por favor, intente de nuevo.'
+        CITI_USER_DETAILS_ERROR: 'Ha ocurrido un error. Por favor, intente de nuevo.',
+
+        /*fields required */
+        REQUIRE_DOMAIN_EMP_CITI: 'El dominio es obligatorio',
+        REQUIRE_SOEID_EMP_CITI: 'SOE-ID es obligatorio',
+        REQUIRE_F_NAME_EMP_CITI: 'El nombre es obligatorio',
+        REQUIRE_F_SURNAME_EMP_CITI: ' El primer apellido es obligatorio',
+        REQUIRE_JOB_EMP_CITI_U: 'El puesto es obligatorio',
+        REQUIRE_CITY_EMP_CITI: 'La ciudad es requerida',
+        REQUIRE_EXT_EMP_CITI: 'La extensión no puede ser mayor a 10 dígitos',
+        REQUIRE_CELULAR_NUMBER_EMP_CITI: 'El celular no puede ser mayor a 10 dígitos',
+        REQUIRE_OTHER_EMP_CITI: 'El número no puede ser mayor a 10 dígitos',
+        REQUIRE_EMAIL_EMP_CITI: 'El email no puede ser mayor a 60 caracteres',
+        
+        /*modal new user */
+        FIRST_NAME_CITI_U: 'Nombre',
+        SECOND_NAME_CITI_U: 'Segundo nombre',
+        FIRST_SURNAME_CITI_U: 'Primer Apellido',
+        SECOND_SURNAME_CITI_U: 'Segundo Apellido',
+        COUNTRY_EMP_CITI_U: 'País',
+        CITY_EMP_CITI_U: 'Ciudad',
+        TEL_CEL_CITI_U: 'Tel. Cel.',
+        TEL_OTHER_EMP_CITI: 'Otro Tel.',
+        EMAIL_EMP_CITI: 'Email',
+        REPORTS_TO_EMP_CITI: 'Reporta a',
+        COMMENTS_EMP_CITI: 'Comentarios'
     }
 };

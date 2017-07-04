@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var citiUsersCtrl = function($scope, $location,localeService,domainService, employeesCitiService, $cookies, messagesService) {
+var citiUsersCtrl = function($scope, $location,localeService,domainService, employeesCitiService, $cookies, messagesService, jobsCitiService) {
 
     if ($cookies.get("citiU") != "true"){
         $location.path("/principal");
@@ -88,7 +88,24 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
         });
     };
 
+    var getJobs  =function(index, rows){
+        var petition  = false;
+        jobsCitiService.getJobs(index, rows)
+        .then(function(data){
+            petition = data.success;
+            if (petition ){
+                $this.jobsCU = data.data;
+            }
+        });
+    };
+
     /* Scope functions */
+    $this.prepareCombosEmpCiti = function(){
+        $this.domainCiti = $this.idDomainCU;
+        getDomains(1,100);
+
+    };
+
     $this.pageChangeHandlerAppsEmpCiti = function(newPage){
         getAppsByCitiEmployee(newPage);
     };
