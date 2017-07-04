@@ -25,6 +25,8 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     $this.domainSelected = 0;
     $this.idDomainSelected = 0;
 
+    $this.showButtons = $cookies.get("showButtons") == "true" ? true : false;
+
     var changeTab = function(show, hide){
         $(".applications ul :nth-child("+hide+")").attr("class","");
         $(".applications ul :nth-child("+show+")").attr("class","active")
