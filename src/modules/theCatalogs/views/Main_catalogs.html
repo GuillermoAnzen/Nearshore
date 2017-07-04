@@ -1,16 +1,12 @@
 <!DOCTYPE HTML>
-<div class="catalogs" ng-controller="catalogCtrl">
+<div class="catalogs">
     <h1> {{'TITLE_CATALOGS' | translate}} </h1>
     <div>
         <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="" ng-click="showCatalogTab(event,'catalog1')"> {{'CAT_CITI_EMPLOYEES' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog2')"> {{'CAT_VENDOR_EMPLOYEES' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog3')"> {{'CAT_VENDORS' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog4')"> {{'CAT_PLATFORMS' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog4')"> {{'CAT_JOBS_CITI' | translate}} </a></li>
+        <li class="active"><a data-toggle="tab" href="" ng-click="showCatalogTab(event,'catalog1')"> {{'CAT_VENDORS' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog2')"> {{'CAT_PLATFORMS' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog3')"> {{'CAT_JOBS_CITI' | translate}} </a></li>
         <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog4')"> {{'CAT_DOMAINS' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog4')"> {{'CAT_JOBS_VENDOR' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog4')"> {{'CAT_PROFILES' | translate}} </a></li>
         <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog4')"> {{'CAT_CITIES' | translate}} </a></li>
         <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab(event,'catalog4')"> {{'CAT_COUNTRIES' | translate}} </a></li>
     </ul>
@@ -20,18 +16,46 @@
 
         <!-- TABS CATALOG1  -->
         <div id="catalog1" class="tabcontent default">
-            <table>
-                <thead>
+            <div class="row">
+                <br/>
+                <div class="col-xs-4">
+                    <label ></label>
+                    <div class="input-group">
+                        <input type="text" ng-model="q" class="form-control" id="search" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4">
+                    <label for="search">{{'ITEMS_PER_PAGE'|translate}}:</label>
+                    <input type="number" min="1" max="100" class="form-control" ng-model="pageSize" placeholder="items per page">
+                </div>
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
                     <tr>
-                        <th> Nombre </th>
+                        <th> </th>
+                        <th ng-click="OrderBy('nombre')"> Nombre </th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> catalog1 </td>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="x in vendorsList | filter:q | itemsPerPage: pageSize" total-items="totalVendors" current-page="currentPage">
+                        <td><input type="radio" ng-model="idVendor" value="{{x.id}}" name="idUser" ng-click='checkVendor(idVendor)'></td>
+                        <td>{{x.nombre}}</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+            </div>
+
         </div>
 
         <!-- TAB CATALOG2 -->

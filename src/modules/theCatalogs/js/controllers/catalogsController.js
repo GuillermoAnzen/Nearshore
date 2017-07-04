@@ -8,8 +8,32 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies) {
+var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService) {
 
+     $scope.currentPage = 1;
+     $scope.pageSize = 10;
+     $scope.vendorsList=[];
+     $scope.totalVendors= 0;
+
+     getResultsPage();
+
+     function getResultsPage(){
+     vendorCatService.getVendors().then(function(response){
+        if(response.success){
+            $scope.vendorsList=[];
+            $scope.totalVendors= response.data.length;
+            for(var i=0; i<response.data.length; i++ ){
+            var _id= parseInt(response.data[i].ID);
+            var vendor={id: _id, nombre: response.data[i].DESCRIPCION};
+            $scope.vendorsList.push(vendor);
+            }
+        }else{
+             $scope.error="Hubo un error en la conexión con la base de datos";
+             $console.log('Error');
+        }
+     });
+
+     }
     if ($cookies.get("cat") != "true"){
         $location.path("/principal");
     }
