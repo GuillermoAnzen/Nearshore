@@ -45,7 +45,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="x in vendorsList | filter:q | itemsPerPage: pageSize" total-items="totalVendors" current-page="currentPage">
+                    <tr dir-paginate="x in vendorsList | filter:q | itemsPerPage: pageSize">
                         <td><input type="radio" ng-model="idVendor" value="{{x.id}}" name="idUser" ng-click='checkVendor(idVendor)'></td>
                         <td>{{x.nombre}}</td>
                     </tr>
@@ -53,7 +53,7 @@
                 </table>
             </div>
             <div class="text-center">
-                <dir-pagination-controls boundary-links="true" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+                <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
             </div>
 
         </div>
