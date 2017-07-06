@@ -8,6 +8,7 @@ module.exports = {
 
         /* modal titles */
         NEW_CITI_EMP_TITLE: 'New Citi Employee',
+        UPDATE_CITI_EMP_TITLE: 'Update Citi Employee',
 
         /* Label Tables */
         NAME_DOMAIN_CITI_U: 'Name',
@@ -24,6 +25,8 @@ module.exports = {
         TEL_CEL_CITI_U: 'Celular num',
         TEL_OTRO_CITI_U: 'Another tel',
         EMAIL_CITI_U: 'Email',
+        REPORT_TO_CITI_U: 'Reports to',
+        COMMENT_CITI_U: 'Comments',
 
         /* buttons */
         NEW_CITI_EMP: 'New',
@@ -32,6 +35,14 @@ module.exports = {
 
         /*error messages */
         CITI_USER_DETAILS_ERROR: 'Has ocurred an error. Please, try again.',
+        CITI_USER_ADD_ERROR: 'Error ocurred. The citi employee was not added.',
+        CITI_USER_GET_EMPLOYEES_ERROR: 'Error ocurred. Citi Employees.',
+        CITI_USER_DELETE_ERROR: 'Error ocurred. Employee not deleted.',
+        CITI_USER_UPDATE_ERROR: 'Error ocurred. Employee nor updated.',
+        //sucess
+        CITI_USER_ADD_SUCCESSFULLY: 'Employee added successfully.',
+        CITI_USER_DELETE_SUCCESSFULLY: 'Employee deleted successfully',
+        CITI_USER_UPDATE_SUCCESSFULLY: 'Employee updated successfully.',
 
         /*fields required */
         REQUIRE_DOMAIN_EMP_CITI: 'Domain is required',
@@ -43,7 +54,8 @@ module.exports = {
         REQUIRE_EXT_EMP_CITI: 'The number cannot larger than 10 digits',
         REQUIRE_CELULAR_NUMBER_EMP_CITI: 'The number cannot be larger than 10 digits',
         REQUIRE_OTHER_EMP_CITI: 'The number cannot be larger than 10 digits',
-        REQUIRE_EMAIL_EMP_CITI: 'Email cannot be larger than 60 characteres',
+        REQUIRE_EMAIL_EMP_CITI: 'Email is not valid',
+        REQUIRE_EMAIL_LONG_EMP_CITI: 'Email cannot be larger than 60 characteres',
         
         /*modal new user */
         FIRST_NAME_CITI_U: 'Name',

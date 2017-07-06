@@ -67,6 +67,14 @@
                     <div class="col-xs-3">
                         <button ng-show="showButtons" class="btn btn-primary btn-block" translate="NEW_CITI_EMP" data-toggle="modal" data-target="#NewCitiEmp" ng-click="prepareCombosEmpCiti()"></button>
                     </div>
+
+                    <div class="col-xs-3">
+                        <button ng-show="showButtons" ng-disabled="disableButton" class="btn btn-default btn-block" translate="UPDATE_CITI_EMP" data-toggle="modal" data-target="#UpdateCitiEmp" ng-click="updateCitiUsers('all')"></button>
+                    </div>
+
+                    <div class="col-xs-3">
+                        <button ng-show="showButtons" ng-disabled="disableButton" class="btn btn-default btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers('all')"></button>
+                    </div>
                 </div>
                 <div class="row margin-left">
                     <div class="col-xs-4">
@@ -92,12 +100,14 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th></th>
                             <th translate="NAME_CITI_U"></th>
                             <th translate="JOB_CITI_U"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr dir-paginate="x in citiUsersList | filter:q | itemsPerPage: pageSizeCU" total-items="totalUserCiti" current-page="currentPageCU"  pagination-id="domainPaginationCU">
+                            <td> <input type="radio" ng-value="x.Soe_Id" ng-model="idEmpCi" name="idEmpCi" ng-click="empCSelected(idEmpCi)"> </td>
                             <td> <a href="" ng-model="id[Soe_Id]" ng-click="showCitiUserDetails(x.Soe_Id)">{{x.nombre}} </a></td>
                             <td> <a href="" ng-model="id[Soe_Id]" ng-click="showCitiUserDetails(x.Soe_Id)">{{x.puesto}} </a></td>
                         </tr>
@@ -112,16 +122,12 @@
         <!-- TAB CATAspecific_detailLOG3 -->
         <div id="specific_detail" class="tabcontent">
             <div class="row page-header">
-                <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-primary btn-block" translate="NEW_CITI_EMP" data-toggle="modal" data-target="#NewCitiEmp" ng-click="prepareCombosEmpCiti()"></button>
+                <div class="col-xs-offset-3 col-xs-3">
+                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="UPDATE_CITI_EMP" data-toggle="modal" data-target="#UpdateCitiEmp" ng-click="updateCitiUsers('details')"></button>
                 </div>
 
                 <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="UPDATE_CITI_EMP" data-toggle="modal" data-target="#UpdateCitiEmp" ng-click="updateCitiUsers()"></button>
-                </div>
-
-                <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers()"></button>
+                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers('details')"></button>
                 </div>
             </div>
             <!-- TABLe -->
@@ -159,6 +165,12 @@
                         <div class="col-md-4"> <p>{{citiUData.Movil}}</p> </div>
                         <label class="control-label col-md-2" translate="EMAIL_CITI_U"></label> 
                         <div class="col-md-4"> <p>{{citiUData.Email}}</p> </div>
+                    </div>
+                    <div class="row">
+                        <label class="control-label col-md-2" translate="REPORT_TO_CITI_U"></label>
+                        <div class="col-md-4"> <p>{{citiUData.reportaA}}</p> </div>
+                        <label class="control-label col-md-2" translate="COMMENT_CITI_U"></label> 
+                        <div class="col-md-4"> <p>{{citiUData.comentarios}}</p> </div>
                     </div>
                     <hr>
                     <div class="table-aplications">
@@ -263,7 +275,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="COUNTRY_EMP_CITI_U"> </label>
                         <div class="col-sm-4">
-                            <select name="countryEmpC" id="countryEmpC" ng-model="countryEmpC" class="form-control"  ng-change="getCities(countryEmpP)"
+                            <select name="countryEmpC" id="countryEmpC" ng-model="countryEmpC" class="form-control"  ng-change="getCities(countryEmpC)"
                                 ng-options="x.ID as x.DESCRIPCION for x in catCountries">
                             </select>
                         </div>
@@ -297,13 +309,15 @@
                         <div class="col-sm-4">
                             <input type="email" name="emailEmpC" class="form-control" id="emailEmpC" ng-model="emailEmpC" ng-maxlength="60">
                             <p translate="REQUIRE_EMAIL_EMP_CITI" ng-show="AddEmpC.emailEmpC.$error.email" class="help-block"></p>
+                            <p translate="REQUIRE_EMAIL_LONG_EMP_CITI" ng-show="AddEmpC.emailEmpC.$error.valid" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="REPORTS_TO_EMP_CITI"> </label>
                         <div class="col-sm-4">
                             <select name="reports2EmpC" id="reports2EmpC" class="form-control" ng-model="reports2EmpC" ng-change=""
-                                ng-options="e.clave as e.nombre for e in empsCiti">
+                                ng-options="e.Soe_Id as e.nombre for e in empsCiti">
+                                <option value=""></option>
                             </select>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="COMMENTS_EMP_CITI"> </label>
@@ -314,6 +328,126 @@
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-3">
                             <button ng-show="showButtons" type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!AddEmpC.$valid"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Update Emp Citi -->
+<div class="modal fade" id="UpdateCitiEmp" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" translate="UPDATE_CITI_EMP_TITLE"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" name="UpdEmpC" ng-submit="updateEmpCiti()" novalidate>
+                    <div class="form-group">
+                        <label class="control-label required col-md-2" translate="DOMAIN_CITI_U"></label>
+                        <div class="col-sm-4">
+                            <select name="UdomainCiti" id="UdomainCiti" ng-model="UdomainCiti" class="form-control" ng-change="" required
+                                ng-options="x.ID as x.DESCRIPCION for x in domainsCU">
+                            </select>
+                            <p translate="REQUIRE_DOMAIN_EMP_CITI" ng-show="UpdEmpC.UdomainCiti.$error.required" class="help-block"></p>
+                        </div>
+                        <label class="control-label required col-md-2"> SOE-ID </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="UsoeidEmpC" id="UsoeidEmpC" ng-model="UsoeidEmpC" class="form-control" required>
+                            <p translate="REQUIRE_SOEID_EMP_CITI" ng-show="UpdEmpC.UsoeidEmpC.$dirty && UpdEmpC.UsoeidEmpC.$error.required" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-md-2" translate="FIRST_NAME_CITI_U"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="UfirstNameCU" id="UfirstNameCU" ng-model="UfirstNameCU" class="form-control" required>
+                            <p translate="REQUIRE_F_NAME_EMP_CITI" ng-show="UpdEmpC.UfirstNameCU.$dirty && UpdEmpC.UfirstNameCU.$error.required" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-md-2" translate="SECOND_NAME_CITI_U"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="UsecondNameCU" id="UsecondNameCU" ng-model="UsecondNameCU" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-md-2" translate="FIRST_SURNAME_CITI_U"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="UfirstSurnameCU" id="UfirstSurnameCU" ng-model="UfirstSurnameCU" class="form-control" required>
+                            <p translate="REQUIRE_F_SURNAME_EMP_CITI" ng-show="UpdEmpC.UfirstSurnameCU.$dirty && UpdEmpC.UfirstSurnameCU.$error.required" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-md-2" translate="SECOND_SURNAME_CITI_U"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="UsecondSurnameCU" id="UsecondSurnameCU" ng-model="UsecondSurnameCU" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label required col-md-2" translate="JOB_CITI_U"></label>
+                        <div class="col-sm-4">
+                            <select name="UjobCitiU" id="UjobCitiU" ng-model="UjobCitiU" class="form-control" ng-change="" required
+                                ng-options="x.ID as x.DESCRIPCION for x in jobsCU">
+                            </select>
+                            <p translate="REQUIRE_JOB_EMP_CITI_U" ng-show="UpdEmpC.UjobCitiU.$error.required" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="COUNTRY_EMP_CITI_U"> </label>
+                        <div class="col-sm-4">
+                            <select name="UcountryEmpC" id="UcountryEmpC" ng-model="UcountryEmpC" class="form-control"  ng-change="getCities(countryEmpC)"
+                                ng-options="x.ID as x.DESCRIPCION for x in catCountries">
+                            </select>
+                        </div>
+						<label class="control-label required col-sm-2" translate="CITY_EMP_CITI_U">  </label>
+                        <div class="col-sm-4">
+                            <select name="UcitiesEmpC" id="UcitiesEmpC" ng-model="UcitiesEmpC" class="form-control" ng-change="" required
+                                ng-options="c.Id as c.Descripcion for c in catCities" required>
+                            </select>
+                            <p translate="REQUIRE_CITY_EMP_CITI" ng-show="UpdEmpC.UcitiesEmpC.$error.required" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for=""> Ext. </label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" id="UextCelEmpC" ng-model="UextCelEmpC" name="UextCelEmpC" ng-maxlength="10">
+                            <p translate="REQUIRE_EXT_EMP_CITI" ng-show="!UpdEmpC.UextCelEmpC.$valid" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="TEL_CEL_CITI_U"> </label>
+                        <div class="col-sm-4">
+                            <input type="number" name="UcelEmpC" class="form-control" id="UcelEmpC" ng-model="UcelEmpC" ng-maxlength="10">
+                            <p translate="REQUIRE_CELULAR_NUMBER_EMP_CITI" ng-show="!UpdEmpC.UcelEmpC.$valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" translate="TEL_OTHER_EMP_CITI">  </label>
+                        <div class="col-sm-4">
+                            <input type="number" name="UtelOEmpC" class="form-control" id="UtelOEmpC" ng-model="UtelOEmpC" ng-maxlength="10">
+                            <p translate="REQUIRE_OTHER_EMP_CITI" ng-show="!UpdEmpC.UtelOEmpC.$valid" class="help-block"></p>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="EMAIL_EMP_CITI"> </label>
+                        <div class="col-sm-4">
+                            <input type="email" name="UemailEmpC" class="form-control" id="UemailEmpC" ng-model="UemailEmpC" ng-maxlength="60">
+                            <p translate="REQUIRE_EMAIL_EMP_CITI" ng-show="UpdEmpC.UemailEmpC.$error.email" class="help-block"></p>
+                            <p translate="REQUIRE_EMAIL_LONG_EMP_CITI" ng-show="UpdEmpC.UemailEmpC.$error.valid" class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="" translate="REPORTS_TO_EMP_CITI"> </label>
+                        <div class="col-sm-4">
+                            <select name="Ureports2EmpC" id="Ureports2EmpC" class="form-control" ng-model="Ureports2EmpC" ng-change=""
+                                ng-options="e.Soe_Id as e.nombre for e in empsCiti">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="" translate="COMMENTS_EMP_CITI"> </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="UcommentEmpC" class="form-control" id="UcommentEmpC" ng-model="UcommentEmpC">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-3">
+                            <button ng-show="showButtons" type="submit" class="btn btn-primary btn-block" translate="SAVE" ng-disabled="!UpdEmpC.$valid"></button>
                         </div>
                     </div>
                 </form>
