@@ -11,6 +11,22 @@ module.exports = {
         CAT_JOBS_VENDOR: 'Vendor Jobs',
         CAT_PROFILES: 'Profiles',
         CAT_CITIES: 'Cities',
-        CAT_COUNTRIES: 'Countries'
+        CAT_COUNTRIES: 'Countries',
+        ITEMS_PER_PAGE: 'Items per page',
+        NEW_VENDOR: 'New Vendor',
+        NAMEVendor:'Name',
+        MODIFY:'Modify',
+        NEW_VENDOR_TITLE: 'Add a new vendor',
+        ENTER_A_NAME_VENDOR:'Enter a name.',
+        ErrorNameRequired:'Name is required',
+        SAVE:'Save',
+        ClearForm:'Clear form',
+        SuccessAddingVendor:'The vendor was succesfully added',
+        ErrorAddingVendor:'The process of adding a vendor could have errors',
+        Edit_Vendor_Title:'Edit vendor',
+        SuccessEditVendor: 'The vendor was successfully updated',
+        ErrorEditVendor:'The process of vendor updating could have errors',
+        SuccesDeleteVendor:'The vendor was successfully deleted',
+        ErrorDeleteVendor: 'The procces of vendor deleted could have errors'
     }
 };

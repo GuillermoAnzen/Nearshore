@@ -8,12 +8,35 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService) {
+var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window) {
 
      $scope.currentPage = 1;
      $scope.pageSize = 10;
      $scope.vendorsList=[];
      $scope.totalVendors= 0;
+     $scope.activeModifyButton=true;
+
+    $scope.hideSuccessDeleteAlert= function(){
+       $scope.showSuccessDelete= false;
+       }
+
+     $scope.hideSuccessAddAlert= function(){
+       $scope.showSuccessAdd= false;
+     }
+
+     $scope.hideSuccessEditAlert= function(){
+        $scope.showSuccessEdit= false;
+     }
+
+     $scope.hideErrorDeleteAlert= function(){
+        $scope.showErrorDelete= false;
+     }
+     $scope.hideErrorAddAlert= function(){
+        $scope.showErrorAdd= false;
+     }
+     $scope.hideErrorEditAlert= function(){
+        $scope.showErrorEdit= false;
+     }
 
      getResultsPage();
 
@@ -32,8 +55,85 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
              $console.log('Error');
         }
      });
+     };
 
-     }
+    $scope.addNewVendor=function(){
+
+    vendorCatService.addVendor($scope.name).then(function(response){
+        if(response.success){
+        pristineFields();
+        $('#NewVendor').modal('hide');
+        getResultsPage();
+        $scope.showSuccessAdd= true;
+        }else{
+         $('#NewVendor').modal('hide');
+         $scope.showErrorAdd= true;
+        }
+    });
+    }
+    $scope.checkVendor= function(value){
+        $scope.activeModifyButton= false;
+        $scope.idVendor= value;
+    };
+     $scope.clearFields= function(){
+            pristineFields();
+        }
+    $scope.deleteVendor= function(){
+        if($window.confirm('you are gonna delete this, are you sure?')){
+            deleteVendorProcess();
+        }
+
+    }
+    function deleteVendorProcess(){
+        vendorCatService.deleteProvider($scope.idVendor).then(function(response){
+            if(response.success){
+                pristineEditFields();
+                $('#EditVendor').modal('hide');
+                getResultsPage();
+                $scope.showSuccessDelete=true;
+            }else{
+                $('#EditVendor').modal('hide');
+                $scope.showErrorDelete= true;
+            }
+        });
+    }
+    $scope.showEditModal= function(){
+        var vendorID= $scope.idVendor;
+        $("#EditVendor").modal('show');
+        returnObjectVendor(vendorID);
+
+    }
+    $scope.editVendorProcess= function(){
+        var description= $scope.vendorNameEdit;
+        var vendorID= $scope.idVendor;
+        vendorCatService.updateVendors(vendorID, description).then(function(response){
+        if(response.success){
+        pristineEditFields();
+        $("#EditVendor").modal('hide');
+        getResultsPage();
+        $scope.showSuccessEdit= true;
+        }else{
+        $("#EditVendor").modal('hide');
+        $scope.showErrorEdit= true;
+        }
+        })
+    }
+    function returnObjectVendor(vendorID){
+        vendorCatService.getProviderById(vendorID).then(function(response){
+            if(response.success){
+                $scope.vendorNameEdit = response.data[0].DESCRIPCION;
+            }
+        });
+    }
+    function pristineFields(){
+            $scope.AddVendor.$setPristine();
+            $scope.name= null;
+    }
+    function pristineEditFields(){
+        $scope.EditVendor.$setPristine();
+        $scope.vendorNameEdit=null;
+    }
+
     if ($cookies.get("cat") != "true"){
         $location.path("/principal");
     }

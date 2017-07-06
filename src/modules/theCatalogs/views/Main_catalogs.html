@@ -17,9 +17,43 @@
         <!-- TABS CATALOG1  -->
         <div id="catalog1" class="tabcontent default">
             <div class="row">
+                <div class="col-xs-3">
+                    <button class="btn btn-primary btn-block" translate="NEW_VENDOR" data-toggle="modal" data-target="#NewVendor" ></button>
+                </div>
+
+                <div class="col-xs-3">
+                    <button class="btn btn-default btn-block" translate="MODIFY" ng-disabled="activeModifyButton" ng-click="showEditModal()"></button>
+                </div>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessAdd">
+                <a href="" class="close" ng-click="hideSuccessAddAlert()" aria-label="close">&times;</a>
+                <p translate="SuccessAddingVendor"></p>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorAdd">
+                <a href="" class="close" ng-click="hideErrorAddAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorAddingVendor"></p>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessEdit">
+                <a href="" class="close" ng-click="hideSuccessEditAlert()" aria-label="close">&times;</a>
+                <p translate="SuccessEditVendor"></p>
+                </a>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorEdit">
+                <a href="" class="close" ng-click="hideErrorEditAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorEditVendor"></p>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessDelete">
+                <a href="" class="close" ng-click="hideSuccessDeleteAlert()" aria-label="close">&times;</a>
+                <p translate="SuccesDeleteVendor"></p>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorDelete">
+                <a href="" class="close" ng-click="hideErrorDeleteAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorDeleteVendor"></p>
+            </div>
+                <div class="row">
                 <br/>
                 <div class="col-xs-4">
-                    <label ></label>
+                    <label></label>
                     <div class="input-group">
                         <input type="text" ng-model="q" class="form-control" id="search" placeholder="Search">
                         <div class="input-group-btn">
@@ -41,12 +75,12 @@
                     <thead>
                     <tr>
                         <th> </th>
-                        <th ng-click="OrderBy('nombre')"> Nombre </th>
+                        <th>{{'Name'|translate}} </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr dir-paginate="x in vendorsList | filter:q | itemsPerPage: pageSize">
-                        <td><input type="radio" ng-model="idVendor" value="{{x.id}}" name="idUser" ng-click='checkVendor(idVendor)'></td>
+                        <td><input type="radio" ng-model="idVendor" value="{{x.id}}" name="idVendor" ng-click='checkVendor(idVendor)'></td>
                         <td>{{x.nombre}}</td>
                     </tr>
                     </tbody>
@@ -55,6 +89,63 @@
             <div class="text-center">
                 <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
             </div>
+            <div class="modal fade" id="NewVendor" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" translate="NEW_VENDOR_TITLE"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" name="AddVendor" ng-submit="addNewVendor()" novalidate>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="name" translate="NAMEVendor"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="name" class="form-control" id="name" ng-model="name" placeholder="{{'ENTER_A_NAME_VENDOR'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorNameRequired" ng-show="AddVendor.name.$dirty && AddUser.name.$error.required" class="help-block"></p>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default" translate="SAVE"></button>
+                                        <button class="btn btn-default" ng-click="clearFields()" translate="ClearForm"></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="EditVendor" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" translate="Edit_Vendor_Title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" name="EditVendor" ng-submit="editVendorProcess()" novalidate>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="vendorNameEdit" translate="NAME"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="vendorNameEdit" class="form-control" id="vendorNameEdit" ng-model="vendorNameEdit" placeholder="{{'ENTER_A_NAME_VENDOR'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorFirstNameRequired" ng-show="EditVendor.vendorNameEdit.$dirty && EditVendor.vendorNameEdit.$error.required" class="help-block"></p>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default" translate="SAVEUPLOAD"></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <button class="btn btn-danger" ng-click="deleteVendor()" translate="DeleteUser"></button>
+                        </div>
+                    </div>
+                </div>
 
         </div>
 
