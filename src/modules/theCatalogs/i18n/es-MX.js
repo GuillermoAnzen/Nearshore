@@ -11,6 +11,22 @@ module.exports = {
         CAT_JOBS_VENDOR: 'Perfiles Proveedor',
         CAT_PROFILES: 'Perfiles',
         CAT_CITIES: 'Ciudades',
-        CAT_COUNTRIES: 'Paises'
+        CAT_COUNTRIES: 'Paises',
+        ITEMS_PER_PAGE: 'Registros por página',
+        NEW_VENDOR: 'Nuevo Proveedor',
+        NAMEVendor:'Nombre',
+        MODIFY:'Modificar',
+        NEW_VENDOR_TITLE: 'Agrega nuevo proveedor',
+        ENTER_A_NAME_VENDOR:'Ingresa un nombre.',
+        ErrorNameRequired:'El nombre es requerido',
+        SAVE:'Guardar',
+        ClearForm: 'Limpiar formulario',
+        SuccessAddingVendor: 'Se agregó correctamente el proveedor',
+        ErrorAddingVendor:'El proceso de agregar proveedores pudo tener errores',
+        Edit_Vendor_Title:'Edita proveedor',
+        SuccessEditVendor: 'Se actualizó correctamente el proveedor',
+        ErrorEditVendor:'El proceso de editar proveedores tuvo errores',
+        SuccesDeleteVendor:'Se eliminó correctamente el proveedor',
+        ErrorDeleteVendor: 'El proceso de eliminado de proveedores tuvo errores'
     }
 };
