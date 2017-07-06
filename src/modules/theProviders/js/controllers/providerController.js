@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var providerCtrl = function($scope, $location,localeService,vendorCatService,employeesVendorService,jobsVendorService,CitiesService,countryService,messagesService, $cookies) {
+var providerCtrl = function($scope, $location,localeService,vendorCatService,employeesVendorService,jobsVendorService,CitiesService,countryService,messagesService, $cookies,$window) {
 
     if ($cookies.get("provs") != "true"){
         $location.path("/principal");
@@ -136,8 +136,8 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
         .then(function(data){
             petition = data.success;
             if (petition){
-                messagesService.handlerMessages("ADD_EMP_PROV_SUCCESS",true);
                 $("#NewEmpProv").modal('hide');
+                messagesService.handlerMessages("ADD_EMP_PROV_SUCCESS",true);
                 showDetailsProvider($this.currentPageEP,$this.pageSizeEP, $this.idProv);
                 cleanFieldsNewEmp();
             }else{
@@ -156,7 +156,9 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
     };
 
     $this.deleteEmpProvider = function(){
-        deleteEmpProvider($this.idEmpProv);
+        if($window.confirm('you are gonna delete this user, are you sure?')){
+            deleteEmpProvider($this.idEmpProv);
+        }
     };
 
     $this.showSpecificDetailsEmp = function(_id){
