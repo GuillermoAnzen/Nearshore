@@ -3,11 +3,18 @@
 var navController= function ($translate, locale,localeService,sessionManager,$location,$cookies, logoutService) {
   
   var $this = this;
-
-  $this.language = locale.getDefaultLaguage();
+  var lan = $cookies.get("i");
+    if (!lan){
+      $this.language = locale.getDefaultLaguage();
+      $translate.use(this.language);
+    }else{
+      $translate.use(lan);
+      $this.language = lan;
+    }
 
   $this.changeLanguage = function () {
       $translate.use(this.language);
+      $cookies.put("i",this.language);
   }
 
   if ($cookies.get('IsLogged')=='true'){

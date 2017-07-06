@@ -56,6 +56,8 @@ module.exports = angular.module('app.login', [
                 return response || $q.when(response);
             },
             'responseError': function(rejection){
+                $rootScope.isLoading = false;
+                //messagesService.handlerMessages("RESPONSE_ERROR_GENERAL",false);
                 return $q.reject(rejection);
             }
         };
