@@ -87,6 +87,8 @@ module.exports = {
         VALIDATE_SUPPORT_L3_NEW_APP: 'Select level 3 support please.',
         VALIDATE_PLATFORM_1_NEW_APP: 'Select the Primary Platform.',
         VALIDATE_PLATFORM_2_NEW_APP: 'Select the Secondary platform.',
-        VALIDATE_PLATFORM_3_NEW_APP: 'Select the Tertiary Platform.'
+        VALIDATE_PLATFORM_3_NEW_APP: 'Select the Tertiary Platform.',
+
+        NAME_TABLE: 'Name'
     }
 };

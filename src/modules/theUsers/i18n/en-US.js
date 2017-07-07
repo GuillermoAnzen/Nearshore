@@ -42,6 +42,10 @@ module.exports = {
         SuccessEditUser: 'The user was successfully updated',
         SuccesDeleteUser: 'The user was successfully deleted',
         ErrorEditUser:'The process of updating an user could have errors',
-        ErrorDeleteUser: 'The process of deleting an user could have errors'
+        ErrorDeleteUser: 'The process of deleting an user could have errors',
+        NAME_TABLE: 'Name',
+        PROFILE_TABLE: 'Profile',
+        STATUS_TABLE: 'Status',
+        VENDOR_TABLE: 'Vendor'
     }
 };

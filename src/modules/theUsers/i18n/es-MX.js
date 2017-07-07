@@ -42,7 +42,10 @@ module.exports = {
         SuccessEditUser:'Se actualizo correctamente al usuario',
         SuccesDeleteUser: 'Se elimino correctamente al usuario',
         ErrorEditUser: 'El proceso de editar usuarios tuvo errores',
-        ErrorDeleteUser: 'El proceso de borrar usuarios tuvo errores'
-
+        ErrorDeleteUser: 'El proceso de borrar usuarios tuvo errores',
+        NAME_TABLE: 'Nombre',
+        PROFILE_TABLE: 'Perfil',
+        STATUS_TABLE: 'Estatus',
+        VENDOR_TABLE: 'Proveedor'
     }
 };
