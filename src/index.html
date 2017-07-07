@@ -15,7 +15,7 @@
         <div id="navbarVertical" class="col-sm-3" ng-show="getLoged">
             <div mi-navbar></div>
         </div>
-        <div id="navbarMain" class="col-sm-12" ng-class="{navbarMain: getLoged}">
+        <div id="navbarMain" ng-class="{navbarMain: getLoged}" ng-class="{col-sm-9: getLoged,col-sm-12: !getLoged}">
         <nav-bar data="myNavbarV"></nav-bar>
         
             <div class="" id="messagesHandler">

@@ -120,7 +120,7 @@ var userService = function($http, $q, $cookies){
         }
 
 
-        function newUser(firstName, secondName, lastName, lastMotherName, email, profile, clave){
+        function newUser(firstName, secondName, lastName, lastMotherName, email, profile, clave,vendor){
             var defered= $q.defer();
             var promise= defered.promise;
             var applicationId= $cookies.get('applicationId');
@@ -138,7 +138,8 @@ var userService = function($http, $q, $cookies){
                         apellidoPaterno: lastName,
                         apellidoMaterno: lastMotherName,
                         clave: clave,
-                        activo: 1
+                        activo: 1,
+                        proveedores: vendor || null
 
             }
             $http.post(newUserUri, data, config).then(function(response){

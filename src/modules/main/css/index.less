@@ -31,7 +31,7 @@
     color: white;
 }
 
-.navbar-vertical li a:hover:not(.active) {
+.navbar-vertical li:hover:not(.active) {
     background-color: #0D3644;
     color: white;
     border-style: groove;
@@ -42,7 +42,23 @@
     border-right-color: #0CDA73;
     border-width: 1px;
     border-right-width: 5px;
+    cursor: default;
 }
+
+.navbar-vertical li.active {
+    background-color: #0D3644;
+    color: white;
+    border-style: groove;
+    border-top-color: #DDD;
+    border-bottom-color: #333;
+    border-left-style: none;
+    border-right-style: ridge;
+    border-right-color: #0CDA73;
+    border-width: 1px;
+    border-right-width: 5px;
+    cursor: default;
+}
+
 .navbar-vertical span {
     color: #fff;
     text-decoration: none;

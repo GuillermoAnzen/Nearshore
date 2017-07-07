@@ -195,6 +195,7 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
                 getEmployeesByDomain($this.idDomainCU, $this.currentPageCU, $this.pageSizeCU);
                 cleanFieldsNewEmp();
             }else{
+                $("#NewCitiEmp").modal('hide');
                 messagesService.handlerMessages("CITI_USER_ADD_ERROR",false);
             }
         });
@@ -246,6 +247,7 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
                 getEmployeesByDomain($this.idDomainCU, $this.currentPageCU, $this.pageSizeCU);
                 cleanFieldsNewEmp();
             }else{
+                $("#UpdateCitiEmp").modal('hide');
                 messagesService.handlerMessages("CITI_USER_UPDATE_ERROR",false);
             }
         });

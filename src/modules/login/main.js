@@ -52,7 +52,9 @@ module.exports = angular.module('app.login', [
                     $cookies.remove('counter');
                     $location.path("/login");
                 }
-                $rootScope.isLoading = false; 
+                $timeout(function() {
+                    $rootScope.isLoading = false; 
+                },300);
                 return response || $q.when(response);
             },
             'responseError': function(rejection){

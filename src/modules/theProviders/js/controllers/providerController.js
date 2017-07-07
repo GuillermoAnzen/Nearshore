@@ -76,6 +76,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
                     getAppsByEmp($this.idEmpProv, $this.currentPageAEP, $this.pageSizeAEP);
                 }
             }else{
+                $("#UpdateEmpProv").modal('hide');
                 messagesService.handlerMessages("UPDATE_EMP_PROV_ERROR",false);
             }
         });
@@ -141,6 +142,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
                 showDetailsProvider($this.currentPageEP,$this.pageSizeEP, $this.idProv);
                 cleanFieldsNewEmp();
             }else{
+                $("#NewEmpProv").modal('hide');
                 messagesService.handlerMessages("ADD_EMP_PROV_ERROR",false);
             }
         });
