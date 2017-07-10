@@ -40,7 +40,7 @@
                 <thead>
                     <tr>
                         <!--th>  </th-->
-                        <th ng-click="OrderBy('nombre')"> Nombre </th>
+                        <th ng-click="OrderBy('nombre')"> {{'NAME_TABLE' | translate}} </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +66,11 @@
                     </div>
                 </div>
                 <hr>
+                <div class="row search-domain">
+                    <div class="col-xs-3">
+                        <button ng-show="showButtons" class="btn btn-primary btn-block" translate="NEW_APP" data-toggle="modal" data-target="#NewApp" ng-click="prepareCombos()"></button>
+                    </div>
+                </div>
                 <div class="row search-domain">
                     <div class="col-xs-4">
                         <label ></label>
@@ -189,7 +194,7 @@
         <div id="application_consult" class="tabcontent">
             <div class="row page-header">
                 <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-default btn-md" translate="{{levelUpdate}}" data-toggle="modal" data-target="#UpdateSupport" ng-click="updateDetailsL('true')"></button>
+                    <button ng-show="showButtons && permission" class="btn btn-default btn-md" translate="{{levelUpdate}}" data-toggle="modal" data-target="#UpdateSupport" ng-click="updateDetailsL('true')"></button>
                 </div>
             </div>
             <!-- TABLe -->
@@ -484,57 +489,63 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-5" for="sup1" translate="SUPPORT_L1"></label>
+                        <label class="control-label required col-sm-5" for="sup1" translate="SUPPORT_L1"></label>
                         <div class="col-sm-7">
                             <select class="form-control" ng-model="supportL1" id="supportL1" name="supportL1" 
-                                ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors">
+                                ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors" required>
                                 <option value=""> </option>
                             </select>
+                            <p translate="VALIDATE_SUPPORT_L1_NEW_APP"  ng-show="AddApp.supportL1.$dirty && AddApp.supportL1.$error.required" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-5" for="sup2" translate="SUPPORT_L2"></label>
+                        <label class="control-label required col-sm-5" for="sup2" translate="SUPPORT_L2"></label>
                         <div class="col-sm-7">
                             <select class="form-control" ng-model="supportL2" id="supportL2" name="supportL2" 
-                                ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors">
+                                ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors" required>
                                 <option value=""></option>
                             </select>
+                            <p translate="VALIDATE_SUPPORT_L2_NEW_APP"  ng-show="AddApp.supportL2.$dirty && AddApp.supportL2.$error.required" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-5" for="sup3" translate="SUPPORT_L3"></label>
+                        <label class="control-label required col-sm-5" for="sup3" translate="SUPPORT_L3"></label>
                         <div class="col-sm-7">
                             <select class="form-control" ng-model="supportL3" id="supportL3" name="supportL3" 
-                                ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors">
+                                ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors" required>
                                 <option value=""></option>
                             </select>
+                            <p translate="VALIDATE_SUPPORT_L3_NEW_APP"  ng-show="AddApp.supportL3.$dirty && AddApp.supportL3.$error.required" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-5" for="ptfPrimary" translate="PTF_PRIMARY"></label>
+                        <label class="control-label required col-sm-5" for="ptfPrimary" translate="PTF_PRIMARY"></label>
                         <div class="col-sm-7">
                             <select class="form-control" ng-model="ptfPrimary" id="ptfPrimary" name="ptfPrimary"
-                                ng-options="platform.Id as platform.Descripcion for platform in platforms">
+                                ng-options="platform.Id as platform.Descripcion for platform in platforms" required>
                                 <option value=""></option>
                             </select>
+                            <p translate="VALIDATE_PLATFORM_1_NEW_APP"  ng-show="AddApp.ptfPrimary.$dirty && AddApp.ptfPrimary.$error.required" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-5" for="ptfSecondary" translate="PTF_SECONDARY"></label>
+                        <label class="control-label required col-sm-5" for="ptfSecondary" translate="PTF_SECONDARY"></label>
                         <div class="col-sm-7">
                             <select class="form-control" ng-model="ptfSecondary" id="ptfSecondary" name="ptfSecondary"
-                                ng-options="platform.Id as platform.Descripcion for platform in platforms">
+                                ng-options="platform.Id as platform.Descripcion for platform in platforms" required>
                                 <option value=""></option>
                             </select>
+                            <p translate="VALIDATE_PLATFORM_2_NEW_APP"  ng-show="AddApp.ptfSecondary.$dirty && AddApp.ptfSecondary.$error.required" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-5" for="ptfTertiary" translate="PTF_TERTIARY"></label>
+                        <label class="control-label required col-sm-5" for="ptfTertiary" translate="PTF_TERTIARY"></label>
                         <div class="col-sm-7">
                             <select class="form-control" ng-model="ptfTertiary" id="ptfTertiary" name="ptfTertiary"
-                                ng-options="platform.Id as platform.Descripcion for platform in platforms">
+                                ng-options="platform.Id as platform.Descripcion for platform in platforms" required>
                                 <option value=""></option>
                             </select>
+                            <p translate="VALIDATE_PLATFORM_3_NEW_APP"  ng-show="AddApp.ptfTertiary.$dirty && AddApp.ptfTertiary.$error.required" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -580,7 +591,8 @@
                         <div class="row">
                             <label class="control-label col-md-3 label-app required" for=""> CSI-ID </label>
                             <div  class="col-md-3">
-                                <input type="number" name="csiId_appUp" class="form-control" id="csiId_appUp" ng-model="csiId_appUp" disabled>
+                                <input type="number" name="csiId_appUp" class="form-control" id="csiId_appUp" ng-model="csiId_appUp" disabled required>
+                                <p translate="VALIDATE_CSI_ID_NEW_APP"  ng-show="UpdateApp.csiId_appUp.$valid && UpdateApp.csiId_appUp.$dirty && UpdateApp.csiId_appUp.$error.required" class="help-block"></p>
                             </div>
                             <label class="control-label col-md-2 label-app" for=""> PTB-ID </label>
                             <div class="col-sm-3">
@@ -601,30 +613,33 @@
                             </div>
                         </div> <br>
                         <div class="row">
-                            <label class="control-label col-md-3 label-app" for="" translate="VENDOR_L1"></label>
+                            <label class="control-label required col-md-3 label-app" for="" translate="VENDOR_L1"></label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="supportL1Up" id="supportL1Up" ng-model="supportL1Up"
-                                    ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors">
+                                    ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors" required>
                                     <!--option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL1"  value="{{vendor.ID}}">{{vendor.}}</option-->
                                 </select>
+                                <p translate="VALIDATE_SUPPORT_L1_NEW_APP"  ng-show="UpdateApp.supportL1Up.$dirty && UpdateApp.supportL1Up.$error.required" class="help-block"></p>
                             </div>
                         </div> <br>
                         <div class="row">
-                            <label class="control-label col-md-3 label-app" for="" translate="VENDOR_L2"></label>
+                            <label class="control-label required col-md-3 label-app" for="" translate="VENDOR_L2"></label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="supportL2Up" id="supportL2Up" ng-model="supportL2Up"
-                                    ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors">
+                                    ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors" required>
                                     <!--option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL2"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option-->
                                 </select>
+                                <p translate="VALIDATE_SUPPORT_L2_NEW_APP"  ng-show="UpdateApp.supportL2Up.$dirty && UpdateApp.supportL2Up.$error.required" class="help-block"></p>
                             </div>
                         </div> <br>
                         <div class="row">
-                            <label class="control-label col-md-3 label-app" for="" translate="VENDOR_L3"></label>
+                            <label class="control-label required col-md-3 label-app" for="" translate="VENDOR_L3"></label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="supportL3Up" id="supportL3Up" ng-model="supportL3Up"
-                                    ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors">
+                                    ng-options="vendor.ID as vendor.DESCRIPCION for vendor in vendors" required>
                                     <!--option ng-repeat="vendor in vendors" ng-selected="vendor.ID == app[0].idProvL3"  value="{{vendor.ID}}">{{vendor.DESCRIPCION}}</option-->
                                 </select>
+                                <p translate="VALIDATE_SUPPORT_L3_NEW_APP"  ng-show="UpdateApp.supportL3Up.$dirty && UpdateApp.supportL3Up.$error.required" class="help-block"></p>
                             </div>
                         </div> <br>
                         <div class="row">
@@ -634,15 +649,17 @@
                                     ng-options="platform.Id as platform.Descripcion for platform in platforms">
                                     <!--option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfPrim" value="{{platform.Id}}">{{platform.Descripcion}}</option-->
                                 </select>
+                                <p translate="VALIDATE_PLATFORM_1_NEW_APP"  ng-show="UpdateApp.ptfPrimaryUp.$dirty && UpdateApp.ptfPrimaryUp.$error.required" class="help-block"></p>
                             </div>
                         </div> <br>
                         <div class="row">
-                            <label class="control-label col-md-3 label-app" for="" translate="SECONDARY"></label>
+                            <label class="control-label required col-md-3 label-app" for="" translate="SECONDARY"></label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="ptfSecondaryUp" ng-model="ptfSecondaryUp"
-                                    ng-options="platform.Id as platform.Descripcion for platform in platforms">
+                                    ng-options="platform.Id as platform.Descripcion for platform in platforms" required>
                                     <!--option ng-repeat="platform in platforms" ng-selected="platform.Id == app[0].idPtfSec" value="{{platform.Id}}">{{platform.Descripcion}}</option-->
                                 </select>
+                                <p translate="VALIDATE_PLATFORM_2_NEW_APP"  ng-show="UpdateApp.ptfSecondaryUp.$dirty && UpdateApp.ptfSecondaryUp.$error.required" class="help-block"></p>
                             </div>
                         </div> <br>
                         <div class="row">

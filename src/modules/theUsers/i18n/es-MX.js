@@ -44,6 +44,9 @@ module.exports = {
         ErrorEditUser: 'El proceso de editar usuarios tuvo errores',
         ErrorDeleteUser: 'El proceso de borrar usuarios tuvo errores',
         EDIT_PLATAFORM_TITLE:'Edita plataforma'
-
+        NAME_TABLE: 'Nombre',
+        PROFILE_TABLE: 'Perfil',
+        STATUS_TABLE: 'Estatus',
+        VENDOR_TABLE: 'Proveedor'
     }
 };

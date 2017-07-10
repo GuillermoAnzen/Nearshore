@@ -81,6 +81,14 @@ module.exports = {
         /* Validation messages */
         VALIDATE_DOMAIN_NEW_APP: 'El dominio es oblogatorio',
         VALIDATE_CSI_ID_NEW_APP: 'El CSI-ID es necesario',
-        VALIDATE_SHORT_DESCRIPTION_NEW_APP: 'La descripción es obligatoria'
+        VALIDATE_SHORT_DESCRIPTION_NEW_APP: 'La descripción es obligatoria',
+        VALIDATE_SUPPORT_L1_NEW_APP: 'Seleccione el soporte de nivel 1 por favor.',
+        VALIDATE_SUPPORT_L2_NEW_APP: 'Seleccione el soporte de nivel 2 por favor.',
+        VALIDATE_SUPPORT_L3_NEW_APP: 'Seleccione el soporte de nivel 3 por favor.',
+        VALIDATE_PLATFORM_1_NEW_APP: 'Seleccione la plataforma primaria.',
+        VALIDATE_PLATFORM_2_NEW_APP: 'Seleccione la plataforma secundaria.',
+        VALIDATE_PLATFORM_3_NEW_APP: 'Seleccione la plataforma terciaria.',
+
+        NAME_TABLE: 'Nombre'
     }
 };

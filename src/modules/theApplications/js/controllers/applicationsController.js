@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatService,applicationService,messagesService,employeesCitiService,employeesVendorService,$cookies) {
+var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatService,applicationService,messagesService,employeesCitiService,employeesVendorService,$cookies, $window) {
 
     if ($cookies.get("app") != "true"){
         $location.path("/principal");
@@ -137,10 +137,22 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
             if (petitionSuccess){
                 if (data.data.length != 0){
                     $scope.detailsL = data.data;
-                    getAnalistas();
-                    getGerentes();
-                    getLideres();
-                    getEmployeesVendor(_idProv);
+                    var admin = $cookies.get("adm") == "true" ? true : false;
+                    if (admin){
+                        $this.permission = true;
+                        getAnalistas();
+                        getGerentes();
+                        getLideres();
+                        getEmployeesVendor(_idProv);
+                    }else if(data.data[0].idProveedor == parseInt($cookies.get("flag"))){
+                        $this.permission = true;
+                        getAnalistas();
+                        getGerentes();
+                        getLideres();
+                        getEmployeesVendor(_idProv);
+                    }else{
+                        $this.permission = false;
+                    }
                 }else{
                     $scope.detailsL = [];
                     message = "No se han encontrado datos, por favor actualicelos.";
@@ -205,6 +217,21 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
                     messagesService.handlerMessages("NO_EMPLOYEES_CONS_APP",false);
                 }
             }
+        });
+    };
+
+    var deleteApp = function(_id){
+        var petitionSuccess = false;
+        applicationService.deleteApplication(
+            _id
+        ).then(function(data){
+            petitionSuccess = data.success;
+            if (petitionSuccess){
+                messagesService.handlerMessages("DELETED_SUCCESS_APP",true);
+                changeTab(2, 3);
+                $this.showApplicationsIdDomain($scope.idDomainSelected,$scope.domainSelected);
+            }else
+                messagesService.handlerMessages("ERROR_DELETE_APP",false);
         });
     };
 
@@ -332,18 +359,9 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
     };
 
     $this.deleteApplication = function(_id){
-        var petitionSuccess = false;
-        applicationService.deleteApplication(
-            _id
-        ).then(function(data){
-            petitionSuccess = data.success;
-            if (petitionSuccess){
-                messagesService.handlerMessages("DELETED_SUCCESS_APP",true);
-                changeTab(2, 3);
-                $this.showApplicationsIdDomain($scope.idDomainSelected,$scope.domainSelected);
-            }else
-                messagesService.handlerMessages("ERROR_DELETE_APP",false);
-        });
+        if ($window.confirm("You are gonna delete this user, Are you sure?")){
+            deleteApp(_id);
+        }
     };
 
     $this.saveChangesSupportApplication = function(){

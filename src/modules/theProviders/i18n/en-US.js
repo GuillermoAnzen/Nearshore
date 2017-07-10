@@ -2,10 +2,10 @@ module.exports = {
     language: 'en-US',
     translate: {
         /* main titles */
-        TITLE_PROVIDERS: 'Providers',
-        PROVIDERS_CONSULT: 'Consult Providers',
-        PROVIDER_DETAIL: 'Detail Providers',
-        SPECIFIC_DETAIL_PROVIDER: 'Specific Detail Provider',
+        TITLE_PROVIDERS: 'Vendors',
+        PROVIDERS_CONSULT: 'Consult Vendors',
+        PROVIDER_DETAIL: 'Detail Vendors',
+        SPECIFIC_DETAIL_PROVIDER: 'Specific Vendor Details',
 
         /* buttons */
         VENDOR: 'Vendor',

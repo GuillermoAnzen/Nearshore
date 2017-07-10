@@ -11,6 +11,10 @@ var angular = require('angular');
 
 var loginCtrl = function($scope, $location,localeService,$rootScope, $http, loginService,sessionManager, $cookies) {
 
+    if ($cookies.get('IsLogged') == 'true'){
+        $location.path("/principal");
+    }
+
     $scope.validateLengthPassword = function(password) {
         console.log("Entra a la funcion");
         var flag = false;
@@ -55,6 +59,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                             $cookies.put("app", true);
                             $cookies.put("provs", true);
                             $cookies.put("showButtons", true);
+                            $cookies.put("flag", response.data.data[0].idProvedor);
                         }else if(profile == 4){
                             $cookies.put("app", true);
                             $cookies.put("provs", true);

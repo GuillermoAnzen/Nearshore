@@ -9,7 +9,7 @@ app.factory("sessionManager",function(){
             loged:function(user){
                 $("#navbarVertical").attr("class","col-sm-3");
                 $("#userProfile").attr("class","form-group dropdown");
-                $("#navbarMain").attr("class","col-sm-9 navbarMain");
+                $("#navbarMain").attr("class","col-sm-9 navbarMain ");
                 $("#userProfileName").html(user + ' <span class="caret"></span>');
             },
             notLoged: function(){

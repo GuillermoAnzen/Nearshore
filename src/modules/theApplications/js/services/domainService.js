@@ -33,9 +33,9 @@ var domainService = function ($http, $q, $cookies){
         var defered=$q.defer();
         var promise= defered.promise;
         var data = {
-            index: _index,
-            rows: _rows || 1,
-            idDomain: _idDomain
+            'index': _index,
+            'rows': _rows || 1,
+            'idDomain': _idDomain
         };
         var config = {
             headers : { 

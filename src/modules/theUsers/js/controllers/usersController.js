@@ -174,7 +174,7 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
             $scope.secondName="";
         if($scope.mothersLastName== null)
             $scope.mothersLastName="";
-        userService.newUser($scope.firstname, $scope.secondName, $scope.lastName, $scope.mothersLastName, $scope.email, $scope.profile, $scope.pwd)
+        userService.newUser($scope.firstname, $scope.secondName, $scope.lastName, $scope.mothersLastName, $scope.email, $scope.profile, $scope.pwd,$this.vendor)
           .then(function(response){
           if(response.success){
                 pristineFields();

@@ -81,6 +81,14 @@ module.exports = {
         /* Validation messages */
         VALIDATE_DOMAIN_NEW_APP: 'Domain is required',
         VALIDATE_CSI_ID_NEW_APP: 'The CSI-ID is necesary',
-        VALIDATE_SHORT_DESCRIPTION_NEW_APP: 'Application\' description is required'
+        VALIDATE_SHORT_DESCRIPTION_NEW_APP: 'Application\'s description is required',
+        VALIDATE_SUPPORT_L1_NEW_APP: 'Select level 1 support please.',
+        VALIDATE_SUPPORT_L2_NEW_APP: 'Select level 2 support please.',
+        VALIDATE_SUPPORT_L3_NEW_APP: 'Select level 3 support please.',
+        VALIDATE_PLATFORM_1_NEW_APP: 'Select the Primary Platform.',
+        VALIDATE_PLATFORM_2_NEW_APP: 'Select the Secondary platform.',
+        VALIDATE_PLATFORM_3_NEW_APP: 'Select the Tertiary Platform.',
+
+        NAME_TABLE: 'Name'
     }
 };
