@@ -43,7 +43,7 @@ module.exports = {
         SuccesDeleteUser: 'Se elimino correctamente al usuario',
         ErrorEditUser: 'El proceso de editar usuarios tuvo errores',
         ErrorDeleteUser: 'El proceso de borrar usuarios tuvo errores',
-        EDIT_PLATAFORM_TITLE:'Edita plataforma'
+        EDIT_PLATAFORM_TITLE:'Edita plataforma',
         NAME_TABLE: 'Nombre',
         PROFILE_TABLE: 'Perfil',
         STATUS_TABLE: 'Estatus',
