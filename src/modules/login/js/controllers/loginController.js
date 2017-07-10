@@ -58,7 +58,6 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                         }else if(profile == 2 || profile == 3){
                             $cookies.put("app", true);
                             $cookies.put("provs", true);
-                            $cookies.put("showButtons", true);
                             $cookies.put("flag", response.data.data[0].idProvedor);
                         }else if(profile == 4){
                             $cookies.put("app", true);
