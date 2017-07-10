@@ -8,12 +8,15 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window) {
+var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices) {
 
      $scope.currentPage = 1;
      $scope.pageSize = 10;
+     $scope.pageSizeplataform=10;
      $scope.vendorsList=[];
+     $scope.plataformList=[];
      $scope.totalVendors= 0;
+     $scope.totalPlataform= 0;
      $scope.activeModifyButton=true;
 
     $scope.hideSuccessDeleteAlert= function(){
@@ -37,8 +40,32 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.hideErrorEditAlert= function(){
         $scope.showErrorEdit= false;
      }
+     $scope.hideSuccessAddPlataformAlert= function(){
+        $scope.showSuccessPlataformAdd= false;
+     }
+     $scope.hideErrorAddPlataformAlert= function(){
+        $scope.showErrorPlataformAdd= false;
+     }
 
      getResultsPage();
+     getResultsPagePlataforms();
+
+     function getResultsPagePlataforms(){
+        plataformServices.getallPlataforms().then(function(response){
+            if(response.success){
+                $scope.plataformList=[];
+                $scope.totalPlataform= response.data.length;
+                for(var i=0; i<response.data.length; i++){
+                var _id= parseInt(response.data[i].Id);
+                var plataform={id:_id, nombre: response.data[i].Descripcion, comentarios: response.data[i].Comentarios};
+                $scope.plataformList.push(plataform);
+                }
+            }else{
+                $scope.error= "Hubo un error en la conexión de la base de datos";
+                $console.log('Error');
+            }
+        });
+     }
 
      function getResultsPage(){
      vendorCatService.getVendors().then(function(response){
@@ -71,10 +98,32 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         }
     });
     }
+    $scope.addNewPlataform= function(){
+        plataformServices.addNewPlataform($scope.namePlataform, $scope.commentsPlataform).then(function(response){
+            if(response.success){
+                pristinePlataformFields();
+                $('#NewPlataform').modal('hide');
+                getResultsPagePlataforms();
+                $scope.showSuccessPlataformAdd= true;
+            }else{
+                $('#NewPlataform').modal('hide');
+                $scope.showErrorPlataformAdd= true;
+            }
+        });
+
+    }
+
     $scope.checkVendor= function(value){
         $scope.activeModifyButton= false;
         $scope.idVendor= value;
     };
+
+    $scope.activeModifyPlataformButton= true;
+
+    $scope.checkPlataform= function(value){
+        $scope.activeModifyPlataformButton= false;
+        $scope.idPlataform= value;
+    }
      $scope.clearFields= function(){
             pristineFields();
         }
@@ -103,6 +152,11 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         returnObjectVendor(vendorID);
 
     }
+    $scope.showEditModalPlataform= function(){
+        var plataformId= $scope.idPlataform;
+        $("#EditPlataform").modal('show');
+        returnObjectPlataform(plataformId);
+    }
     $scope.editVendorProcess= function(){
         var description= $scope.vendorNameEdit;
         var vendorID= $scope.idVendor;
@@ -116,7 +170,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         $("#EditVendor").modal('hide');
         $scope.showErrorEdit= true;
         }
-        })
+        });
     }
     function returnObjectVendor(vendorID){
         vendorCatService.getProviderById(vendorID).then(function(response){
@@ -124,11 +178,25 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
                 $scope.vendorNameEdit = response.data[0].DESCRIPCION;
             }
         });
-    }
+    };
+    function returnObjectPlataform(plataformId){
+        plataformServices.getPlataformById(plataformId).then(function(response){
+            if(response.success){
+                $scope.namePlataformEdit= response.data[0].Descripcion;
+                $scope.commentsPlataformEdit= response.data[0].Comentarios;
+            }
+        });
+       }
+
     function pristineFields(){
             $scope.AddVendor.$setPristine();
             $scope.name= null;
     }
+    function pristinePlataformFields(){
+            $scope.AddPlataform.$setPristine();
+            $scope.namePlataform= null;
+            $scope.commentsPlataform= null;
+        }
     function pristineEditFields(){
         $scope.EditVendor.$setPristine();
         $scope.vendorNameEdit=null;
@@ -140,7 +208,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
 
     var $this = $scope;
     
-    $this.showCatalogTab = function(evt, tabName){
+    $this.showCatalogTab = function( tabName){
         // Declare all variables
         var i, tabcontent, tablinks;
 

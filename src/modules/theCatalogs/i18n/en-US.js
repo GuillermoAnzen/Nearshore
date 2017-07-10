@@ -27,6 +27,16 @@ module.exports = {
         SuccessEditVendor: 'The vendor was successfully updated',
         ErrorEditVendor:'The process of vendor updating could have errors',
         SuccesDeleteVendor:'The vendor was successfully deleted',
-        ErrorDeleteVendor: 'The procces of vendor deleted could have errors'
+        ErrorDeleteVendor: 'The procces of vendor deleted could have errors',
+        NEW_PLATAFORM: 'New plataform',
+        Comments:'Comments',
+        NEW_PLATAFORM_TITLE: 'New plataform',
+        NamePlataform:'Name',
+        ENTER_A_NAME_PLATAFORM: 'Enter a name',
+        CommentsPlataform: 'Comments',
+        ENTER_A_COMMENT_PLATAFORM: 'Enter a comment.',
+        SuccessAddingPlataform:'The plataform was succesfully added',
+        ErrorAddingPlataform:'The process of adding a plataform could have errors',
+        EDIT_PLATAFORM_TITLE:'Edit plataform'
     }
 };

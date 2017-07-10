@@ -42,7 +42,8 @@ module.exports = {
         SuccessEditUser:'Se actualizo correctamente al usuario',
         SuccesDeleteUser: 'Se elimino correctamente al usuario',
         ErrorEditUser: 'El proceso de editar usuarios tuvo errores',
-        ErrorDeleteUser: 'El proceso de borrar usuarios tuvo errores'
+        ErrorDeleteUser: 'El proceso de borrar usuarios tuvo errores',
+        EDIT_PLATAFORM_TITLE:'Edita plataforma'
 
     }
 };

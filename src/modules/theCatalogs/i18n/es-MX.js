@@ -27,6 +27,15 @@ module.exports = {
         SuccessEditVendor: 'Se actualizó correctamente el proveedor',
         ErrorEditVendor:'El proceso de editar proveedores tuvo errores',
         SuccesDeleteVendor:'Se eliminó correctamente el proveedor',
-        ErrorDeleteVendor: 'El proceso de eliminado de proveedores tuvo errores'
+        ErrorDeleteVendor: 'El proceso de eliminado de proveedores tuvo errores',
+        NEW_PLATAFORM: 'Nueva plataforma',
+        Comments: 'Comentarios',
+        NEW_PLATAFORM_TITLE: 'Nueva plataforma',
+        NamePlataform:'Nombre',
+        ENTER_A_NAME_PLATAFORM: 'Ingresa un nombre',
+        CommentsPlataform: 'Comentarios',
+        ENTER_A_COMMENT_PLATAFORM: 'Ingresa un comentario',
+        SuccessAddingPlataform:'Se agrego correctamente la plataforma',
+        ErrorAddingPlataform:'El proceso de agregar plataformas pudo tener errores'
     }
 };
