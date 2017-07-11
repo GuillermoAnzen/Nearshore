@@ -35,6 +35,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                         $cookies.put('IsLogged', 'true');
                         $cookies.put('applicationId', applicationId);
                         $cookies.put('username', username);
+                        $cookies.put('user', response.data.data[0].Id);
                         $rootScope.UserLogin = true;
                         $rootScope.$on( $scope.user);
                         sessionManager.loged(username);

@@ -46,6 +46,13 @@ module.exports = {
         NAME_TABLE: 'Name',
         PROFILE_TABLE: 'Profile',
         STATUS_TABLE: 'Status',
-        VENDOR_TABLE: 'Vendor'
+        VENDOR_TABLE: 'Vendor',
+        EDIT_DATA: 'Edit data',
+        CANCEL: 'Cancel',
+        NEW_PWD: 'New Password',
+        EDIT_PASSWORD: 'Edit password',
+        DATA_UPDATE_SUCCESSFULLY: 'Data updated successfully',
+        PASSWORD_INCORRECT: 'Password incorrect',
+        ERROR_OCURRED_DATA_UPDATE: 'An error has ocurred'
     }
 };
