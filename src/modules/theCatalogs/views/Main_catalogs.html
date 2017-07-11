@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <button class="btn btn-danger" ng-click="deleteVendor()" translate="DeleteUser"></button>
+                            <button class="btn btn-danger" ng-click="deleteVendor()" translate="DeleteVendor"></button>
                         </div>
                     </div>
                 </div>
@@ -166,6 +166,23 @@
             <div class="alert alert-warning alert dismissible" ng-show="showErrorPlataformAdd">
                 <a href="" class="close" ng-click="hideErrorAddPlataformAlert()" aria-label="close">&times;</a>
                 <p translate="ErrorAddingPlataform"></p>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessPlataformEdit">
+                <a href="" class="close" ng-click="hideSuccessEditPlataformAlert()" aria-label="close">&times;</a>
+                <p translate="SuccessEditPlataform"></p>
+                </a>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorPlataformEdit">
+                <a href="" class="close" ng-click="hideErrorEditPlataformAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorEditPlataform"></p>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessDeletePlataform">
+                <a href="" class="close" ng-click="hideSuccessDeletePlataformAlert()" aria-label="close">&times;</a>
+                <p translate="SuccesDeletePlataform"></p>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorDeletePlataform">
+                <a href="" class="close" ng-click="hideErrorDeletePlataformAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorDeleteVendor"></p>
             </div>
             <div class="row">
                 <br/>
@@ -216,19 +233,19 @@
                             <h4 class="modal-title" translate="NEW_PLATAFORM_TITLE"></h4>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal" name="EditPlataform" ng-submit="addNewPlataform()" novalidate>
+                            <form class="form-horizontal" name="AddPlataform" ng-submit="addNewPlataform()" novalidate>
                                 <div class="form-group required">
-                                    <label class="control-label col-sm-3" for="namePlataformEdit" translate="NamePlataform"></label>
+                                    <label class="control-label col-sm-3" for="namePlataform" translate="NamePlataform"></label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="namePlataformEdit" class="form-control" id="namePlataformEdit" ng-model="namePlataformEdit" placeholder="{{'ENTER_A_NAME_PLATAFORM'|translate}}"  ng-trim="true" required>
-                                        <p translate="ErrorNameRequired" ng-show="EditPlataform.namePlataformEdit.$dirty && EditPlataform.namePlataformEdit.$error.required" class="help-block"></p>
+                                        <input type="text" name="namePlataform" class="form-control" id="namePlataform" ng-model="namePlataform" placeholder="{{'ENTER_A_NAME_PLATAFORM'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorNameRequired" ng-show="AddPlataform.namePlataform.$dirty && AddPlataform.namePlataform.$error.required" class="help-block"></p>
                                     </div>
                                 </div>
                                 <div class="form-group required">
-                                    <label class="control-label col-sm-3" for="commentsPlataformEdit" translate="CommentsPlataform"></label>
+                                    <label class="control-label col-sm-3" for="commentsPlataform" translate="CommentsPlataform"></label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="commentsPlataformEdit" class="form-control" id="commentsPlataformEdit" ng-model="commentsPlataformEdit" placeholder="{{'ENTER_A_COMMENT_PLATAFORM'|translate}}"  ng-trim="true" required>
-                                        <p translate="ErrorNameRequired" ng-show="EditPlataform.commentsPlataformEdit.$dirty && EditPlataform.commentsPlataformEdit.$error.required" class="help-block"></p>
+                                        <input type="text" name="commentsPlataform" class="form-control" id="commentsPlataform" ng-model="commentsPlataform" placeholder="{{'ENTER_A_COMMENT_PLATAFORM'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorNameRequired" ng-show="AddPlataform.commentsPlataform.$dirty && AddPlataform.commentsPlataform.$error.required" class="help-block"></p>
                                     </div>
                                 </div>
 
@@ -252,17 +269,17 @@
                         <div class="modal-body">
                             <form class="form-horizontal" name="EditPlataform" ng-submit="editPlataformProcess()" novalidate>
                                 <div class="form-group required">
-                                    <label class="control-label col-sm-3" for="namePlataform" translate="NamePlataform"></label>
+                                    <label class="control-label col-sm-3" for="namePlataformEdit" translate="NamePlataform"></label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="name" class="form-control" id="namePlataform" ng-model="namePlataform" placeholder="{{'ENTER_A_NAME_PLATAFORM'|translate}}"  ng-trim="true" required>
-                                        <p translate="ErrorNameRequired" ng-show="AddPlataform.name.$dirty && AddPlataform.name.$error.required" class="help-block"></p>
+                                        <input type="text" name="namePlataformEdit" class="form-control" id="namePlataformEdit" ng-model="namePlataformEdit" placeholder="{{'ENTER_A_NAME_PLATAFORM'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorNameRequired" ng-show="EditPlataform.name.$dirty && EditPlataform.name.$error.required" class="help-block"></p>
                                     </div>
                                 </div>
                                 <div class="form-group required">
-                                    <label class="control-label col-sm-3" for="commentsPlataform" translate="CommentsPlataform"></label>
+                                    <label class="control-label col-sm-3" for="commentsPlataformEdit" translate="CommentsPlataform"></label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="commentsPlataform" class="form-control" id="commentsPlataform" ng-model="commentsPlataform" placeholder="{{'ENTER_A_COMMENT_PLATAFORM'|translate}}"  ng-trim="true" required>
-                                        <p translate="ErrorNameRequired" ng-show="AddPlataform.commentsPlataform.$dirty && AddPlataform.commentsPlataform.$error.required" class="help-block"></p>
+                                        <input type="text" name="commentsPlataformEdit" class="form-control" id="commentsPlataformEdit" ng-model="commentsPlataformEdit" placeholder="{{'ENTER_A_COMMENT_PLATAFORM'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorNameRequired" ng-show="EditPlataform.commentsPlataformEdit.$dirty && EditPlataform.commentsPlataformEdit.$error.required" class="help-block"></p>
                                     </div>
                                 </div>
 
@@ -272,6 +289,7 @@
                                     </div>
                                 </div>
                             </form>
+                            <button class="btn btn-danger" ng-click="deletePlataform()" translate="DeletePlataform"></button>
                         </div>
                     </div>
                 </div>

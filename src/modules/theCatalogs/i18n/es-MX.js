@@ -36,6 +36,10 @@ module.exports = {
         CommentsPlataform: 'Comentarios',
         ENTER_A_COMMENT_PLATAFORM: 'Ingresa un comentario',
         SuccessAddingPlataform:'Se agrego correctamente la plataforma',
-        ErrorAddingPlataform:'El proceso de agregar plataformas pudo tener errores'
+        ErrorAddingPlataform:'El proceso de agregar plataformas pudo tener errores',
+        SuccessEditPlataform:'Se actualizó correctamente la plataforma',
+        ErrorEditPlataform: 'El proceso de actualizar plataformas pudo tener errores',
+        DeleteVendor:'Borrar proveedor',
+        DeletePlataform: 'Borrar plataformas'
     }
 };

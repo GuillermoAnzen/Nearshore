@@ -37,6 +37,10 @@ module.exports = {
         ENTER_A_COMMENT_PLATAFORM: 'Enter a comment.',
         SuccessAddingPlataform:'The plataform was succesfully added',
         ErrorAddingPlataform:'The process of adding a plataform could have errors',
-        EDIT_PLATAFORM_TITLE:'Edit plataform'
+        EDIT_PLATAFORM_TITLE:'Edit plataform',
+        SuccessEditPlataform:'The plataform was successfully updated',
+        ErrorEditPlataform:'The process of plataform updating could have errors',
+        DeleteVendor:'Delete vendor',
+        DeletePlataform: 'Delete plataform'
     }
 };

@@ -30,6 +30,19 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.hideSuccessEditAlert= function(){
         $scope.showSuccessEdit= false;
      }
+     $scope.hideSuccessEditPlataformAlert=  function(){
+        $scope.showSuccessPlataformEdit= false;
+     }
+     $scope.hideErrorEditPlataformAlert= function(){
+        $scope.showErrorPlataformEdit= false;
+     }
+     $scope.hideSuccessDeletePlataformAlert= function(){
+        $scope.showSuccessDeletePlataform= false;
+     }
+
+     $scope.hideErrorDeletePlataformAlert= function(){
+        $scope.showErrorDeletePlataform= false;
+     }
 
      $scope.hideErrorDeleteAlert= function(){
         $scope.showErrorDelete= false;
@@ -146,6 +159,22 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             }
         });
     }
+
+    $scope.deletePlataform = function(){
+        if($window.confirm('you are gonna delete this, are you sure?')){
+        deletePlataformProcess();
+        }
+    }
+    function deletePlataformProcess(){
+      plataformServices.deletePlataform($scope.idPlataform).then(function(response){
+        if(response.success){
+            pristineEditPlataformFields();
+            $('#EditPlataform').modal('hide');
+            getResultsPagePlataforms();
+            $scope.showSuccessPlataformDelete= true;
+        }
+      });
+    }
     $scope.showEditModal= function(){
         var vendorID= $scope.idVendor;
         $("#EditVendor").modal('show');
@@ -171,6 +200,24 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         $scope.showErrorEdit= true;
         }
         });
+    };
+
+    $scope.editPlataformProcess= function(){
+        var nombre= $scope.namePlataformEdit;
+        var comentarios= $scope.commentsPlataformEdit;
+        var id= $scope.idPlataform;
+        plataformServices.editPlataform(id,nombre,comentarios).then(function(response){
+            if(response.success){
+                pristineEditPlataformFields();
+                $("#EditPlataform").modal('hide');
+                getResultsPagePlataforms();
+                $scope.showSuccessPlataformEdit= true;
+            }else{
+                $("#EditPlataform").modal('hide');
+                $scope.showErrorPlataformEdit= true;
+            }
+        });
+
     }
     function returnObjectVendor(vendorID){
         vendorCatService.getProviderById(vendorID).then(function(response){
@@ -197,6 +244,11 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $scope.namePlataform= null;
             $scope.commentsPlataform= null;
         }
+    function pristineEditPlataformFields(){
+            $scope.EditPlataform.$setPristine();
+            $scope.namePlataformEdit=null;
+            $scope.commentsPlataformEdit= null;
+    }
     function pristineEditFields(){
         $scope.EditVendor.$setPristine();
         $scope.vendorNameEdit=null;
