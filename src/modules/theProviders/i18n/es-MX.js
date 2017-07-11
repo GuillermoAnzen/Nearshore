@@ -87,7 +87,7 @@ module.exports = {
         REQUIRE_EXT_OFFICE_EMP_PROV: 'La extensión no puede ser mayor a 10 dígitos.',
         REQUIRE_EMAIL_P_EMP_PROV: 'El email no puede ser mayor a 60 caracteres.',
         REQUIRE_SOEID_EMP_PROV: 'El SOE-ID no puede ser mayor a 7 caracteres.',
-        REQUIRE_EMAIL_CITI_EMP_PROV: 'El email no puede ser mayor a 60 caracteres',
+        REQUIRE_EMAIL_CITI_EMP_PROV: 'Formato no válido',
         REQUIRE_TEL_CITI_EMP_PROV: 'El número no puede ser mayor a 10 dígitos.',
         REQUIRE_EXT_CITI_EMP_PROV: 'La extensión no puede ser mayor a 10 dígitos.',
 

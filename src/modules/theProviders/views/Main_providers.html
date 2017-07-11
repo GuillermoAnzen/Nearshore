@@ -59,15 +59,15 @@
             <hr>
             <div class="row">
                 <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-primary btn-block" translate="NEW_EMP_PROV" data-toggle="modal" data-target="#NewEmpProv" ng-click="prepareCombosEmpProv()"></button>
+                    <button ng-show="emp" class="btn btn-primary btn-block" translate="NEW_EMP_PROV" data-toggle="modal" data-target="#NewEmpProv" ng-click="prepareCombosEmpProv()"></button>
                 </div>
 
                 <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="MODIFY_EMP_PROV" data-toggle="modal" ng-disabled="activeModifyButton" data-target="#UpdateEmpProv" ng-click="updateEmpProv('all')"></button>
+                    <button ng-show="emp" class="btn btn-default btn-block" translate="MODIFY_EMP_PROV" data-toggle="modal" ng-disabled="activeModifyButton" data-target="#UpdateEmpProv" ng-click="updateEmpProv('all')"></button>
                 </div>
 
                 <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="DELETE_EMP_PROV" ng-disabled="activeModifyButton" ng-click="deleteEmpProvider()"></button>
+                    <button ng-show="emp" class="btn btn-default btn-block" translate="DELETE_EMP_PROV" ng-disabled="activeModifyButton" ng-click="deleteEmpProvider()"></button>
                 </div>
             </div>
             <hr>
@@ -116,8 +116,8 @@
         <!-- TAB CATAspecific_detailLOG3 -->
         <div id="provider_specific_detail" class="tabcontent">
             <div class="row page-header">
-                <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-default btn-md" translate="MODIFY_EMP_PROV" data-toggle="modal" data-target="#UpdateEmpProv" ng-click="updateEmpProv('spec')"></button>
+                <div class="col-xs-offset-3 col-xs-3">
+                    <button ng-show="emp" class="btn btn-default btn-block" translate="MODIFY_EMP_PROV" data-toggle="modal" data-target="#UpdateEmpProv" ng-click="updateEmpProv('spec')"></button>
                 </div>
             </div>
             <!-- TABLe APLICATION DEVELOPED BY EMPLOYEE -->
@@ -251,7 +251,7 @@
                     <div class="form-group">
                         <label class="control-label required col-sm-2" for="" translate="CODE_EMP_PROV"> </label>
                         <div class="col-sm-4">
-                            <input type="number" name="codeEmpP" id="codeEmpP" ng-model="codeEmpP" class="form-control" required>
+                            <input type="number" name="codeEmpP" id="codeEmpP" ng-model="codeEmpP" min="1" class="form-control" required>
                             <p translate="REQUIRE_CODE_EMP_PROV" ng-show="AddEmpP.codeEmpP.$dirty && AddEmpP.codeEmpP.$error.required" class="help-block"></p>
                         </div>
                     </div>
@@ -295,36 +295,36 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="CEL_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="ldCelEmpP" ng-model="ldCelEmpP" name="ldCelEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <input type="number" class="form-control" id="ldCelEmpP" ng-model="ldCelEmpP" name="ldCelEmpP" ng-maxlength="3" min="1" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_LADA_CEL_EMP_PROV" ng-show="!AddEmpP.ldCelEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="celEmpP" class="form-control" id="celEmpP" ng-model="celEmpP" ng-maxlength="8" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
+                            <input type="number" name="celEmpP" class="form-control" id="celEmpP" ng-model="celEmpP" ng-maxlength="8" min="1" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_CELULAR_NUMBER_EMP_PROV" ng-show="!AddEmpP.celEmpP.$valid" class="help-block"></p>
                         </div>
 						<label class="control-label col-sm-2" translate="TEL_OTHER_EMP_PROV">  </label>
                         <div class="col-sm-2">
-                            <input type="number" name="ldTelOEmpP" class="form-control" id="ldTelOEmpP" ng-model="ldTelOEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <input type="number" name="ldTelOEmpP" class="form-control" id="ldTelOEmpP" ng-model="ldTelOEmpP" ng-maxlength="3" min="1" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_LD_TEL_OTHER_EMP_PROV" ng-show="!AddEmpP.ldTelOEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="telOEmpP" class="form-control" id="telOEmpP" ng-model="telOEmpP" ng-maxlength="8" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
+                            <input type="number" name="telOEmpP" class="form-control" id="telOEmpP" ng-model="telOEmpP" ng-maxlength="8" min="1" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_TEL_OTRO_EMP_PROV" ng-show="!AddEmpP.telOEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="TEL_OFFICE_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" name="ldOfficeEmpP" class="form-control" id="ldOfficeEmpP" ng-model="ldOfficeEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
+                            <input type="number" name="ldOfficeEmpP" class="form-control" id="ldOfficeEmpP" ng-model="ldOfficeEmpP" min="1" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_LD_OFFICE_EMP_PROV" ng-show="!AddEmpP.ldOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="telOfficeEmpP" class="form-control" id="telOfficeEmpP" ng-model="telOfficeEmpP" ng-maxlength="8" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
+                            <input type="number" name="telOfficeEmpP" class="form-control" id="telOfficeEmpP" ng-model="telOfficeEmpP" min="1" ng-maxlength="8" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_TEL_OFFICE_EMP_PROV" ng-show="!AddEmpP.telOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="EXT_OFFIC_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" name="extOfficeEmpP" class="form-control" id="extOfficeEmpP" ng-model="extOfficeEmpP" ng-maxlength="10">
+                            <input type="number" name="extOfficeEmpP" class="form-control" id="extOfficeEmpP" ng-model="extOfficeEmpP" min="1" ng-maxlength="10">
                             <p translate="REQUIRE_EXT_OFFICE_EMP_PROV" ng-show="!AddEmpP.extOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
@@ -350,11 +350,11 @@
                         </div>
                         <label class="control-label col-sm-2" for="" translate="TEL_CITI_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" name="telCitiEmpP" class="form-control" id="telCitiEmpP" ng-model="telCitiEmpP" ng-maxlength="10" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
+                            <input type="number" name="telCitiEmpP" class="form-control" id="telCitiEmpP" ng-model="telCitiEmpP" ng-maxlength="10" min="1" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
                             <p translate="REQUIRE_TEL_CITI_EMP_PROV" ng-show="!AddEmpP.telCitiEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="extCitiEmpP" class="form-control" id="extCitiEmpP" ng-model="extCitiEmpP" ng-maxlength="10" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
+                            <input type="number" name="extCitiEmpP" class="form-control" id="extCitiEmpP" ng-model="extCitiEmpP" ng-maxlength="10" min="1" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_EXT_CITI_EMP_PROV" ng-show="!AddEmpP.extCitiEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
@@ -411,7 +411,7 @@
                     <div class="form-group">
                         <label class="control-label required col-sm-2" for="" translate="CODE_EMP_PROV"> </label>
                         <div class="col-sm-4">
-                            <input type="number" name="codeEmpP" id="codeEmpP" ng-model="codeEmpP" class="form-control" required>
+                            <input type="number" name="codeEmpP" id="codeEmpP" ng-model="codeEmpP" class="form-control" min="1" required>
                             <p translate="REQUIRE_CODE_EMP_PROV" ng-show="AddEmpP.codeEmpP.$dirty && AddEmpP.codeEmpP.$error.required" class="help-block"></p>
                         </div>
                     </div>
@@ -455,36 +455,36 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="CEL_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="ldCelEmpP" ng-model="ldCelEmpP" name="ldCelEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <input type="number" class="form-control" id="ldCelEmpP" ng-model="ldCelEmpP" name="ldCelEmpP" ng-maxlength="3" min="1" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_LADA_CEL_EMP_PROV" ng-show="!AddEmpP.ldCelEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="celEmpP" class="form-control" id="celEmpP" ng-model="celEmpP" ng-maxlength="8" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
+                            <input type="number" name="celEmpP" class="form-control" id="celEmpP" ng-model="celEmpP" ng-maxlength="8" min="1" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_CELULAR_NUMBER_EMP_PROV" ng-show="!AddEmpP.celEmpP.$valid" class="help-block"></p>
                         </div>
 						<label class="control-label col-sm-2" translate="TEL_OTHER_EMP_PROV">  </label>
                         <div class="col-sm-2">
-                            <input type="number" name="ldTelOEmpP" class="form-control" id="ldTelOEmpP" ng-model="ldTelOEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <input type="number" name="ldTelOEmpP" class="form-control" id="ldTelOEmpP" ng-model="ldTelOEmpP" ng-maxlength="3" min="1" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_LD_TEL_OTHER_EMP_PROV" ng-show="!AddEmpP.ldTelOEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="telOEmpP" class="form-control" id="telOEmpP" ng-model="telOEmpP" ng-maxlength="8" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
+                            <input type="number" name="telOEmpP" class="form-control" id="telOEmpP" ng-model="telOEmpP" ng-maxlength="8" min="1" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_TEL_OTRO_EMP_PROV" ng-show="!AddEmpP.telOEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="TEL_OFFICE_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" name="ldOfficeEmpP" class="form-control" id="ldOfficeEmpP" ng-model="ldOfficeEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
+                            <input type="number" name="ldOfficeEmpP" class="form-control" id="ldOfficeEmpP" ng-model="ldOfficeEmpP" ng-maxlength="3" min="1" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_LD_OFFICE_EMP_PROV" ng-show="!AddEmpP.ldOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="telOfficeEmpP" class="form-control" id="telOfficeEmpP" ng-model="telOfficeEmpP" ng-maxlength="8" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
+                            <input type="number" name="telOfficeEmpP" class="form-control" id="telOfficeEmpP" ng-model="telOfficeEmpP" ng-maxlength="8" min="1" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_TEL_OFFICE_EMP_PROV" ng-show="!AddEmpP.telOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="EXT_OFFIC_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" name="extOfficeEmpP" class="form-control" id="extOfficeEmpP" ng-model="extOfficeEmpP" ng-maxlength="10">
+                            <input type="number" name="extOfficeEmpP" class="form-control" id="extOfficeEmpP" min="1" ng-model="extOfficeEmpP" ng-maxlength="10">
                             <p translate="REQUIRE_EXT_OFFICE_EMP_PROV" ng-show="!AddEmpP.extOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
@@ -510,11 +510,11 @@
                         </div>
                         <label class="control-label col-sm-2" for="" translate="TEL_CITI_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input type="number" name="telCitiEmpP" class="form-control" id="telCitiEmpP" ng-model="telCitiEmpP" ng-maxlength="10" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
+                            <input type="number" name="telCitiEmpP" class="form-control" id="telCitiEmpP" ng-model="telCitiEmpP" ng-maxlength="10" min="1" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
                             <p translate="REQUIRE_TEL_CITI_EMP_PROV" ng-show="!AddEmpP.telCitiEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input type="number" name="extCitiEmpP" class="form-control" id="extCitiEmpP" ng-model="extCitiEmpP" ng-maxlength="10" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
+                            <input type="number" name="extCitiEmpP" class="form-control" id="extCitiEmpP" ng-model="extCitiEmpP" ng-maxlength="10" min="1" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_EXT_CITI_EMP_PROV" ng-show="!AddEmpP.extCitiEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
@@ -522,6 +522,7 @@
                         <label class="control-label col-sm-2" for="" translate="REPORTS_TO_EMP_PROV"> </label>
                         <div class="col-sm-4">
                             <select name="reports2EmpP" id="reports2EmpP" class="form-control" ng-model="reports2EmpP" ng-change="">
+                                <option value=""></option>
                                 <option ng-repeat="e in empsVendor" value="{{e.clave}}"> {{e.nombre}} </option>
                             </select>
                         </div>
@@ -571,7 +572,7 @@
                     <div class="form-group requ">
                         <label class="control-label required col-sm-2" for="" translate="CODE_EMP_PROV"> </label>
                         <div class="col-sm-4">
-                            <input type="number" name="UPcodeEmpP" id="UPcodeEmpP" ng-model="UPcodeEmpP" class="form-control" required>
+                            <input type="number" name="UPcodeEmpP" id="UPcodeEmpP" ng-model="UPcodeEmpP" min="1" class="form-control" required>
                             <p translate="REQUIRE_CODE_EMP_PROV" ng-show="UpdateEmpPForm.UPcodeEmpP.$dirty && UpdateEmpPForm.UPcodeEmpP.$error.required" class="help-block"></p>
                         </div>
                     </div>
@@ -615,36 +616,36 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="CEL_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.LD_celular" type="number" class="form-control" id="UPldCelEmpP" ng-model="UPldCelEmpP" name="UPldCelEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <input ng-value="empDet.LD_celular" type="number" min="1" class="form-control" id="UPldCelEmpP" ng-model="UPldCelEmpP" name="UPldCelEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_LADA_CEL_EMP_PROV" ng-show="!UpdateEmpPForm.UPldCelEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.celular" type="number" name="UPcelEmpP" class="form-control" id="UPcelEmpP" ng-model="UPcelEmpP" ng-maxlength="8" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
+                            <input ng-value="empDet.celular" type="number" min="1" name="UPcelEmpP" class="form-control" id="UPcelEmpP" ng-model="UPcelEmpP" ng-maxlength="8" placeholder="{{'CEL_NUMBER_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_CELULAR_NUMBER_EMP_PROV" ng-show="!UpdateEmpPForm.UPcelEmpP.$valid" class="help-block"></p>
                         </div>
 						<label class="control-label col-sm-2" translate="TEL_OTHER_EMP_PROV">  </label>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.ladaOtro" type="number" name="UPldTelOEmpP" class="form-control" id="UPldTelOEmpP" ng-model="UPldTelOEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
+                            <input ng-value="empDet.ladaOtro" type="number" min="1" name="UPldTelOEmpP" class="form-control" id="UPldTelOEmpP" ng-model="UPldTelOEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_LD_TEL_OTHER_EMP_PROV" ng-show="!UpdateEmpPForm.UPldTelOEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.telOtro" type="number" name="UPtelOEmpP" class="form-control" id="UPtelOEmpP" ng-model="UPtelOEmpP" ng-maxlength="8" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
+                            <input ng-value="empDet.telOtro" type="number" min="1" name="UPtelOEmpP" class="form-control" id="UPtelOEmpP" ng-model="UPtelOEmpP" ng-maxlength="8" placeholder="{{'TEL_NUMBER_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_TEL_OTRO_EMP_PROV" ng-show="!UpdateEmpPForm.UPtelOEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="" translate="TEL_OFFICE_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.ladaProveedor" type="number" name="UPldOfficeEmpP" class="form-control" id="UPldOfficeEmpP" ng-model="UPldOfficeEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
+                            <input ng-value="empDet.ladaProveedor" type="number" min="1" name="UPldOfficeEmpP" class="form-control" id="UPldOfficeEmpP" ng-model="UPldOfficeEmpP" ng-maxlength="3" placeholder="{{'AREA_CODE_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_LD_OFFICE_EMP_PROV" ng-show="!UpdateEmpPForm.UPldOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.Telefono_Proveedor" type="number" name="UPtelOfficeEmpP" class="form-control" id="UPtelOfficeEmpP" ng-model="UPtelOfficeEmpP" ng-maxlength="8" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
+                            <input ng-value="empDet.Telefono_Proveedor" type="number" min="1" name="UPtelOfficeEmpP" class="form-control" id="UPtelOfficeEmpP" ng-model="UPtelOfficeEmpP" ng-maxlength="8" placeholder="{{'TEL_OFFIC_EMP_PROV'| translate}}">
                             <p translate="REQUIRE_TEL_OFFICE_EMP_PROV" ng-show="!UpdateEmpPForm.UPtelOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="EXT_OFFIC_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.Ext_Proveedor" type="number" name="UPextOfficeEmpP" class="form-control" id="UPextOfficeEmpP" ng-model="UPextOfficeEmpP" ng-maxlength="10">
+                            <input ng-value="empDet.Ext_Proveedor" type="number" min="1" name="UPextOfficeEmpP" class="form-control" id="UPextOfficeEmpP" ng-model="UPextOfficeEmpP" ng-maxlength="10">
                             <p translate="REQUIRE_EXT_OFFICE_EMP_PROV" ng-show="!UpdateEmpPForm.UPextOfficeEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
@@ -670,11 +671,11 @@
                         </div>
                         <label class="control-label col-sm-2" for="" translate="TEL_CITI_EMP_PROV"> </label>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.Telefono_citi" type="number" name="UPtelCitiEmpP" class="form-control" id="UPtelCitiEmpP" ng-model="UPtelCitiEmpP" ng-maxlength="10" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
+                            <input ng-value="empDet.Telefono_citi" type="number" min="1" name="UPtelCitiEmpP" class="form-control" id="UPtelCitiEmpP" ng-model="UPtelCitiEmpP" ng-maxlength="10" placeholder="{{'N_TEL_CITI_EMP_PROV' |translate}}">
                             <p translate="REQUIRE_TEL_CITI_EMP_PROV" ng-show="!UpdateEmpPForm.UPtelCitiEmpP.$valid" class="help-block"></p>
                         </div>
                         <div class="col-sm-2">
-                            <input ng-value="empDet.Ext_Citi" type="number" name="UPextCitiEmpP" class="form-control" id="UPextCitiEmpP" ng-model="UPextCitiEmpP" ng-maxlength="10" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
+                            <input ng-value="empDet.Ext_Citi" type="number" min="1" name="UPextCitiEmpP" class="form-control" id="UPextCitiEmpP" ng-model="UPextCitiEmpP" ng-maxlength="10" placeholder="{{'EXT_CITI_EMP_PROV' | translate}}">
                             <p translate="REQUIRE_EXT_CITI_EMP_PROV" ng-show="!UpdateEmpPForm.UPextCitiEmpP.$valid" class="help-block"></p>
                         </div>
                     </div>
@@ -683,6 +684,7 @@
                         <div class="col-sm-4">
                             <select name="UPreports2EmpP" id="UPreports2EmpP" class="form-control" ng-model="UPreports2EmpP" 
                                 ng-options="e.clave as e.nombre for e in empsVendor">
+                                <option value=""></option>
                             </select>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="COMMENTS_EMP_PROV"> </label>

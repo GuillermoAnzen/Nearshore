@@ -290,19 +290,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for=""> Ext. </label>
                         <div class="col-sm-4">
-                            <input type="number" class="form-control" id="extCelEmpC" ng-model="extCelEmpC" name="extCelEmpC" ng-maxlength="10">
+                            <input type="number" class="form-control" id="extCelEmpC" ng-model="extCelEmpC" name="extCelEmpC" ng-maxlength="10" min="1">
                             <p translate="REQUIRE_EXT_EMP_CITI" ng-show="!AddEmpC.extCelEmpC.$valid" class="help-block"></p>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="TEL_CEL_CITI_U"> </label>
                         <div class="col-sm-4">
-                            <input type="number" name="celEmpC" class="form-control" id="celEmpC" ng-model="celEmpC" ng-maxlength="10">
+                            <input type="number" name="celEmpC" class="form-control" id="celEmpC" ng-model="celEmpC" ng-maxlength="10" min="1">
                             <p translate="REQUIRE_CELULAR_NUMBER_EMP_CITI" ng-show="!AddEmpC.celEmpC.$valid" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" translate="TEL_OTHER_EMP_CITI">  </label>
                         <div class="col-sm-4">
-                            <input type="number" name="telOEmpC" class="form-control" id="telOEmpC" ng-model="telOEmpC" ng-maxlength="10">
+                            <input type="number" name="telOEmpC" class="form-control" id="telOEmpC" ng-model="telOEmpC" ng-maxlength="10" min="1">
                             <p translate="REQUIRE_OTHER_EMP_CITI" ng-show="!AddEmpC.telOEmpC.$valid" class="help-block"></p>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="EMAIL_EMP_CITI"> </label>
@@ -410,19 +410,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for=""> Ext. </label>
                         <div class="col-sm-4">
-                            <input type="number" class="form-control" id="UextCelEmpC" ng-model="UextCelEmpC" name="UextCelEmpC" ng-maxlength="10">
+                            <input type="number" class="form-control" id="UextCelEmpC" ng-model="UextCelEmpC" name="UextCelEmpC" ng-maxlength="10" min="1">
                             <p translate="REQUIRE_EXT_EMP_CITI" ng-show="!UpdEmpC.UextCelEmpC.$valid" class="help-block"></p>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="TEL_CEL_CITI_U"> </label>
                         <div class="col-sm-4">
-                            <input type="number" name="UcelEmpC" class="form-control" id="UcelEmpC" ng-model="UcelEmpC" ng-maxlength="10">
+                            <input type="number" name="UcelEmpC" class="form-control" id="UcelEmpC" ng-model="UcelEmpC" ng-maxlength="10" min="1">
                             <p translate="REQUIRE_CELULAR_NUMBER_EMP_CITI" ng-show="!UpdEmpC.UcelEmpC.$valid" class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" translate="TEL_OTHER_EMP_CITI">  </label>
                         <div class="col-sm-4">
-                            <input type="number" name="UtelOEmpC" class="form-control" id="UtelOEmpC" ng-model="UtelOEmpC" ng-maxlength="10">
+                            <input type="number" name="UtelOEmpC" class="form-control" id="UtelOEmpC" ng-model="UtelOEmpC" ng-maxlength="10" min="1">
                             <p translate="REQUIRE_OTHER_EMP_CITI" ng-show="!UpdEmpC.UtelOEmpC.$valid" class="help-block"></p>
                         </div>
                         <label class="control-label col-sm-2" for="" translate="EMAIL_EMP_CITI"> </label>
