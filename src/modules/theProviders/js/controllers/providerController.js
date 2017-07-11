@@ -27,7 +27,7 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
     $this.newEmpProv = true;
 
     $this.showButtons = $cookies.get("showButtons") == "true" ? true : false;
-
+    $this.emp =  $cookies.get("emp") == "true" ? true : false;
     /*  $this.idEmp
         $this.desciption
         $this.idProv

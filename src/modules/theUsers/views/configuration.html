@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<div class="users" >
+    <h1> {{'EDIT_DATA' | translate}} </h1>
+    
+
+    <div id="tabsUsers">
+        <br><br>
+        <form class="form-horizontal" name="EditDataUser" ng-submit="editDataUser()" novalidate>
+            <div class="form-group required">
+                <label class="control-label col-sm-3" for="editDataFirstname" translate="NAME"></label>
+                <div class="col-sm-8">
+                    <input type="text" name="editDataFirstname" class="form-control" id="editDataFirstname" ng-model="editDataFirstname" placeholder="{{'ENTER_A_NAME'|translate}}"  ng-trim="true" required>
+                    <p translate="ErrorFirstNameRequired" ng-show="EditDataUser.editDataFirstname.$dirty && EditDataUser.editDataFirstname.$error.required" class="help-block"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="editDataSecondName" translate="SECOND_NAME"></label>
+                <div class="col-sm-8">
+                    <input type="text" name="editDataSecondName" class="form-control" id="editDataSecondName" ng-model="editDataSecondName" placeholder="{{'ENTER_SECOND_NAME'| translate}}" ng-trim="true">
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="control-label col-sm-3" for="editDataLastName" translate="LAST_NAME"></label>
+                <div class="col-sm-8">
+                    <input type="text" name="editDataLastName" class="form-control" id="editDataLastName" ng-model="editDataLastName" placeholder="{{'ENTER_LAST_NAME'| translate}}" required ng-trim="true">
+                    <p translate="ErrorLastNameRequired" ng-show="EditDataUser.editDataLastName.$dirty && EditDataUser.editDataLastName.$error.required" class="help-block"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="editDataMothersLastName" translate="MOTHERS_LAST_NAME"></label>
+                <div class="col-sm-8">
+                    <input type="text" name="editDataMothersLastName" class="form-control" id="editDataMothersLastName" ng-model="editDataMothersLastName" placeholder="{{'ENTER_MOTHERS_LAST_NAME'|translate}}" ng-trim="true">
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="control-label col-sm-3" for="editDataEmail" translate="EMAIL"></label>
+                <div class="col-sm-8">
+                    <input type="email" name="editDataEmail" class="form-control" id="editDataEmail" ng-model="editDataEmail" placeholder="{{'ENTER_AN_EMAIL'| translate}}" ng-trim="true" required>
+                    <p translate="ErrorEmailFormat" ng-show="EditDataUser.editDataEmail.$error.editDataEmail" class="help-block"></p>
+                    <p translate="ErrorEmailRequired" ng-show="EditDataUser.editDataEmail.$dirty && EditDataUser.editDataEmail.$error.required" class="help-block"></p>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="control-label col-sm-3" for="pwd" translate="PWD"></label>
+                <div class="col-sm-8">
+                    <input type="password" name="pwd" class="form-control" id="pwd" ng-model="pwd" placeholder="{{'ENTER_A_PASSWORD'| translate}}"  ng-minlength="4" ng-trim="true" required>
+                    <p translate="ErrorPWDRequired" ng-show="EditDataUser.pwd.$dirty && EditDataUser.pwd.$error.required" class="help-block"></p>
+                    <p translate="ErrorPWDTooShort" ng-show="EditDataUser.pwd.$error.minlength" class="help-block"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                <label for="editPwd"> {{'EDIT_PASSWORD'| translate}}
+                <input type="checkbox" name="editPwd" id="editPwd" ng-model="editPwd" >
+                </label>
+                </div>
+            </div>
+            <div class="form-group required" ng-class="{accordionBody: editPwd, hideAccordion: !editPwd}">
+                <label class="control-label col-sm-3" for="editDataNewPwd" translate="NEW_PWD"></label>
+                <div class="col-sm-8">
+                    <input id="newPass" type="password" name="editDataNewPwd" class="form-control" id="editDataNewPwd" ng-model="editDataNewPwd" placeholder="{{'ENTER_A_PASSWORD'| translate}}"  ng-minlength="4" ng-trim="true" ng-required="editPwd">
+                    <p translate="ErrorPWDRequired" ng-show="EditDataUser.editDataNewPwd.$dirty && EditDataUser.editDataNewPwd.$error.required" class="help-block"></p>
+                    <p translate="ErrorPWDTooShort" ng-show="EditDataUser.editDataNewPwd.$error.minlength" class="help-block"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    <button type="submit" class="btn btn-primary" translate="SAVE" ng-disabled="!EditDataUser.$valid"></button>
+                    <button ng-click="cancel()" class="btn btn-default" translate="CANCEL"></button>
+                </div>
+            </div>
+        </form>
+        <br><br>
+    </div>
+
+</div>

@@ -7,6 +7,7 @@ var userService = function($http, $q, $cookies){
     var getAllDomainsUri='http://54.153.120.183/catalogsms/dominios/domainList';
     var getAllVendorsUri= 'http://54.153.120.183/catalogsms/proveedores/';
     var newUserUri='http://54.153.120.183/catalogsms/usuarios/newUser';
+    var updateDataUserUri = 'http://54.153.120.183/catalogsms/usuarios/updateUser/';
     var contentType = "application/json; charset=utf-8";
     var data = "";
 
@@ -76,7 +77,8 @@ var userService = function($http, $q, $cookies){
         getUserById:getUserById,
         updateUser: updateUser,
         deleteUser:deleteUser,
-        getAllVendors:getAllVendors
+        getAllVendors:getAllVendors,
+        updateDataUser: updateDataUser
     };
         function deleteUser(userid){
             var defered= $q.defer();
@@ -148,6 +150,29 @@ var userService = function($http, $q, $cookies){
             return promise;
         }
 
+        function updateDataUser(id, firstName, secondName, lastName, lastMotherName, email, pwd, newPwd){
+            var defered= $q.defer();
+            var promise= defered.promise;
+            var applicationId= $cookies.get('applicationId');
+            var config = {
+            headers:{'Content-Type': 'application/json; charset=utf-8',
+                     'ApplicationID': applicationId
+            }};
+            var data={
+                "idUsuarios": id,
+                "email": email,
+                "primerNombre": firstName,
+                "segundoNombre": secondName,
+                "apellidoPaterno": lastName,
+                "apellidoMaterno": lastMotherName,
+                "clave": pwd,
+                "newClave": newPwd
+            }
+            $http.put(updateDataUserUri, data, config).then(function(response){
+                defered.resolve(response.data);
+            });
+            return promise;
+        }
 }
 
 module.exports = angular.module("app.locale").service("userService",userService);;

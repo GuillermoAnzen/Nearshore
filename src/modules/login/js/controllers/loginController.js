@@ -35,6 +35,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                         $cookies.put('IsLogged', 'true');
                         $cookies.put('applicationId', applicationId);
                         $cookies.put('username', username);
+                        $cookies.put('user', response.data.data[0].Id);
                         $rootScope.UserLogin = true;
                         $rootScope.$on( $scope.user);
                         sessionManager.loged(username);
@@ -48,6 +49,7 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                         $cookies.put("cat", false);
                         $cookies.put("showButtons", false);
                         $cookies.put("counter","1");
+                        $cookies.put("emp",false);
                         if (profile == 1){
                             $cookies.put("adm", true);
                             $cookies.put("app", true);
@@ -55,10 +57,11 @@ var loginCtrl = function($scope, $location,localeService,$rootScope, $http, logi
                             $cookies.put("citiU", true);
                             $cookies.put("cat", true);
                             $cookies.put("showButtons", true);
+                            $cookies.put("emp",true);
                         }else if(profile == 2 || profile == 3){
                             $cookies.put("app", true);
                             $cookies.put("provs", true);
-                            $cookies.put("showButtons", true);
+                            $cookies.put("emp",true);
                             $cookies.put("flag", response.data.data[0].idProvedor);
                         }else if(profile == 4){
                             $cookies.put("app", true);

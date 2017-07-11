@@ -28,6 +28,11 @@ module.exports = angular.module('app.users', [
         template: require('./views/Main_users.html'),
         controller: 'userCtrl'
     });
+
+    $routeProvider.when('/configuration',{
+        template: require('./views/configuration.html'),
+        controller: 'configCtrl'
+    });
 }]);
 
 

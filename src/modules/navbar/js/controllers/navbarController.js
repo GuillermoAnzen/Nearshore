@@ -41,5 +41,9 @@ var navController= function ($translate, locale,localeService,sessionManager,$lo
 
     }
 
+    $this.configuration = function(){
+        $location.path("/configuration");
+    };
+
 };
 module.exports =angular.module("app.navbar").controller("navController",navController);

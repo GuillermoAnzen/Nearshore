@@ -20,6 +20,7 @@
             <button class="btn btn-default dropdown-toggle" type="button" id="userProfileName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             </button>
             <ul class="dropdown-menu" aria-labelledby="userProfileName">
+              <li><a ng-click="$ctrl.configuration()" href="">{{'CONFIGURATION' | translate}}</a></li>
               <li role="separator" class="divider"></li>
               <li><a ng-click="$ctrl.logout()" href="#">{{'LOGOUT' | translate}}</a></li>
             </ul>
