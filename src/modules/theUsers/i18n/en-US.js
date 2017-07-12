@@ -53,6 +53,8 @@ module.exports = {
         EDIT_PASSWORD: 'Edit password',
         DATA_UPDATE_SUCCESSFULLY: 'Data updated successfully',
         PASSWORD_INCORRECT: 'Password incorrect',
-        ERROR_OCURRED_DATA_UPDATE: 'An error has ocurred'
+        ERROR_OCURRED_DATA_UPDATE: 'An error has ocurred',
+        ENTER_YOUR_PASSWORD: 'Type your password',
+        ENTER_NEW_PASSWORD: 'Type new password'
     }
 };
