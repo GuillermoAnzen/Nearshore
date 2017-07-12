@@ -41,6 +41,8 @@ module.exports = {
         SuccessEditPlataform:'The plataform was successfully updated',
         ErrorEditPlataform:'The process of plataform updating could have errors',
         DeleteVendor:'Delete vendor',
-        DeletePlataform: 'Delete plataform'
+        DeletePlataform: 'Delete plataform',
+        SuccesDeletePlataform: 'The plataform was successfully deleted',
+        ErrorDeletePlataform: 'The proccess of plataform deleted could have errors.'
     }
 };

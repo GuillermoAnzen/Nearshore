@@ -40,6 +40,8 @@ module.exports = {
         SuccessEditPlataform:'Se actualizó correctamente la plataforma',
         ErrorEditPlataform: 'El proceso de actualizar plataformas pudo tener errores',
         DeleteVendor:'Borrar proveedor',
-        DeletePlataform: 'Borrar plataformas'
+        DeletePlataform: 'Borrar plataformas',
+        SuccesDeletePlataform:'Se eliminó correctamente la plataforma',
+        ErrorDeletePlataform: 'El proceso de eliminado de plataformas tuvo errores'
     }
 };

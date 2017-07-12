@@ -37,7 +37,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         $scope.showErrorPlataformEdit= false;
      }
      $scope.hideSuccessDeletePlataformAlert= function(){
-        $scope.showSuccessDeletePlataform= false;
+        $scope.showSuccessPlataformDelete= false;
      }
 
      $scope.hideErrorDeletePlataformAlert= function(){
