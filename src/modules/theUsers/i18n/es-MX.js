@@ -54,6 +54,8 @@ module.exports = {
         EDIT_PASSWORD: 'Editar contraseña',
         DATA_UPDATE_SUCCESSFULLY: 'Datos actualizados exitosamente',
         PASSWORD_INCORRECT: 'Contraseña incorrecta',
-        ERROR_OCURRED_DATA_UPDATE: 'Ha ocurrido un error'
+        ERROR_OCURRED_DATA_UPDATE: 'Ha ocurrido un error',
+        ENTER_YOUR_PASSWORD: 'Ingresa tu contraseña',
+        ENTER_NEW_PASSWORD: 'Ingresa la nueva contraseña'
     }
 };
