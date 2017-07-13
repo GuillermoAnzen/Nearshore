@@ -8,16 +8,21 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices) {
+var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService) {
 
      $scope.currentPage = 1;
      $scope.pageSize = 10;
      $scope.pageSizeplataform=10;
+     $scope.pageSizeProfile= 10;
      $scope.vendorsList=[];
      $scope.plataformList=[];
+     $scope.profilesList=[];
      $scope.totalVendors= 0;
      $scope.totalPlataform= 0;
+     $scope.totalprofiles= 0;
+     $scope.currentPageProfile= 1;
      $scope.activeModifyButton=true;
+     $scope.activeModifyProfileBoton= true;
 
     $scope.hideSuccessDeleteAlert= function(){
        $scope.showSuccessDelete= false;
@@ -62,6 +67,27 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
 
      getResultsPage();
      getResultsPagePlataforms();
+     getResultsPageProfiles($scope.currentPageProfile);
+
+    $scope.pageChangedProfile= function(newPage){
+        getResultsPageProfiles(newPage);
+    }
+     function getResultsPageProfiles(newPage){
+     jobsCitiService.getJobs(newPage,$scope.pageSizeProfile).then(function(response){
+        if(response.success){
+            $scope.profilesList=[];
+            $scope.totalprofiles= response.data[0].total;
+            for(var i= 0; i< response.data.length; i++){
+             var _id=parseInt(response.data[i].ID);
+             var profile={id: _id, nombre: response.data[i].DESCRIPCION};
+            $scope.profilesList.push(profile);
+            }
+        }else{
+            $scope.error="Hubo un error en la conexión de la base de datos";
+            $console.log('Error');
+        }
+     });
+     }
 
      function getResultsPagePlataforms(){
         plataformServices.getallPlataforms().then(function(response){
@@ -111,6 +137,18 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         }
     });
     }
+    $scope.addNewProfile= function(){
+        jobsCitiService.addNewJob($scope.nameProfile).then(function(response){
+            if(response.success){
+                pristinePerfilFields();
+                $("#NewProfile").modal('hide');
+                getResultsPageProfiles($scope.currentPageProfile);
+                $scope.showSuccessProfileAdd= true;
+            }else
+                $("#NewProfile").modal('hide');
+                $scope.showErrorProfileAdd= true;
+        });
+    }
     $scope.addNewPlataform= function(){
         plataformServices.addNewPlataform($scope.namePlataform, $scope.commentsPlataform).then(function(response){
             if(response.success){
@@ -137,9 +175,31 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         $scope.activeModifyPlataformButton= false;
         $scope.idPlataform= value;
     }
+    $scope.checkProfile= function(value){
+        $scope.activeModifyProfileBoton= false;
+        $scope.idProfile= value;
+    }
      $scope.clearFields= function(){
             pristineFields();
         }
+    $scope.deleteProfile= function(){
+        if($window.confirm('you are gonna delete this, are you sure?')){
+            deleteProfileProcess();
+        }
+    }
+    function deleteProfileProcess(){
+    jobsCitiService.deleteProfile($scope.idProfile).then(function(response){
+       if(response.success){
+       pristineEditProfileFields();
+        $('#EditProfile').modal('hide');
+        getResultsPageProfiles();
+        $scope.showSuccessProfileDelete= true;
+        }else{
+            $('#EditProfile').modal('hide');
+            $scope.showErrorDeleteProfile= true;
+        }
+    });
+    }
     $scope.deleteVendor= function(){
         if($window.confirm('you are gonna delete this, are you sure?')){
             deleteVendorProcess();
@@ -181,10 +241,35 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         returnObjectVendor(vendorID);
 
     }
+    $scope.showEditModalProfile= function(){
+        var profileId= $scope.idProfile;
+        $("#EditProfile").modal('show');
+        returnObjectProfile(profileId);
+    };
+
+
     $scope.showEditModalPlataform= function(){
         var plataformId= $scope.idPlataform;
         $("#EditPlataform").modal('show');
         returnObjectPlataform(plataformId);
+    }
+    $scope.editProfileProcess= function()
+    {
+        var description=$scope.nameProfileEdit;
+        var profileId= $scope.idProfile;
+        jobsCitiService.updateProfile(profileId, description).then(function(response){
+            if(response.success){
+                pristineEditProfileFields();
+                $("#EditProfile").modal('hide');
+                getResultsPageProfiles($scope.currentPageProfile);
+                $scope.showSuccessProfileEdit= true;
+
+            }else{
+            $("#EditProfile").modal('hide');
+            $scope.showErrorProfileEdit= true;
+            }
+        });
+
     }
     $scope.editVendorProcess= function(){
         var description= $scope.vendorNameEdit;
@@ -226,6 +311,13 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             }
         });
     };
+    function returnObjectProfile(profileId){
+        jobsCitiService.getProfileById(profileId).then(function(response){
+            if(response.success){
+                $scope.nameProfileEdit= response.data[0].DESCRIPCION;
+            }
+        });
+    }
     function returnObjectPlataform(plataformId){
         plataformServices.getPlataformById(plataformId).then(function(response){
             if(response.success){
@@ -252,6 +344,14 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
     function pristineEditFields(){
         $scope.EditVendor.$setPristine();
         $scope.vendorNameEdit=null;
+    }
+    function pristineEditProfileFields(){
+        $scope.EditProfile.$setPristine();
+        $scope.nameProfileEdit=null;
+    }
+    function pristinePerfilFields(){
+        $scope.AddProfile.$setPristine();
+        $scope.nameProfile= null;
     }
 
     if ($cookies.get("cat") != "true"){

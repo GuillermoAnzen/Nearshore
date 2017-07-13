@@ -43,6 +43,16 @@ module.exports = {
         DeleteVendor:'Delete vendor',
         DeletePlataform: 'Delete plataform',
         SuccesDeletePlataform: 'The plataform was successfully deleted',
-        ErrorDeletePlataform: 'The proccess of plataform deleted could have errors.'
+        ErrorDeletePlataform: 'The proccess of plataform deleted could have errors.',
+        NEW_PROFILE:'New profile',
+        NEW_Profile_TITLE:'Add a new profile',
+        SuccessAddingProfile: 'The profile was succesfully added.',
+        ErrorAddingProfile: 'The process of adding a profile could have errors',
+        SuccessEditProfile:'The profile was successfully updated',
+        ErrorEditProfile:'The process of profile updating could have errors',
+        SuccesDeleteProfile:'The profile was successfully added',
+        ErrorDeleteProfile:'The process of profile deleted could have errores',
+        DeleteProfile:'Delete profile',
+        Edit_Profile_Title: 'Profile edit'
     }
 };

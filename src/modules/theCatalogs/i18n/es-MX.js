@@ -42,6 +42,16 @@ module.exports = {
         DeleteVendor:'Borrar proveedor',
         DeletePlataform: 'Borrar plataformas',
         SuccesDeletePlataform:'Se eliminó correctamente la plataforma',
-        ErrorDeletePlataform: 'El proceso de eliminado de plataformas tuvo errores'
+        ErrorDeletePlataform: 'El proceso de eliminado de plataformas tuvo errores',
+        NEW_PROFILE:'Nuevo perfil',
+        NEW_Profile_TITLE: 'Nuevo Perfil',
+        SuccessAddingProfile: 'Se agrego correctamente el perfil.',
+        ErrorAddingProfile:'El proceso de agregar perfiles pudo tener errores',
+        SuccessEditProfile: 'Se actualizó correctamente el perfil',
+        ErrorEditProfile:'El proceso de actualizar perfiles pudo tener errores',
+        SuccesDeleteProfile:'Se eliminó correctamente el perfil',
+        ErrorDeleteProfile:'El proceso de eliminado de perfiles pudo tener errores',
+        DeleteProfile: 'Eliminar perfil',
+        Edit_Profile_Title: 'Edita perfil'
     }
 };
