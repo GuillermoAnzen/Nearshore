@@ -59,6 +59,9 @@ module.exports = {
         ErrorAddingDomain:'El proceso de agregar dominios pudo tener errores.',
         SuccessEditDomain: 'Se actualizó correctamente el dominio',
         ErrorEditDomain:'El proceso de actualizar dominios pudo tener errores',
-        DeleteDomain:'Eliminar dominio'
+        DeleteDomain:'Eliminar dominio',
+        SuccesDeleteDomain: 'Se eliminó correctamente el dominio.',
+        ErrorDeleteDomain:'El proceso de eliminado de dominos pudo tener errores',
+        Edit_Domain_Title:'Edita dominio'
     }
 };

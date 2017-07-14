@@ -86,6 +86,24 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.hideErrorDeleteProfileAlert= function(){
         $scope.showErrorDeleteProfile= false;
      }
+     $scope.hideSuccessAddDomainAlert= function(){
+        $scope.showSuccessDomainAdd= false;
+     }
+     $scope.hideErrorAddDomainAlert= function(){
+        $scope.showErrorDomainAdd= false;
+     }
+     $scope.hideSuccessEditDomainAlert= function(){
+        $scope.showSuccessDomainEdit= false;
+     }
+     $scope.hideErrorEditDomainAlert= function(){
+        $scope.showErrorDomainEdit= false;
+     }
+     $scope.hideSuccessDeleteDomainsAlert= function(){
+        $scope.showSuccessDomainsDelete= false;
+     }
+     $scope.hideErrorDeleteDomainsAlert= function(){
+        $scope.showErrorDeleteDomains= false;
+     }
 
      getResultsPage();
      getResultsPagePlataforms();
@@ -250,16 +268,16 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             deleteDomainProcess()
         }
     }
-    $scope.deleteDomain= function(){
+    function deleteDomainProcess(){
         domainServices.deleteDomain($scope.idDomain).then(function(response){
             if(response.success){
             pristineEditDomainFields();
             $('#EditDomain').modal('hide');
             getResultsPageDomains($scope.currentPageDomains);
-            $scope.showSuccessDomainEdit= true;
+            $scope.showSuccessDomainsDelete= true;
             }else{
             $('#EditDomain').modal('hide');
-            $scope.showErrorDomainEdit= true;
+            $scope.showErrorDeleteDomains= true;
             }
         });
     }

@@ -59,6 +59,9 @@ module.exports = {
         ErrorAddingDomain:'The process of adding a domain could have errors',
         SuccessEditDomain:'The domain was succesfully updated',
         ErrorEditDomain: 'The process of domain updating could have errors',
-        DeleteDomain:'Delete domain'
+        DeleteDomain:'Delete domain',
+        SuccesDeleteDomain:'The domain was successfully deleted',
+        ErrorDeleteDomain:'The process of domain deleted could have errors',
+        Edit_Domain_Title:'Edit domain'
     }
 };
