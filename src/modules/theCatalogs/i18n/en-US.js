@@ -53,6 +53,12 @@ module.exports = {
         SuccesDeleteProfile:'The profile was successfully added',
         ErrorDeleteProfile:'The process of profile deleted could have errores',
         DeleteProfile:'Delete profile',
-        Edit_Profile_Title: 'Profile edit'
+        Edit_Profile_Title: 'Profile edit',
+        NEW_DOMAIN:'New domain',
+        SuccessAddingDomain:'The domain was successfully added.',
+        ErrorAddingDomain:'The process of adding a domain could have errors',
+        SuccessEditDomain:'The domain was succesfully updated',
+        ErrorEditDomain: 'The process of domain updating could have errors',
+        DeleteDomain:'Delete domain'
     }
 };

@@ -35,7 +35,7 @@ module.exports = {
         ENTER_A_NAME_PLATAFORM: 'Ingresa un nombre',
         CommentsPlataform: 'Comentarios',
         ENTER_A_COMMENT_PLATAFORM: 'Ingresa un comentario',
-        SuccessAddingPlataform:'Se agrego correctamente la plataforma',
+        SuccessAddingPlataform:'Se agregó correctamente la plataforma',
         ErrorAddingPlataform:'El proceso de agregar plataformas pudo tener errores',
         SuccessEditPlataform:'Se actualizó correctamente la plataforma',
         ErrorEditPlataform: 'El proceso de actualizar plataformas pudo tener errores',
@@ -45,13 +45,20 @@ module.exports = {
         ErrorDeletePlataform: 'El proceso de eliminado de plataformas tuvo errores',
         NEW_PROFILE:'Nuevo perfil',
         NEW_Profile_TITLE: 'Nuevo Perfil',
-        SuccessAddingProfile: 'Se agrego correctamente el perfil.',
+        SuccessAddingProfile: 'Se agregó correctamente el perfil.',
         ErrorAddingProfile:'El proceso de agregar perfiles pudo tener errores',
         SuccessEditProfile: 'Se actualizó correctamente el perfil',
         ErrorEditProfile:'El proceso de actualizar perfiles pudo tener errores',
         SuccesDeleteProfile:'Se eliminó correctamente el perfil',
         ErrorDeleteProfile:'El proceso de eliminado de perfiles pudo tener errores',
         DeleteProfile: 'Eliminar perfil',
-        Edit_Profile_Title: 'Edita perfil'
+        Edit_Profile_Title: 'Edita perfil',
+        NEW_DOMAIN:'Nuevo dominio',
+        NEW_DOMAIN_TITLE:'Agrega nuevo dominio.',
+        SuccessAddingDomain:'Se agregó correctamente el dominio',
+        ErrorAddingDomain:'El proceso de agregar dominios pudo tener errores.',
+        SuccessEditDomain: 'Se actualizó correctamente el dominio',
+        ErrorEditDomain:'El proceso de actualizar dominios pudo tener errores',
+        DeleteDomain:'Eliminar dominio'
     }
 };

@@ -8,12 +8,14 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService) {
+var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService, domainServices) {
 
      $scope.currentPage = 1;
+     $scope.currentPageDomains=1;
      $scope.pageSize = 10;
      $scope.pageSizeplataform=10;
      $scope.pageSizeProfile= 10;
+     $scope.pageSizeDomain=10;
      $scope.vendorsList=[];
      $scope.plataformList=[];
      $scope.profilesList=[];
@@ -23,6 +25,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.currentPageProfile= 1;
      $scope.activeModifyButton=true;
      $scope.activeModifyProfileBoton= true;
+     $scope.activeModifyDomainButton= true;
 
     $scope.hideSuccessDeleteAlert= function(){
        $scope.showSuccessDelete= false;
@@ -64,10 +67,51 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.hideErrorAddPlataformAlert= function(){
         $scope.showErrorPlataformAdd= false;
      }
+     $scope.hideSuccessAddProfileAlert= function(){
+        $scope.showSuccessProfileAdd= false;
+     }
+     $scope.hideErrorAddProfileAlert= function(){
+        $scope.showErrorProfileAdd= false;
+     }
+     $scope.hideSuccessEditProfileAlert= function(){
+        $scope.showSuccessProfileEdit= false;
+     }
+     $scope.hideErrorEditProfileAlert= function(){
+        $scope.showErrorProfileEdit= false;
+     }
+
+     $scope.hideSuccessDeleteProfileAlert= function(){
+        $scope.showSuccessProfileDelete= false;
+     }
+     $scope.hideErrorDeleteProfileAlert= function(){
+        $scope.showErrorDeleteProfile= false;
+     }
 
      getResultsPage();
      getResultsPagePlataforms();
      getResultsPageProfiles($scope.currentPageProfile);
+     getResultsPageDomains($scope.currentPageDomains)
+
+     $scope.pageChangedDomain= function(newPage){
+        getResultsPageDomains(newPage);
+     }
+    function getResultsPageDomains(newPage){
+        domainServices.getAllDomains(newPage,$scope.pageSizeDomain).then(function(response){
+            if(response.success){
+            $scope.domainsList=[];
+            $scope.totalDomains= response.data[0].total;
+            for(var i=0; i<response.data.length; i++){
+                var _id= parseInt(response.data[i].ID);
+                var domain={id:_id, nombre:response.data[i].DESCRIPCION};
+                $scope.domainsList.push(domain);
+            }
+            }else{
+                $scope.error="Hubo un error en la conexión de la base de datos";
+                $console.log('Error');
+            }
+        });
+
+    }
 
     $scope.pageChangedProfile= function(newPage){
         getResultsPageProfiles(newPage);
@@ -137,6 +181,20 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         }
     });
     }
+    $scope.addNewDomain= function(){
+        domainServices.addNewDomain($scope.nameDomain).then(function(response){
+         if(response.success){
+            pristineDomainFields();
+            $("#NewDomain").modal('hide');
+            getResultsPageDomains($scope.currentPageDomains);
+            $scope.showSuccessDomainAdd= true;
+         }else
+         {
+           $("#NewDomain").modal('hide');
+           $scope.showErrorDomainAdd= true;
+         }
+        });
+    }
     $scope.addNewProfile= function(){
         jobsCitiService.addNewJob($scope.nameProfile).then(function(response){
             if(response.success){
@@ -144,9 +202,10 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
                 $("#NewProfile").modal('hide');
                 getResultsPageProfiles($scope.currentPageProfile);
                 $scope.showSuccessProfileAdd= true;
-            }else
+            }else{
                 $("#NewProfile").modal('hide');
                 $scope.showErrorProfileAdd= true;
+            }
         });
     }
     $scope.addNewPlataform= function(){
@@ -179,9 +238,31 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         $scope.activeModifyProfileBoton= false;
         $scope.idProfile= value;
     }
+    $scope.checkDomains= function(value){
+        $scope.activeModifyDomainButton= false;
+        $scope.idDomain= value;
+    }
      $scope.clearFields= function(){
             pristineFields();
         }
+    $scope.deleteDomain= function(){
+        if($window.confirm('you are gonna delete this, are you sure?')){
+            deleteDomainProcess()
+        }
+    }
+    $scope.deleteDomain= function(){
+        domainServices.deleteDomain($scope.idDomain).then(function(response){
+            if(response.success){
+            pristineEditDomainFields();
+            $('#EditDomain').modal('hide');
+            getResultsPageDomains($scope.currentPageDomains);
+            $scope.showSuccessDomainEdit= true;
+            }else{
+            $('#EditDomain').modal('hide');
+            $scope.showErrorDomainEdit= true;
+            }
+        });
+    }
     $scope.deleteProfile= function(){
         if($window.confirm('you are gonna delete this, are you sure?')){
             deleteProfileProcess();
@@ -192,7 +273,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
        if(response.success){
        pristineEditProfileFields();
         $('#EditProfile').modal('hide');
-        getResultsPageProfiles();
+        getResultsPageProfiles($scope.currentPageProfile);
         $scope.showSuccessProfileDelete= true;
         }else{
             $('#EditProfile').modal('hide');
@@ -253,6 +334,11 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         $("#EditPlataform").modal('show');
         returnObjectPlataform(plataformId);
     }
+    $scope.showEditModalDomain= function(){
+        var dominioId=$scope.idDomain;
+        $("#EditDomain").modal('show');
+        returnObjectDomain(dominioId);
+    }
     $scope.editProfileProcess= function()
     {
         var description=$scope.nameProfileEdit;
@@ -304,6 +390,21 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         });
 
     }
+    $scope.editDomainProcess= function(){
+        var nombre=$scope.nameDomainEdit;
+        var id=$scope.idDomain;
+        domainServices.editDomain(id, nombre).then(function(response){
+            if(response.success){
+                pristineEditDomainFields();
+                $("#EditDomain").modal('hide');
+                getResultsPageDomains($scope.currentPageDomains);
+                $scope.showSuccessDomainEdit= true;
+            }else{
+                $("#EditDomain").modal('hide');
+                $scope.showErrorDomainEdit= true;
+            }
+        })
+    };
     function returnObjectVendor(vendorID){
         vendorCatService.getProviderById(vendorID).then(function(response){
             if(response.success){
@@ -326,6 +427,14 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             }
         });
        }
+    function returnObjectDomain(domainId){
+        domainServices.getDomainById(domainId).then(
+        function(response){
+            if(response.success){
+                $scope.nameDomainEdit= response.data[0].DESCRIPCION;
+            }
+        });
+    }
 
     function pristineFields(){
             $scope.AddVendor.$setPristine();
@@ -352,6 +461,14 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
     function pristinePerfilFields(){
         $scope.AddProfile.$setPristine();
         $scope.nameProfile= null;
+    }
+    function pristineDomainFields(){
+        $scope.AddDomain.$setPristine();
+        $scope.nameDomain= true;
+    }
+    function pristineEditDomainFields(){
+        $scope.EditDomain.$setPristine();
+        $scope.nameDomainEdit= null;
     }
 
     if ($cookies.get("cat") != "true"){
