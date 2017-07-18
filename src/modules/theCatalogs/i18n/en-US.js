@@ -71,6 +71,8 @@ module.exports = {
         SuccessEditCountry:'The country was successfully updated',
         ErrorEditCountry: 'The process of country updating could have errors',
         SuccesDeleteCountry:'The country was successfully deleted',
-        ErrorDeleteCountry:'The process of country deleted could have errors'
+        ErrorDeleteCountry:'The process of country deleted could have errors',
+        NEW_CITY: 'New city',
+        Pais:'Country'
     }
 };

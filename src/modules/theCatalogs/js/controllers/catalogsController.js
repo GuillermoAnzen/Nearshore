@@ -8,24 +8,28 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService, domainServices, countryService) {
+var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService, domainServices, countryService, CitiesService) {
 
      $scope.currentPage = 1;
      $scope.currentPageDomains=1;
      $scope.currentPageCountry=1;
+     $scope.currentPageCity=1;
      $scope.pageSize = 10;
      $scope.pageSizeplataform=10;
      $scope.pageSizeProfile= 10;
      $scope.pageSizeDomain=10;
      $scope.pageSizeCountry= 10;
+     $scope.pageSizeCity=10;
      $scope.vendorsList=[];
      $scope.plataformList=[];
      $scope.profilesList=[];
      $scope.countrysList=[];
+     $scope.citysList=[];
      $scope.totalVendors= 0;
      $scope.totalPlataform= 0;
      $scope.totalprofiles= 0;
      $scope.totalCountrys= 0;
+     $scope.totalCity= 0;
      $scope.currentPageProfile= 1;
      $scope.activeModifyButton=true;
      $scope.activeModifyProfileBoton= true;
@@ -133,6 +137,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      getResultsPageProfiles($scope.currentPageProfile);
      getResultsPageDomains($scope.currentPageDomains);
      getResultsPageCountrys($scope.currentPageCountry);
+     getResultsPageCity();
 
      $scope.pageChangedCountry= function(newPage){
         getResultsPageCountrys(newPage);
@@ -194,7 +199,22 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         }
      });
      }
-
+     function getResultsPageCity(){
+        CitiesService.getCities().then(function(response){
+            if(response.success){
+                $scope.citysList=[];
+                $scope.totalCity= response.data.length;
+                for(var i=0; i < response.data.length; i++){
+                    var _id= parseInt(response.data[i].Id);
+                    var city={id:_id, nombre: response.data[i].ciudad, pais: response.data[i].pais};
+                    $scope.citysList.push(city);
+                }
+            }else{
+                $scope.error="Hubo un error en la conexión de la base de datos";
+                $console.log('Error');
+            }
+        })
+     }
      function getResultsPagePlataforms(){
         plataformServices.getallPlataforms().then(function(response){
             if(response.success){

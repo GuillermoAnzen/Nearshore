@@ -72,6 +72,8 @@ module.exports = {
         SuccessEditCountry: 'Se actualizo correctamente el país',
         ErrorEditCountry:'El proceso de actualizar paises pudo tener errores',
         SuccesDeleteCountry:'Se eliminó correctamente el país.',
-        ErrorDeleteCountry:'El proceso de eliminado de paises pudo tener errores'
+        ErrorDeleteCountry:'El proceso de eliminado de paises pudo tener errores',
+        NEW_CITY:'Nueva ciudad',
+        Pais:'País'
     }
 };
