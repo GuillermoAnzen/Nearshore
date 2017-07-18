@@ -73,6 +73,8 @@ module.exports = {
         SuccesDeleteCountry:'The country was successfully deleted',
         ErrorDeleteCountry:'The process of country deleted could have errors',
         NEW_CITY: 'New city',
-        Pais:'Country'
+        Pais:'Country',
+        ErrorCountryRequiered:'Country field is required.',
+        NEW_City_TITLE:'Add a new city'
     }
 };

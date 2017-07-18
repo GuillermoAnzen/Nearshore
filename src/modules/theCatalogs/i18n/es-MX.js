@@ -74,6 +74,8 @@ module.exports = {
         SuccesDeleteCountry:'Se eliminó correctamente el país.',
         ErrorDeleteCountry:'El proceso de eliminado de paises pudo tener errores',
         NEW_CITY:'Nueva ciudad',
-        Pais:'País'
+        Pais:'País',
+        ErrorCountryRequiered: 'El país es requerido',
+        NEW_City_TITLE:'Agrega nueva ciudad'
     }
 };

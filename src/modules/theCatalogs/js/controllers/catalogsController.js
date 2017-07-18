@@ -150,8 +150,10 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
                 for(var i=0; i< response.data.length; i++){
                     var _id= parseInt(response.data[i].ID);
                     var country={id:_id, nombre: response.data[i].DESCRIPCION};
+
                     $scope.countrysList.push(country);
                 }
+
             }else{
                 $scope.error="Hubó un error en la conexión de la base de datos";
                 $console.log('Error');
@@ -340,6 +342,10 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
     $scope.checkDomains= function(value){
         $scope.activeModifyDomainButton= false;
         $scope.idDomain= value;
+    }
+    $scope.checkCity= function(value){
+        $scope.activeModifyCityButton= false;
+        $scope.idCity= value
     }
      $scope.clearFields= function(){
             pristineFields();
@@ -624,6 +630,8 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
     if ($cookies.get("cat") != "true"){
         $location.path("/principal");
     }
+
+
 
     var $this = $scope;
     
