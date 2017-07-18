@@ -567,6 +567,14 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $scope.namePlataform= null;
             $scope.commentsPlataform= null;
         }
+    function pristineCountryFields(){
+            $scope.AddCountry.$setPristine();
+            $scope.nameCountry= null;
+    }
+    function pristineEditCountryFields(){
+            $scope.EditCountry.$setPristine();
+            $scope.nameCountryEdit= null;
+    }
     function pristineEditPlataformFields(){
             $scope.EditPlataform.$setPristine();
             $scope.namePlataformEdit=null;

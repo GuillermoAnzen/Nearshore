@@ -75,12 +75,31 @@ var countryService = function ($http, $q, $cookies){
         });
         return promise;
     }
+    this.addCountry= function(name){
+        var endopoint= server +"catalogsms/paises/";
+        var applicationId= $cookies.get('applicationId');
+        var content_type='application/json; charset=utf-8';
+        var defered= $q.defer();
+        var promise= defered.promise;
+        var config={ headers:{
+                           'Content-Type': content_type,
+                           'ApplicationID': applicationId
+         }};
+         var data={
+            'descripcion': name
+            };
+         $http.post(endopoint,data, config).then(function(response){
+            defered.resolve(response.data);
+         });
+         return promise;
+    }
 
     return{
         getCountries: this.getCountries,
         getCountryById:this.getCountryById,
         editCountry:this.editCountry,
-        deleteCountry:this.deleteCountry
+        deleteCountry:this.deleteCountry,
+        addCountry:this.addCountry
     };
 }
 module.exports= angular.module("app.locale").service("countryService", countryService);
