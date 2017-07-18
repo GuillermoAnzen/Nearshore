@@ -62,6 +62,15 @@ module.exports = {
         DeleteDomain:'Delete domain',
         SuccesDeleteDomain:'The domain was successfully deleted',
         ErrorDeleteDomain:'The process of domain deleted could have errors',
-        Edit_Domain_Title:'Edit domain'
+        Edit_Domain_Title:'Edit domain',
+        NEW_COUNTRY: 'New country',
+        Name:'Name',
+        NEW_COUNTRY_TITLE: 'Add a new country',
+        SuccessAddingCountry: 'The country was successfully added',
+        ErrorAddingCountry:'The process of adding a country could have errors',
+        SuccessEditCountry:'The country was successfully updated',
+        ErrorEditCountry: 'The process of country updating could have errors',
+        SuccesDeleteCountry:'The country was successfully deleted',
+        ErrorDeleteCountry:'The process of country deleted could have errors'
     }
 };

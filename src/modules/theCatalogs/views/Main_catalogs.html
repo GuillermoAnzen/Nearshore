@@ -7,8 +7,8 @@
         <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab('catalog2')"> {{'CAT_PLATFORMS' | translate}} </a></li>
         <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab('catalog3')"> {{'CAT_JOBS_CITI' | translate}} </a></li>
         <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab('catalog4')"> {{'CAT_DOMAINS' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab('catalog4')"> {{'CAT_CITIES' | translate}} </a></li>
-        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab('catalog4')"> {{'CAT_COUNTRIES' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab('catalog5')">  {{'CAT_COUNTRIES' | translate}} </a></li>
+        <li><a data-toggle="tab" class="tablinks" href="" ng-click="showCatalogTab('catalog4')">{{'CAT_CITIES' | translate}} </a></li>
     </ul>
     </div>
 
@@ -555,6 +555,135 @@
                                 </div>
                             </form>
                             <button class="btn btn-danger" ng-click="deleteDomain()" translate="DeleteDomain"></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="catalog5" class="tabcontent">
+            <div class="row">
+                <div class="col-xs-3">
+                    <button class="btn btn-primary btn-block" translate="NEW_COUNTRY" data-toggle="modal" data-target="#NewCountry"></button>
+                </div>
+                <div class="col-xs-3">
+                    <button class="btn btn-default btn-block" translate="MODIFY" ng-disabled="activeModifyCountryButton" ng-click="showEditModalCountry()"></button>
+                </div>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessCountryAdd">
+                <a href="" class="close" ng-click="hideSuccessAddCountryAlert()" aria-label="close">&times;</a>
+                <p translate="SuccessAddingCountry"></p>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorCountryAdd">
+                <a href="" class="close" ng-click="hideErrorAddCountryAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorAddingCountry"></p>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessCountryEdit">
+                <a href="" class="close" ng-click="hideSuccessEditCountryAlert()" aria-label="close">&times;</a>
+                <p translate="SuccessEditCountry"></p>
+                </a>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorCountryEdit">
+                <a href="" class="close" ng-click="hideErrorEditCountryAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorEditCountry"></p>
+            </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessCountryDelete">
+                <a href="" class="close" ng-click="hideSuccessDeleteCountryAlert()" aria-label="close">&times;</a>
+                <p translate="SuccesDeleteCountry"></p>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorDeleteCountry">
+                <a href="" class="close" ng-click="hideErrorDeleteCountryAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorDeleteCountry"></p>
+            </div>
+            <div class="row">
+                <br/>
+                <div class="col-xs-4">
+                    <label></label>
+                    <div class="input-group">
+                        <input type="text" ng-model="qc" class="form-control" id="searchCountry" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4">
+                    <label for="search">{{'ITEMS_PER_PAGE'|translate}}:</label>
+                    <input type="number" min="1" max="100" class="form-control" ng-model="pageSizeCountry" placeholder="items per page">
+                </div>
+            </div>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th> </th>
+                        <th>{{'Name'|translate}} </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="x in countrysList | filter:qc | itemsPerPage: pageSizeCountry" total-items="totalCountrys" current-page="currentPageCountry" pagination-id="countryPagination">
+                        <td><input type="radio" ng-model="idCountry" value="{{x.id}}" name="idCountry" ng-click='checkCountry(idCountry)'></td>
+                        <td>{{x.nombre}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <dir-pagination-controls boundary-links="true" on-page-change="pageChangedCountry(newPageNumber)" pagination-id="countryPagination"></dir-pagination-controls>
+            </div>
+            <div class="modal fade" id="NewCountry" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" translate="NEW_COUNTRY_TITLE"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" name="AddCountry" ng-submit="addNewCountry()" novalidate>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="nameCountry" translate="Name"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="nameCountry" class="form-control" id="nameCountry" ng-model="nameCountry" placeholder="{{'ENTER_A_NAME_VENDOR'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorNameRequired" ng-show="AddCountry.nameCountry.$dirty && AddCountry.nameCountry.$error.required" class="help-block"></p>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default" translate="SAVE"></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="EditCountry" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" translate="Edit_Country_Title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" name="EditCountry" ng-submit="editCountryProcess()" novalidate>
+                                <div class="form-group required">
+                                    <label class="control-label col-sm-3" for="nameCountryEdit" translate="NAME"></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="nameCountryEdit" class="form-control" id="nameCountryEdit" ng-model="nameCountryEdit" placeholder="{{'ENTER_A_NAME_VENDOR'|translate}}"  ng-trim="true" required>
+                                        <p translate="ErrorNameRequired" ng-show="EditCountry.nameCountryEdit.$dirty && EditCountry.nameCountryEdit.$error.required" class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default" translate="SAVEUPLOAD"></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <button class="btn btn-danger" ng-click="deleteCountry()" translate="DeleteCountry"></button>
                         </div>
                     </div>
                 </div>

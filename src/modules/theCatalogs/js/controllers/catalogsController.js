@@ -8,24 +8,29 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService, domainServices) {
+var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService, domainServices, countryService) {
 
      $scope.currentPage = 1;
      $scope.currentPageDomains=1;
+     $scope.currentPageCountry=1;
      $scope.pageSize = 10;
      $scope.pageSizeplataform=10;
      $scope.pageSizeProfile= 10;
      $scope.pageSizeDomain=10;
+     $scope.pageSizeCountry= 10;
      $scope.vendorsList=[];
      $scope.plataformList=[];
      $scope.profilesList=[];
+     $scope.countrysList=[];
      $scope.totalVendors= 0;
      $scope.totalPlataform= 0;
      $scope.totalprofiles= 0;
+     $scope.totalCountrys= 0;
      $scope.currentPageProfile= 1;
      $scope.activeModifyButton=true;
      $scope.activeModifyProfileBoton= true;
      $scope.activeModifyDomainButton= true;
+     $scope.activeModifyCountryButton= true;
 
     $scope.hideSuccessDeleteAlert= function(){
        $scope.showSuccessDelete= false;
@@ -104,11 +109,50 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.hideErrorDeleteDomainsAlert= function(){
         $scope.showErrorDeleteDomains= false;
      }
+     $scope.hideSuccessAddCountryAlert= function(){
+        $scope.showSuccessCountryAdd= false;
+     }
+     $scope.hideErrorAddCountryAlert= function(){
+        $scope.showErrorCountryAdd= false;
+     }
+     $scope.hideSuccessEditCountryAlert= function(){
+        $scope.showSuccessCountryEdit= false;
+     }
+     $scope.hideErrorEditCountryAlert= function(){
+        $scope.showErrorCountryEdit= false;
+     }
+     $scope.hideSuccessDeleteCountryAlert= function(){
+        $scope.showSuccessCountryDelete= false;
+     }
+     $scope.hideErrorDeleteCountryAlert= function(){
+        $scope.showErrorDeleteCountry= false;
+     }
 
      getResultsPage();
      getResultsPagePlataforms();
      getResultsPageProfiles($scope.currentPageProfile);
-     getResultsPageDomains($scope.currentPageDomains)
+     getResultsPageDomains($scope.currentPageDomains);
+     getResultsPageCountrys($scope.currentPageCountry);
+
+     $scope.pageChangedCountry= function(newPage){
+        getResultsPageCountrys(newPage);
+     }
+     function getResultsPageCountrys(newPage){
+        countryService.getCountries(newPage, $scope.pageSizeCountry).then(function(response){
+            if(response.success){
+                $scope.countrysList=[];
+                $scope.totalCountrys= response.data[0].total;
+                for(var i=0; i< response.data.length; i++){
+                    var _id= parseInt(response.data[i].ID);
+                    var country={id:_id, nombre: response.data[i].DESCRIPCION};
+                    $scope.countrysList.push(country);
+                }
+            }else{
+                $scope.error="Hubó un error en la conexión de la base de datos";
+                $console.log('Error');
+            }
+        })
+     }
 
      $scope.pageChangedDomain= function(newPage){
         getResultsPageDomains(newPage);
@@ -184,7 +228,19 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         }
      });
      };
-
+    $scope.addNewCountry= function(){
+        countryService.addCountry($scope.nameCountry).then(response){
+            if(response.success){
+            pristineCountryFields();
+            $('#NewCountry').modal('hide');
+            getResultsPageCountrys($scope.currentPageCountry);
+            $scope.showSuccessCountryAdd= true;
+            }else{
+            $('#NewCountry').modal('hide');
+            $scope.showErrorCountryAdd= true;
+            }
+        }
+    }
     $scope.addNewVendor=function(){
 
     vendorCatService.addVendor($scope.name).then(function(response){
@@ -239,6 +295,11 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             }
         });
 
+    }
+
+    $scope.checkCountry= function(value){
+        $scope.activeModifyCountryButton= false;
+        $scope.idCountry= value;
     }
 
     $scope.checkVendor= function(value){
@@ -334,6 +395,21 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         }
       });
     }
+    $scope.deleteCountry= function(){
+        if($window.confirm('you are gonna delete this, are you sure?')){
+        deleteCountryProcess();
+        }
+    }
+    function deleteCountryProcess(){
+        countryService.deleteCountry($scope.idCountry).then(function(response){
+        if(response.success){
+            pristineEditCountryFields();
+            $('#EditCountry').modal('hide');
+            getResultsPageCountrys($scope.currentPageCountry);
+            $scope.showSuccessCountryDelete= true;
+        }
+        });
+    }
     $scope.showEditModal= function(){
         var vendorID= $scope.idVendor;
         $("#EditVendor").modal('show');
@@ -356,6 +432,11 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         var dominioId=$scope.idDomain;
         $("#EditDomain").modal('show');
         returnObjectDomain(dominioId);
+    }
+    $scope.showEditModalCountry= function(){
+        var countryId= $scope.idCountry;
+        $('#EditCountry').modal('show');
+        returnObjectCountry(countryId);
     }
     $scope.editProfileProcess= function()
     {
@@ -423,6 +504,22 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             }
         })
     };
+    $scope.editCountryProcess= function(){
+        var nombre= $scope.nameCountryEdit;
+        var id= $scope.idCountry;
+        countryService.editCountry(id, nombre).then(function(response){
+            if(response.success){
+                pristineEditCountryFields();
+                $("#EditCountry").modal('hide');
+                getResultsPageCountrys($scope.currentPageCountry);
+                $scope.showSuccessCountryEdit=true;
+            }else{
+                $("#EditCountry").modal('hide');
+                $scope.showErrorCountryEdit= true;
+            }
+        });
+    }
+
     function returnObjectVendor(vendorID){
         vendorCatService.getProviderById(vendorID).then(function(response){
             if(response.success){
@@ -452,6 +549,13 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
                 $scope.nameDomainEdit= response.data[0].DESCRIPCION;
             }
         });
+    }
+    function returnObjectCountry(countryId){
+        countryService.getCountryById(countryId).then(function(response){
+            if(response.success){
+                $scope.nameCountryEdit= response.data[0].DESCRIPCION;
+            }
+        })
     }
 
     function pristineFields(){

@@ -62,6 +62,16 @@ module.exports = {
         DeleteDomain:'Eliminar dominio',
         SuccesDeleteDomain: 'Se eliminó correctamente el dominio.',
         ErrorDeleteDomain:'El proceso de eliminado de dominos pudo tener errores',
-        Edit_Domain_Title:'Edita dominio'
+        Edit_Domain_Title:'Edita dominio',
+        NEW_COUNTRY:'Nuevo país',
+        Name:'Nombre',
+        NEW_COUNTRY_TITLE:'Agrega nuevo país',
+        SuccessAddingCountry: 'Se agregó correctamente el país',
+        ErrorAddingCountry:'El proceso de agregar paises pudo tener errores',
+        Edit_Country_Title:'Edita país',
+        SuccessEditCountry: 'Se actualizo correctamente el país',
+        ErrorEditCountry:'El proceso de actualizar paises pudo tener errores',
+        SuccesDeleteCountry:'Se eliminó correctamente el país.',
+        ErrorDeleteCountry:'El proceso de eliminado de paises pudo tener errores'
     }
 };
