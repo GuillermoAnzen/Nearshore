@@ -229,7 +229,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      });
      };
     $scope.addNewCountry= function(){
-        countryService.addCountry($scope.nameCountry).then(response){
+        countryService.addCountry($scope.nameCountry).then(function(response){
             if(response.success){
             pristineCountryFields();
             $('#NewCountry').modal('hide');
@@ -239,7 +239,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $('#NewCountry').modal('hide');
             $scope.showErrorCountryAdd= true;
             }
-        }
+        });
     }
     $scope.addNewVendor=function(){
 
