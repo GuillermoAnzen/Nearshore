@@ -103,13 +103,31 @@ var CitiesService = function ($http, $q, $cookies){
         });
         return promise;
     }
+    this.deleteCity= function(idCity){
+        var endpoint= server + "catalogsms/ciudades/"+ idCity;
+        var applicationId= $cookies.get('applicationId');
+        var content_type='application/json; charset=utf-8' ;
+        var defered= $q.defer();
+        var promise= defered.promise;
+        var config= {
+            headers : {
+                  'Content-Type': content_type,
+                  'ApplicationID': applicationId
+                   }
+        };
+        $http.delete(endpoint,config).then(function(response){
+            defered.resolve(response.data);
+        });
+        return promise;
+    }
 
     return{
         addCitys:this.addCitys,
         getCities: this.getCities,
         getCitiesByIdCountry: this.getCitiesByIdCountry,
         getCitiesById:this.getCitiesById,
-        updateCity: this.updateCity
+        updateCity: this.updateCity,
+        deleteCity: this.deleteCity
     };
 }
 module.exports= angular.module("app.locale").service("CitiesService", CitiesService);

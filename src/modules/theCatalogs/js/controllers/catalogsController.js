@@ -132,6 +132,22 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.hideErrorDeleteCountryAlert= function(){
         $scope.showErrorDeleteCountry= false;
      }
+     $scope.hideSuccessAddCityAlert= function(){
+        $scope.showSuccessCityAdd= false;
+     }
+     $scope.hideErrorAddCityAlert= function(){
+        $scope.showErrorCityAdd= false;
+     }
+     $scope.hideSuccessEditCityAlert= function(){
+        $scope.showSuccessCityEdit= false;
+     }
+     $scope.hideSuccessDeleteCityAlert= function(){
+        $scope.showSuccessCityDelete= false;
+     }
+     $scope.hideErrorDeleteCityAlert= function(){
+        $scope.showErrorDeleteCity= false;
+     }
+
 
      getResultsPage();
      getResultsPagePlataforms();
@@ -362,6 +378,24 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
     }
      $scope.clearFields= function(){
             pristineFields();
+        }
+        $scope.deleteCity= function(){
+            if($window.confirm('you are gonna delete this, are you sure?')){
+            deleteCityProcess();
+            }
+        }
+        function deleteCityProcess(){
+        CitiesService.deleteCity($scope.idCity).then(function(response){
+            if(response.success){
+                pristineEditCityFields();
+                $('#EditCity').modal('hide');
+                getResultsPageCity();
+                $scope.showSuccessCityDelete= true;
+            }else{
+                $("#EditCity").modal('hide');
+                $scope.showErrorDeleteCity= true;
+            }
+        })
         }
     $scope.deleteDomain= function(){
         if($window.confirm('you are gonna delete this, are you sure?')){

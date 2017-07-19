@@ -716,6 +716,14 @@
                 <a href="" class="close" ng-click="hideErrorEditCityAlert()" aria-label="close">&times;</a>
                 <p translate="ErrorEditCity"></p>
             </div>
+            <div class="alert alert-success alert-dismissible" ng-show="showSuccessCityDelete">
+                <a href="" class="close" ng-click="hideSuccessDeleteCityAlert()" aria-label="close">&times;</a>
+                <p translate="SuccesDeleteCity"></p>
+            </div>
+            <div class="alert alert-warning alert dismissible" ng-show="showErrorDeleteCity">
+                <a href="" class="close" ng-click="hideErrorDeleteCityAlert()" aria-label="close">&times;</a>
+                <p translate="ErrorDeleteCity"></p>
+
             <div class="row">
                 <br/>
                 <div class="col-xs-4">
@@ -825,7 +833,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <button class="btn btn-danger" ng-click="deleteCountry()" translate="DeleteCity"></button>
+                            <button class="btn btn-danger" ng-click="deleteCity()" translate="DeleteCity"></button>
                         </div>
                     </div>
                 </div>
