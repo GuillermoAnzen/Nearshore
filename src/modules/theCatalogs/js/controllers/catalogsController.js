@@ -35,6 +35,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.activeModifyProfileBoton= true;
      $scope.activeModifyDomainButton= true;
      $scope.activeModifyCountryButton= true;
+     $scope.activeModifyCityButton= true;
 
     $scope.hideSuccessDeleteAlert= function(){
        $scope.showSuccessDelete= false;
@@ -318,6 +319,18 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         });
 
     }
+    $scope.addNewCity= function(){
+        CitiesService.addCitys($scope.countryCity, $scope.nameCity).then(function(response){
+            if(response.success){
+                pristineCitiesFields();
+                $('#NewCity').modal('hide');
+                getResultsPageCity();
+                $scope.showSuccessCityAdd= true;
+            }else{
+                $('#NewCity').modal('hide');
+            }
+        });
+    }
 
     $scope.checkCountry= function(value){
         $scope.activeModifyCountryButton= false;
@@ -464,6 +477,11 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         $('#EditCountry').modal('show');
         returnObjectCountry(countryId);
     }
+    $scope.showEditModalCity= function(){
+        var cityId= $scope.idCity;
+        $('#EditCity').modal('show');
+        returnObjectCity(cityId);
+    }
     $scope.editProfileProcess= function()
     {
         var description=$scope.nameProfileEdit;
@@ -479,6 +497,23 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $("#EditProfile").modal('hide');
             $scope.showErrorProfileEdit= true;
             }
+        });
+
+    }
+    $scope.EditCityProcess= function(){
+        var nameCountry= $scope.countryCityEdit;
+        var nameCity= $scope.nameCityEdit;
+        CitiesService.updateCity(nameCountry,nameCity, $scope.idCity).then(function(response){
+            if(response.success){
+                pristineEditCityFields();
+                $("#EditCity").modal('hide');
+                getResultsPageCity();
+                $scope.showSuccessCityEdit= true;
+            }else{
+                $('#EditCity').modal('hide');
+                $scope.showErrorCityEdit= true;
+            }
+
         });
 
     }
@@ -545,7 +580,14 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             }
         });
     }
-
+    function returnObjectCity(cityId){
+        CitiesService.getCitiesById(cityId).then(function(response){
+            if(response.success){
+                $scope.nameCityEdit= response.data[0].Descripcion;
+                $scope.countryCityEdit= response.data[0].Id_Pais;
+            }
+        });
+    }
     function returnObjectVendor(vendorID){
         vendorCatService.getProviderById(vendorID).then(function(response){
             if(response.success){
@@ -597,6 +639,11 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $scope.AddCountry.$setPristine();
             $scope.nameCountry= null;
     }
+    function pristineCitiesFields(){
+            $scope.AddCity.$setPristine();
+            $scope.countryCity=null;
+            $scope.nameCity= null;
+    }
     function pristineEditCountryFields(){
             $scope.EditCountry.$setPristine();
             $scope.nameCountryEdit= null;
@@ -620,13 +667,17 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
     }
     function pristineDomainFields(){
         $scope.AddDomain.$setPristine();
-        $scope.nameDomain= true;
+        $scope.nameDomain= null;
     }
     function pristineEditDomainFields(){
         $scope.EditDomain.$setPristine();
         $scope.nameDomainEdit= null;
     }
-
+    function pristineEditCityFields(){
+        $scope.EditCity.$setPristine();
+        $scope.countryCityEdit= null;
+        $scope.nameCityEdit= null;
+    }
     if ($cookies.get("cat") != "true"){
         $location.path("/principal");
     }

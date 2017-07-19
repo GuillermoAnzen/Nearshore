@@ -76,6 +76,12 @@ module.exports = {
         NEW_CITY:'Nueva ciudad',
         Pais:'País',
         ErrorCountryRequiered: 'El país es requerido',
-        NEW_City_TITLE:'Agrega nueva ciudad'
+        NEW_City_TITLE:'Agrega nueva ciudad',
+        SuccessAddingCity:'Se agregó correctamente la ciudad',
+        Edit_City_TITLE:'Edita ciudad',
+        ErrorAddingCity: 'El proceso de agregar ciudades pudo tener errores',
+        SuccessEditCity: 'Se actualizó correctamente la ciudad',
+        ErrorEditCity: 'El proceso de actualizar ciudades pudo tener errores',
+        DeleteCity: 'Eliminar ciudad'
     }
 };

@@ -75,6 +75,13 @@ module.exports = {
         NEW_CITY: 'New city',
         Pais:'Country',
         ErrorCountryRequiered:'Country field is required.',
-        NEW_City_TITLE:'Add a new city'
+        NEW_City_TITLE:'Add a new city',
+        SuccessAddingCity: 'The city was successfully added',
+        Edit_City_TITLE: 'Edit city',
+        ErrorAddingCity: 'The process of adding a city could have errors',
+        SuccessEditCity: 'The city was successfully updated',
+        ErrorEditCity: 'The process of city updating could have errors',
+        DeleteCity:'Delete city'
+
     }
 };
