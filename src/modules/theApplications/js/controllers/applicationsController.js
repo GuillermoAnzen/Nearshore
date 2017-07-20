@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatService,applicationService,messagesService,employeesCitiService,employeesVendorService,$cookies, $window) {
+var applicationCtrl = function($mdDialog, $scope, $rootScope ,domainService,vendorCatService,applicationService,messagesService,employeesCitiService,employeesVendorService,$cookies, $window) {
 
     if ($cookies.get("app") != "true"){
         $location.path("/principal");
@@ -358,11 +358,34 @@ var applicationCtrl = function($scope, $rootScope ,domainService,vendorCatServic
         });
     };
 
-    $this.deleteApplication = function(_id){
+    $scope.deleteApplication = function(ev,_id) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Application, Are you sure?')
+            .ariaLabel('Delete Application')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Va a borrar esta Aplicación, ¿Estás seguro?')
+            .ariaLabel('Delete Application')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+
+        $mdDialog.show(confirm).then(function() {
+        deleteApp(_id);
+        }, function() {
+        
+        });
+    };
+    /*$this.deleteApplication = function(_id){
         if ($window.confirm("You are gonna delete this user, Are you sure?")){
             deleteApp(_id);
         }
-    };
+};*/
 
     $this.saveChangesSupportApplication = function(){
         var petitionSuccess = false;

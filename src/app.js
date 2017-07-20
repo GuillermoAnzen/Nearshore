@@ -1,5 +1,4 @@
 var angular = require('angular');
-
 /* Modules for bootstrap */
 require('bootstrap-webpack!../conf/bootstrap.config.js');
 var $ = require('jquery');
@@ -31,7 +30,8 @@ var app = angular.module('app', [
     require('angular-route'),
     require('angular-sanitize'),
     require('angular-translate'),
-    require('angular-cookies')
+    require('angular-cookies'),
+    require('angular-material')
 ].concat(getModuleDependencies()));
 
 app.config(['$translateProvider',

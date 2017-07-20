@@ -54,7 +54,7 @@ module.exports = {
         DeleteProfile: 'Eliminar perfil',
         Edit_Profile_Title: 'Edita perfil',
         NEW_DOMAIN:'Nuevo dominio',
-        NEW_DOMAIN_TITLE:'Agrega nuevo dominio.',
+        NEW_DOMAIN_TITLE:'Agrega nuevo dominio',
         SuccessAddingDomain:'Se agregó correctamente el dominio',
         ErrorAddingDomain:'El proceso de agregar dominios pudo tener errores.',
         SuccessEditDomain: 'Se actualizó correctamente el dominio',

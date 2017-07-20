@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var providerCtrl = function($scope, $location,localeService,vendorCatService,employeesVendorService,jobsVendorService,CitiesService,countryService,messagesService, $cookies,$window) {
+var providerCtrl = function($mdDialog, $scope, $location,localeService,vendorCatService,employeesVendorService,jobsVendorService,CitiesService,countryService,messagesService, $cookies,$window) {
 
     if ($cookies.get("provs") != "true"){
         $location.path("/principal");
@@ -157,11 +157,34 @@ var providerCtrl = function($scope, $location,localeService,vendorCatService,emp
         $this.idEmpProv = _idEmp;
     };
 
-    $this.deleteEmpProvider = function(){
+    $scope.deleteEmpProvider = function(ev,_id) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Employee, Are you sure?')
+            .ariaLabel('Delete Employee Provider')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar este Empleado, ¿Estás seguro?')
+            .ariaLabel('Delete Employee Provider')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+
+        $mdDialog.show(confirm).then(function() {
+            deleteEmpProvider($this.idEmpProv);
+        }, function() {
+        
+        });
+    };
+    /*$this.deleteEmpProvider = function(){
         if($window.confirm('you are gonna delete this user, are you sure?')){
             deleteEmpProvider($this.idEmpProv);
         }
-    };
+    };*/
 
     $this.showSpecificDetailsEmp = function(_id){
         $this.activeModifyButton = true;

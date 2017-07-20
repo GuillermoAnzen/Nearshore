@@ -8,10 +8,11 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var userCtrl = function($scope, $location,localeService, userService, $timeout, $window, $cookies) {
+var userCtrl = function($scope, $location,localeService, userService, $timeout, $cookies, $mdDialog) {
 
     var $this = $scope;
     $this.urlInclude='addNewUser.html';
+    $scope.activeModifyButton=true;
 
     if ($cookies.get("adm") != "true"){
         $location.path("/principal");
@@ -207,11 +208,35 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
 
             });
     }
-    $scope.deleteUser= function(){
+
+    $scope.deleteUser = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this User, Are you sure?')
+            .ariaLabel('Delete User')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar este Usuario, ¿Estás seguro?')
+            .ariaLabel('Delete User')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+    $mdDialog.show(confirm).then(function() {
+      deleteUserProcess();
+    }, function() {
+      
+    });
+  };
+
+    /*$scope.deleteUser= function(){
         if($window.confirm('you are gonna delete this user, are you sure?')){
             deleteUserProcess();
         }
-    }
+    }*/
 
     function deleteUserProcess(){
         userService.deleteUser($scope.idUser)
@@ -221,6 +246,7 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
                 $("#EditUser").modal('hide');
                   getResultsPage($scope.currentPage);
                   $scope.showSuccessDelete= true;
+                  $scope.activeModifyButton=true;
             }else{
                $("#EditUser").modal('hide');
                $scope.showErrorDelete= true;

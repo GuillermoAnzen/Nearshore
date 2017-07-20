@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var citiUsersCtrl = function($scope, $location,localeService,domainService, employeesCitiService, $cookies, messagesService, jobsCitiService, CitiesService, countryService,$window) {
+var citiUsersCtrl = function($mdDialog, $scope, $location,localeService,domainService, employeesCitiService, $cookies, messagesService, jobsCitiService, CitiesService, countryService,$window) {
 
     if ($cookies.get("citiU") != "true"){
         $location.path("/principal");
@@ -134,7 +134,7 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
 
     var getCities = function(_id){
         var petition = false;
-        CitiesService.getCitiesId(_id,1,100)
+        CitiesService.getCitiesByIdCountry(_id,1,100)
             .then(function(data){
                 petition = data.success;
                 if (petition){
@@ -214,6 +214,7 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
                 }else{
                     getEmployeesByDomain($this.idDomainCU, $this.currentPageCU, $this.pageSizeCU);
                 }
+                $this.disableButton = true;
                 messagesService.handlerMessages("CITI_USER_DELETE_SUCCESSFULLY",true);
             }else{
                 messagesService.handlerMessages("CITI_USER_DELETE_ERROR",false);
@@ -265,11 +266,34 @@ var citiUsersCtrl = function($scope, $location,localeService,domainService, empl
         updateCitiUser();
     };
 
-    $this.deleteCitiUsers = function(type){
+    $scope.deleteCitiUsers = function(ev,type) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Citi Employee, Are you sure?')
+            .ariaLabel('Delete Employee Citi')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar este Empleado Citi, ¿Estás seguro?')
+            .ariaLabel('Delete Employee Citi')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+
+        $mdDialog.show(confirm).then(function() {
+            deleteCitiUser($this.idUCiti,type);
+        }, function() {
+        
+        });
+    };
+    /*$this.deleteCitiUsers = function(type){
         if($window.confirm('You are gonna delete this user, are you sure?')){
             deleteCitiUser($this.idUCiti,type);
         }
-    };
+    };*/
 
     $this.empCSelected = function(idEmpC){
         $this.idUCiti = idEmpC;

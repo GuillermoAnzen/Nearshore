@@ -8,7 +8,7 @@ var angular = require('angular');
  * @param {undefinided} this This function does not get parameters yet.
  * @returns {undefinided} This function does not return values.
  */
-var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService, domainServices, countryService, CitiesService) {
+var catalogCtrl = function($mdDialog,$scope, $location,localeService, $cookies, vendorCatService, $window, plataformServices, jobsCitiService, domainServices, countryService, CitiesService) {
 
      $scope.currentPage = 1;
      $scope.currentPageDomains=1;
@@ -379,11 +379,35 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
      $scope.clearFields= function(){
             pristineFields();
         }
-        $scope.deleteCity= function(){
-            if($window.confirm('you are gonna delete this, are you sure?')){
-            deleteCityProcess();
-            }
+    
+    $scope.deleteCity = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this City, Are you sure?')
+            .ariaLabel('Delete City')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar esta Ciudad, ¿Estás seguro?')
+            .ariaLabel('Delete City')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
         }
+
+        $mdDialog.show(confirm).then(function() {
+            deleteCityProcess();
+        }, function() {
+
+        });
+    };
+    /*$scope.deleteCity= function(){
+        if($window.confirm('you are gonna delete this, are you sure?')){
+        deleteCityProcess();
+        }
+    }*/
         function deleteCityProcess(){
         CitiesService.deleteCity($scope.idCity).then(function(response){
             if(response.success){
@@ -391,17 +415,41 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
                 $('#EditCity').modal('hide');
                 getResultsPageCity();
                 $scope.showSuccessCityDelete= true;
+                $scope.activeModifyCityButton = true;
             }else{
                 $("#EditCity").modal('hide');
                 $scope.showErrorDeleteCity= true;
             }
         })
         }
-    $scope.deleteDomain= function(){
+     $scope.deleteDomain = function(ev) {
+             // Appending dialog to document.body to cover sidenav in docs app
+             var confirm = $mdDialog.confirm()
+                 .title('You are gonna delete this Domain, Are you sure?')
+                 .ariaLabel('Delete Domain')
+                 .targetEvent(ev)
+                 .ok('Yes')
+                 .cancel('Cancel');
+             if ($cookies.get("i") == "es-MX"){
+                 confirm = $mdDialog.confirm()
+                 .title('Vas a borrar este Dominio, ¿Estás seguro?')
+                 .ariaLabel('Delete Domain')
+                 .targetEvent(ev)
+                 .ok('Si')
+                 .cancel('Cancelar');
+             }
+
+             $mdDialog.show(confirm).then(function() {
+                 deleteDomainProcess();
+             }, function() {
+
+             });
+         };
+    /*$scope.deleteDomain= function(){
         if($window.confirm('you are gonna delete this, are you sure?')){
             deleteDomainProcess()
         }
-    }
+    }*/
     function deleteDomainProcess(){
         domainServices.deleteDomain($scope.idDomain).then(function(response){
             if(response.success){
@@ -409,36 +457,85 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $('#EditDomain').modal('hide');
             getResultsPageDomains($scope.currentPageDomains);
             $scope.showSuccessDomainsDelete= true;
+            $scope.activeModifyDomainButton = true;
             }else{
             $('#EditDomain').modal('hide');
             $scope.showErrorDeleteDomains= true;
             }
         });
     }
-    $scope.deleteProfile= function(){
+    $scope.deleteProfile = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Profile, Are you sure?')
+            .ariaLabel('Delete Profile')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar este Perfil, ¿Estás seguro?')
+            .ariaLabel('Delete Profile')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+
+        $mdDialog.show(confirm).then(function() {
+            deleteProfileProcess();
+        }, function() {
+
+        });
+    };
+    /*$scope.deleteProfile= function(){
         if($window.confirm('you are gonna delete this, are you sure?')){
             deleteProfileProcess();
         }
-    }
+    }*/
     function deleteProfileProcess(){
     jobsCitiService.deleteProfile($scope.idProfile).then(function(response){
        if(response.success){
-       pristineEditProfileFields();
-        $('#EditProfile').modal('hide');
-        getResultsPageProfiles($scope.currentPageProfile);
-        $scope.showSuccessProfileDelete= true;
+            pristineEditProfileFields();
+            $('#EditProfile').modal('hide');
+            getResultsPageProfiles($scope.currentPageProfile);
+            $scope.showSuccessProfileDelete= true;
+            $scope.activeModifyProfileBoton= true;
         }else{
             $('#EditProfile').modal('hide');
             $scope.showErrorDeleteProfile= true;
         }
     });
     }
-    $scope.deleteVendor= function(){
+
+    $scope.deleteVendor = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Vendor, Are you sure?')
+            .ariaLabel('Delete Provider')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar este Proveedor, ¿Estás seguro?')
+            .ariaLabel('Delete Provider')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+
+        $mdDialog.show(confirm).then(function() {
+            deleteVendorProcess();
+        }, function() {
+
+        });
+    };
+    /*$scope.deleteVendor= function(){
         if($window.confirm('you are gonna delete this, are you sure?')){
             deleteVendorProcess();
         }
 
-    }
+    }*/
     function deleteVendorProcess(){
         vendorCatService.deleteProvider($scope.idVendor).then(function(response){
             if(response.success){
@@ -446,6 +543,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
                 $('#EditVendor').modal('hide');
                 getResultsPage();
                 $scope.showSuccessDelete=true;
+                $scope.activeModifyButton= true;
             }else{
                 $('#EditVendor').modal('hide');
                 $scope.showErrorDelete= true;
@@ -453,11 +551,34 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
         });
     }
 
-    $scope.deletePlataform = function(){
+    $scope.deletePlataform = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Platform, Are you sure?')
+            .ariaLabel('Delete Platform')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar esta Plataforma, ¿Estás seguro?')
+            .ariaLabel('Delete Platform')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+
+        $mdDialog.show(confirm).then(function() {
+            deletePlataformProcess();
+        }, function() {
+
+        });
+    };
+    /*$scope.deletePlataform = function(){
         if($window.confirm('you are gonna delete this, are you sure?')){
         deletePlataformProcess();
         }
-    }
+    }*/
     function deletePlataformProcess(){
       plataformServices.deletePlataform($scope.idPlataform).then(function(response){
         if(response.success){
@@ -465,14 +586,39 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $('#EditPlataform').modal('hide');
             getResultsPagePlataforms();
             $scope.showSuccessPlataformDelete= true;
+            $scope.activeModifyPlataformButton= true;
         }
       });
     }
-    $scope.deleteCountry= function(){
+
+    $scope.deleteCountry = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Country, Are you sure?')
+            .ariaLabel('Delete Country')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        if ($cookies.get("i") == "es-MX"){
+            confirm = $mdDialog.confirm()
+            .title('Vas a borrar este País, ¿Estás seguro?')
+            .ariaLabel('Delete Country')
+            .targetEvent(ev)
+            .ok('Si')
+            .cancel('Cancelar');
+        }
+
+        $mdDialog.show(confirm).then(function() {
+            deleteCountryProcess();
+        }, function() {
+
+        });
+    };
+    /*$scope.deleteCountry= function(){
         if($window.confirm('you are gonna delete this, are you sure?')){
         deleteCountryProcess();
         }
-    }
+    }*/
     function deleteCountryProcess(){
         countryService.deleteCountry($scope.idCountry).then(function(response){
         if(response.success){
@@ -480,6 +626,7 @@ var catalogCtrl = function($scope, $location,localeService, $cookies, vendorCatS
             $('#EditCountry').modal('hide');
             getResultsPageCountrys($scope.currentPageCountry);
             $scope.showSuccessCountryDelete= true;
+            $scope.activeModifyCountryButton = true;
         }
         });
     }

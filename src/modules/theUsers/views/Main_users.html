@@ -18,6 +18,9 @@
                 <div class="col-xs-3">
                     <button class="btn btn-default btn-block" translate="MODIFY" ng-disabled="activeModifyButton" ng-click="showEditModal()"></button>
                 </div>
+                <div class="col-xs-3">
+                    <button class="btn btn-danger btn-block" ng-click="deleteUser($event)"  ng-disabled="activeModifyButton" translate="DeleteUser"></button>
+                </div>
             </div>
             <div class="alert alert-success alert-dismissible" ng-show="showSuccessAdd">
                 <a href="" class="close" ng-click="hideSuccessAddAlert()" aria-label="close">&times;</a>
@@ -255,7 +258,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <button class="btn btn-danger" ng-click="deleteUser()" translate="DeleteUser"></button>
                         </div>
                     </div>
                 </div>

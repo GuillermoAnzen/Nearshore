@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="col-xs-3">
-                        <button ng-show="showButtons" ng-disabled="disableButton" class="btn btn-default btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers('all')"></button>
+                        <button ng-show="showButtons" ng-disabled="disableButton" class="btn btn-danger btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers($event, 'all')"></button>
                     </div>
                 </div>
                 <div class="row margin-left">
@@ -127,7 +127,7 @@
                 </div>
 
                 <div class="col-xs-3">
-                    <button ng-show="showButtons" class="btn btn-default btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers('details')"></button>
+                    <button ng-show="showButtons" class="btn btn-danger btn-block" translate="DELETE_CITI_EMP" ng-click="deleteCitiUsers($event,'details')"></button>
                 </div>
             </div>
             <!-- TABLe -->
