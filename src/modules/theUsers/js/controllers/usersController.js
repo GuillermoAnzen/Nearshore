@@ -211,25 +211,25 @@ var userCtrl = function($scope, $location,localeService, userService, $timeout, 
 
     $scope.deleteUser = function(ev) {
     // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this User, Are you sure?')
-            .ariaLabel('Delete User')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
+        var confirm = $mdDialog.confirm()
             .title('Vas a borrar este Usuario, ¿Estás seguro?')
             .ariaLabel('Delete User')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            var confirm = $mdDialog.confirm()
+            .title('You are gonna delete this User, Are you sure?')
+            .ariaLabel('Delete User')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
-    $mdDialog.show(confirm).then(function() {
-      deleteUserProcess();
-    }, function() {
-      
-    });
+        $mdDialog.show(confirm).then(function() {
+            deleteUserProcess();
+        }, function() {
+        
+        });
   };
 
     /*$scope.deleteUser= function(){

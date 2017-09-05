@@ -1,13 +1,14 @@
 var angular = require("angular");
 
-var userService = function($http, $q, $cookies){
+var userService = function($http, $q, $cookies, constantsService){
     
-    var getAllusersUri = 'http://54.153.120.183/catalogsms/usuarios/';
-    var getAllProfilesUri='http://54.153.120.183/catalogsms/perfiles/';
-    var getAllDomainsUri='http://54.153.120.183/catalogsms/dominios/domainList';
-    var getAllVendorsUri= 'http://54.153.120.183/catalogsms/proveedores/';
-    var newUserUri='http://54.153.120.183/catalogsms/usuarios/newUser';
-    var updateDataUserUri = 'http://54.153.120.183/catalogsms/usuarios/updateUser/';
+    var server = constantsService.server();
+    var getAllusersUri = server + '/catalogsms/usuarios/';
+    var getAllProfilesUri= server + '/catalogsms/perfiles/';
+    var getAllDomainsUri=server + '/catalogsms/dominios/domainList';
+    var getAllVendorsUri= server + '/catalogsms/proveedores/';
+    var newUserUri=server + '/catalogsms/usuarios/newUser';
+    var updateDataUserUri = server + '/catalogsms/usuarios/updateUser/';
     var contentType = "application/json; charset=utf-8";
     var data = "";
 
@@ -87,7 +88,7 @@ var userService = function($http, $q, $cookies){
             var config={        headers:{ 'Content-Type': 'application/json; charset=utf-8',
                                            'ApplicationID': applicationId
                                            }};
-            var deleteUserUri="http://54.153.120.183/catalogsms/usuarios/" + userid.toString();
+            var deleteUserUri=server + "/catalogsms/usuarios/" + userid.toString();
             $http.delete(deleteUserUri,config).then(function(response){
                 defered.resolve(response.data);
             });

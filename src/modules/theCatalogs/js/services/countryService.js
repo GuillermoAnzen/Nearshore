@@ -1,12 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var countryService = function ($http, $q, $cookies){
+var countryService = function ($http, $q, $cookies, constantsService){
 
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
 
     this.getCountries = function(_index, _rows){
-        var endpoint = server + "catalogsms/paises/list";
+        var endpoint = server + "/catalogsms/paises/list";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -28,7 +28,7 @@ var countryService = function ($http, $q, $cookies){
     };
 
     this.getCountryById= function(countryId){
-        var endpoint= server + "catalogsms/paises/" + countryId;
+        var endpoint= server + "/catalogsms/paises/" + countryId;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -45,7 +45,7 @@ var countryService = function ($http, $q, $cookies){
         return promise;
     }
     this.editCountry= function(id, name){
-        var endpoint= server + "catalogsms/paises/" + id;
+        var endpoint= server + "/catalogsms/paises/" + id;
         var applicationId= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8';
         var defered= $q.defer();
@@ -61,7 +61,7 @@ var countryService = function ($http, $q, $cookies){
         return promise;
     }
     this.deleteCountry= function(id){
-        var endopoint= server + "catalogsms/paises/" + id;
+        var endopoint= server + "/catalogsms/paises/" + id;
         var applicationId= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8';
         var defered=$q.defer();
@@ -76,7 +76,7 @@ var countryService = function ($http, $q, $cookies){
         return promise;
     }
     this.addCountry= function(name){
-        var endopoint= server +"catalogsms/paises/";
+        var endopoint= server +"/catalogsms/paises/";
         var applicationId= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8';
         var defered= $q.defer();

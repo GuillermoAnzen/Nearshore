@@ -1,12 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var jobsVendorService = function ($http, $q, $cookies){
+var jobsVendorService = function ($http, $q, $cookies, constantsService){
 
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
 
     this.getJobs = function(){
-        var endpoint = server + "catalogsms/puestos/proveedores/";
+        var endpoint = server + "/catalogsms/puestos/proveedores/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();

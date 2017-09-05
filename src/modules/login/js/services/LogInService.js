@@ -1,7 +1,9 @@
 'use strict';
 var angular = require('angular');
 
-var LoginService= function ($http, $q){
+var LoginService= function ($http, $q, constantsService){
+
+    var server = constantsService.server();
     return{
     getLogin: getLogin
     }
@@ -12,7 +14,7 @@ var LoginService= function ($http, $q){
     function getLogin(username, password){
         var defered=$q.defer();
         var promise= defered.promise;
-        var loginUri= "http://54.153.120.183/appsms/login"
+        var loginUri= server+"/appsms/login"
         var data = {
              usuario: username,
              password: password

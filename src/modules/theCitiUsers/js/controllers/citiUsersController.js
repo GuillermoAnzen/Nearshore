@@ -269,18 +269,18 @@ var citiUsersCtrl = function($mdDialog, $scope, $location,localeService,domainSe
     $scope.deleteCitiUsers = function(ev,type) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this Citi Employee, Are you sure?')
-            .ariaLabel('Delete Employee Citi')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Vas a borrar este Empleado Citi, ¿Estás seguro?')
             .ariaLabel('Delete Employee Citi')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Citi Employee, Are you sure?')
+            .ariaLabel('Delete Employee Citi')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {

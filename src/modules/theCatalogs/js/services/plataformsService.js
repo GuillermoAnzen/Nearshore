@@ -1,12 +1,12 @@
 var angular= require('angular');
 
-var plataformsServices= function($http,$q,$cookies){
+var plataformsServices= function($http,$q,$cookies,constantsService){
 
-    var server= "http://54.153.120.183/";
+    var server= constantsService.server();
 
     this.getallPlataforms = function()
     {
-        var endpoint= server + "catalogsms/plataformas/";
+        var endpoint= server + "/catalogsms/plataformas/";
         var applicationID= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8';
         var defered= $q.defer();
@@ -23,7 +23,7 @@ var plataformsServices= function($http,$q,$cookies){
     };
 
     this.addNewPlataform= function(descripcion, comentarios){
-        var endpoint= server+ "catalogsms/plataformas/";
+        var endpoint= server+ "/catalogsms/plataformas/";
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -43,7 +43,7 @@ var plataformsServices= function($http,$q,$cookies){
     };
 
         this.getPlataformById= function(plataformId){
-        var endpoint= server + "catalogsms/plataformas/"+ plataformId;
+        var endpoint= server + "/catalogsms/plataformas/"+ plataformId;
         var applicationId= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8';
         var defered= $q.defer();
@@ -58,7 +58,7 @@ var plataformsServices= function($http,$q,$cookies){
         return promise;
     };
         this.editPlataform= function(plataformId,descripcion, comentarios){
-            var endpoint= server + "catalogsms/plataformas/" + plataformId;
+            var endpoint= server + "/catalogsms/plataformas/" + plataformId;
             var applicationId= $cookies.get('applicationId');
             var content_type='application/json; charset=utf-8';
             var defered= $q.defer();
@@ -77,7 +77,7 @@ var plataformsServices= function($http,$q,$cookies){
             return promise;
         }
         this.deletePlataform= function(plataformId){
-            var endpoint= server + "catalogsms/plataformas/" + plataformId;
+            var endpoint= server + "/catalogsms/plataformas/" + plataformId;
             var applicationId= $cookies.get('applicationId');
             var content_type= 'application/json; charset=utf-8';
             var defered= $q.defer();

@@ -1,12 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var employeesVendorService = function ($http, $q, $cookies){
+var employeesVendorService = function ($http, $q, $cookies, constantsService){
 
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
 
     this.getEmployeesPerVendor = function(_idVendor){
-        var endpoint = server + "catalogsms/empProvider/employeesVendor/"+_idVendor;
+        var endpoint = server + "/catalogsms/empProvider/employeesVendor/"+_idVendor;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -24,7 +24,7 @@ var employeesVendorService = function ($http, $q, $cookies){
     };
 
     this.getDetailsEmp = function(_id){
-        var endpoint = server + "catalogsms/empProvider/get/"+_id;
+        var endpoint = server + "/catalogsms/empProvider/get/"+_id;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -42,7 +42,7 @@ var employeesVendorService = function ($http, $q, $cookies){
     };
 
     this.getAppsByEmployee = function(_id, _index, _rows){
-        var endpoint = server + "catalogsms/proveedores/appsProvider/";
+        var endpoint = server + "/catalogsms/proveedores/appsProvider/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -88,7 +88,7 @@ var employeesVendorService = function ($http, $q, $cookies){
             _reports2EmpP,
             _commentEmpP
     ){
-        var endpoint = server + "catalogsms/empProvider/addEmployee/";
+        var endpoint = server + "/catalogsms/empProvider/addEmployee/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -136,7 +136,7 @@ var employeesVendorService = function ($http, $q, $cookies){
     };
 
     this.deleteEmployee = function(_id){
-        var endpoint = server + "catalogsms/empProvider/delete/"+_id;
+        var endpoint = server + "/catalogsms/empProvider/delete/"+_id;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -178,7 +178,7 @@ var employeesVendorService = function ($http, $q, $cookies){
             _reports2EmpP,
             _commentEmpP
     ){
-        var endpoint = server + "catalogsms/empProvider/update/";
+        var endpoint = server + "/catalogsms/empProvider/update/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();

@@ -1,12 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var employeesCitiService = function ($http, $q, $cookies){
+var employeesCitiService = function ($http, $q, $cookies, constantsService){
 
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
 
     this.getAnalistas = function(){
-        var endpoint = server + "catalogsms/empleados/analistas";
+        var endpoint = server + "/catalogsms/empleados/analistas";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -24,7 +24,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     };
 
     this.getLideres = function(){
-        var endpoint = server + "catalogsms/empleados/lideres";
+        var endpoint = server + "/catalogsms/empleados/lideres";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -42,7 +42,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     };
     
     this.getGerentes = function(){
-        var endpoint = server + "catalogsms/empleados/gerentes";
+        var endpoint = server + "/catalogsms/empleados/gerentes";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -60,7 +60,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     }
 
     this.getEmployeesByDomain = function(idDomain,_index,_rows){
-        var endpoint = server + "catalogsms/empleados/citiDomainId/";
+        var endpoint = server + "/catalogsms/empleados/citiDomainId/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();
@@ -83,7 +83,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     };
 
     this.getDetailsEMployee = function(_id){
-        var endpoint = server + "catalogsms/empleados/citi/"+_id;
+        var endpoint = server + "/catalogsms/empleados/citi/"+_id;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();
@@ -101,7 +101,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     };
 
     this.getAppsByCitiEmployee = function(_index, _rows, _id){
-        var endpoint = server + "catalogsms/empleados/appsEmpleadoCiti/";
+        var endpoint = server + "/catalogsms/empleados/appsEmpleadoCiti/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();
@@ -124,7 +124,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     };
 
     this.getAllEmployees = function(_index, _rows){
-        var endpoint = server + "catalogsms/empleados/citiList/";
+        var endpoint = server + "/catalogsms/empleados/citiList/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();
@@ -160,7 +160,7 @@ var employeesCitiService = function ($http, $q, $cookies){
         _email,
         _reportaA,
         _comentarios){
-        var endpoint = server + "catalogsms/empleados/citi/";
+        var endpoint = server + "/catalogsms/empleados/citi/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();
@@ -203,7 +203,7 @@ var employeesCitiService = function ($http, $q, $cookies){
     };
 
     this.deleteUser = function(_id){
-        var endpoint = server + "catalogsms/empleados/citi/"+_id;
+        var endpoint = server + "/catalogsms/empleados/citi/"+_id;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();
@@ -234,7 +234,7 @@ var employeesCitiService = function ($http, $q, $cookies){
         _email,
         _reportaA,
         _comentarios){
-        var endpoint = server + "catalogsms/empleados/citi/"+_soeId;
+        var endpoint = server + "/catalogsms/empleados/citi/"+_soeId;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered = $q.defer();

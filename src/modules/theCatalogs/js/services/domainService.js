@@ -1,10 +1,10 @@
 var angular= require('angular');
 
-var domainServices= function($http, $q, $cookies){
-    var server="http://54.153.120.183/";
+var domainServices= function($http, $q, $cookies, constantsService){
+    var server=constantsService.server();
 
     this.getAllDomains= function(index, rows){
-        var endpoint= server + "catalogsms/dominios/domainList";
+        var endpoint= server + "/catalogsms/dominios/domainList";
         var applicationId= $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -26,7 +26,7 @@ var domainServices= function($http, $q, $cookies){
     };
 
     this.addNewDomain= function(name){
-      var endpoint= server + "catalogsms/dominios/";
+      var endpoint= server + "/catalogsms/dominios/";
       var applicationId= $cookies.get('applicationId');
       var content_type= 'application/json; charset=utf-8';
       var defered= $q.defer();
@@ -42,7 +42,7 @@ var domainServices= function($http, $q, $cookies){
       return promise;
     }
     this.getDomainById= function(id){
-        var endpoint= server + "catalogsms/dominios/" + id;
+        var endpoint= server + "/catalogsms/dominios/" + id;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -56,7 +56,7 @@ var domainServices= function($http, $q, $cookies){
         return promise;
     }
     this.editDomain= function(id, name){
-        var endpoint= server + "catalogsms/dominios/" + id;
+        var endpoint= server + "/catalogsms/dominios/" + id;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -74,7 +74,7 @@ var domainServices= function($http, $q, $cookies){
     }
 
     this.deleteDomain= function(id){
-        var endpoint= server + "catalogsms/dominios/" + id;
+        var endpoint= server + "/catalogsms/dominios/" + id;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();

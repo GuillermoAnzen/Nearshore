@@ -1,10 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var domainService = function ($http, $q, $cookies){
+var domainService = function ($http, $q, $cookies, constantsService){
+
+    var serverip = constantsService.server();
     
    this.getDomain = function(_index,_rows){
-        var server = "http://54.153.120.183/catalogsms/dominios/domainList";
+        var server = serverip + "/catalogsms/dominios/domainList";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -27,7 +29,7 @@ var domainService = function ($http, $q, $cookies){
 
     /* APPLICATION PER DOMAIN */
     this.getApplicationDomain = function(_index,_rows,_idDomain){
-        var server = "http://54.153.120.183/appsms/aplicaciones/dominio/";
+        var server = serverip + "/appsms/aplicaciones/dominio/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -51,7 +53,7 @@ var domainService = function ($http, $q, $cookies){
 
     /* DETAILS APPLICATION PER ID */
     this.getApplicationDetails = function(_id){
-        var server = "http://54.153.120.183/appsms/aplicaciones/idAplicacion/";
+        var server = serverip + "/appsms/aplicaciones/idAplicacion/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -73,7 +75,7 @@ var domainService = function ($http, $q, $cookies){
     }
 
     this.getAllApplicationDomain = function(){
-        var server = "http://54.153.120.183/catalogsms/aplicaciones/";
+        var server = serverip + "/catalogsms/aplicaciones/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();

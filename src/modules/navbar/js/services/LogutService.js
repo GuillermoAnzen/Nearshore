@@ -1,15 +1,16 @@
 var angular = require('angular');
 
-var logoutService= function ($http, $q, $cookies){
+var logoutService= function ($http, $q, $cookies, constantsService){
+    var server = constantsService.server();
     return {
         logout: logout
     }
-
+    
     function logout(applicationId){
         var defered=$q.defer();
         var promise= defered.promise;
 
-        var logoutUri= "http://54.153.120.183/logout";
+        var logoutUri= server + "/logout";
 
         var config={
         headers : {'Content-Type': 'application/json; charset=utf-8',

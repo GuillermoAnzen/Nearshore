@@ -1,12 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var jobsCitiService = function ($http, $q, $cookies){
+var jobsCitiService = function ($http, $q, $cookies, constantsService){
 
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
 
     this.getJobs = function(_index, _rows){
-        var endpoint = server + "catalogsms/puestos/citi/list";
+        var endpoint = server + "/catalogsms/puestos/citi/list";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -27,7 +27,7 @@ var jobsCitiService = function ($http, $q, $cookies){
         return promise;
     };
     this.addNewJob= function(name){
-        var endpoint= server + "catalogsms/puestos/citi/";
+        var endpoint= server + "/catalogsms/puestos/citi/";
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -45,7 +45,7 @@ var jobsCitiService = function ($http, $q, $cookies){
         return promise
     }
     this.getProfileById= function(profileId){
-        var endpoint= server + "catalogsms/puestos/citi/" + profileId;
+        var endpoint= server + "/catalogsms/puestos/citi/" + profileId;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -60,7 +60,7 @@ var jobsCitiService = function ($http, $q, $cookies){
         return promise;
     }
     this.updateProfile= function(profileId, descripcion){
-        var endpoint= server + "catalogsms/puestos/citi/"+ profileId;
+        var endpoint= server + "/catalogsms/puestos/citi/"+ profileId;
         var applicationId= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8';
         var defered= $q.defer();
@@ -75,7 +75,7 @@ var jobsCitiService = function ($http, $q, $cookies){
         return promise;
     }
     this.deleteProfile= function(profileId){
-        var endpoint= server + "catalogsms/puestos/citi/" + profileId;
+        var endpoint= server + "/catalogsms/puestos/citi/" + profileId;
         var applicationId= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8';
         var defered= $q.defer();

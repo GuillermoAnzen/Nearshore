@@ -160,18 +160,18 @@ var providerCtrl = function($mdDialog, $scope, $location,localeService,vendorCat
     $scope.deleteEmpProvider = function(ev,_id) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this Employee, Are you sure?')
-            .ariaLabel('Delete Employee Provider')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Vas a borrar este Empleado, ¿Estás seguro?')
             .ariaLabel('Delete Employee Provider')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Employee, Are you sure?')
+            .ariaLabel('Delete Employee Provider')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {

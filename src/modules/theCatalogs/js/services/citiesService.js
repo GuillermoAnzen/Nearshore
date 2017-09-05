@@ -1,12 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var CitiesService = function ($http, $q, $cookies){
+var CitiesService = function ($http, $q, $cookies, constantsService){
 
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
 
     this.getCities = function(){
-        var endpoint = server + "catalogsms/ciudades/";
+        var endpoint = server + "/catalogsms/ciudades/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -23,7 +23,7 @@ var CitiesService = function ($http, $q, $cookies){
         return promise;
     };
     this.getCitiesById= function(id){
-        var endpoint= server + "catalogsms/ciudades/" + id;
+        var endpoint= server + "/catalogsms/ciudades/" + id;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -40,7 +40,7 @@ var CitiesService = function ($http, $q, $cookies){
     }
 
     this.getCitiesByIdCountry = function(_id,_index, _rows){
-        var endpoint = server + "catalogsms/ciudades/paises/"+ _id;
+        var endpoint = server + "/catalogsms/ciudades/paises/"+ _id;
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -61,7 +61,7 @@ var CitiesService = function ($http, $q, $cookies){
         return promise;
     };
     this.addCitys= function(paisId, ciudad){
-        var endpoint= server + "catalogsms/ciudades/paises/"+paisId+"/ciudades";
+        var endpoint= server + "/catalogsms/ciudades/paises/"+paisId+"/ciudades";
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -81,7 +81,7 @@ var CitiesService = function ($http, $q, $cookies){
         return promise;
     }
     this.updateCity= function(paisId, ciudadname, ciudadId){
-        var endpoint= server + "catalogsms/ciudades/" + ciudadId;
+        var endpoint= server + "/catalogsms/ciudades/" + ciudadId;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -104,7 +104,7 @@ var CitiesService = function ($http, $q, $cookies){
         return promise;
     }
     this.deleteCity= function(idCity){
-        var endpoint= server + "catalogsms/ciudades/"+ idCity;
+        var endpoint= server + "/catalogsms/ciudades/"+ idCity;
         var applicationId= $cookies.get('applicationId');
         var content_type='application/json; charset=utf-8' ;
         var defered= $q.defer();

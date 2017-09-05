@@ -383,18 +383,18 @@ var catalogCtrl = function($mdDialog,$scope, $location,localeService, $cookies, 
     $scope.deleteCity = function(ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this City, Are you sure?')
-            .ariaLabel('Delete City')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Vas a borrar esta Ciudad, ¿Estás seguro?')
             .ariaLabel('Delete City')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this City, Are you sure?')
+            .ariaLabel('Delete City')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {
@@ -425,18 +425,18 @@ var catalogCtrl = function($mdDialog,$scope, $location,localeService, $cookies, 
      $scope.deleteDomain = function(ev) {
              // Appending dialog to document.body to cover sidenav in docs app
              var confirm = $mdDialog.confirm()
-                 .title('You are gonna delete this Domain, Are you sure?')
-                 .ariaLabel('Delete Domain')
-                 .targetEvent(ev)
-                 .ok('Yes')
-                 .cancel('Cancel');
-             if ($cookies.get("i") == "es-MX"){
-                 confirm = $mdDialog.confirm()
                  .title('Vas a borrar este Dominio, ¿Estás seguro?')
                  .ariaLabel('Delete Domain')
                  .targetEvent(ev)
                  .ok('Si')
                  .cancel('Cancelar');
+             if ($cookies.get("i") == "en-US"){
+                 confirm = $mdDialog.confirm()
+                 .title('You are gonna delete this Domain, Are you sure?')
+                 .ariaLabel('Delete Domain')
+                 .targetEvent(ev)
+                 .ok('Yes')
+                 .cancel('Cancel');
              }
 
              $mdDialog.show(confirm).then(function() {
@@ -467,18 +467,18 @@ var catalogCtrl = function($mdDialog,$scope, $location,localeService, $cookies, 
     $scope.deleteProfile = function(ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this Profile, Are you sure?')
-            .ariaLabel('Delete Profile')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Vas a borrar este Perfil, ¿Estás seguro?')
             .ariaLabel('Delete Profile')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Profile, Are you sure?')
+            .ariaLabel('Delete Profile')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {
@@ -510,18 +510,18 @@ var catalogCtrl = function($mdDialog,$scope, $location,localeService, $cookies, 
     $scope.deleteVendor = function(ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this Vendor, Are you sure?')
-            .ariaLabel('Delete Provider')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Vas a borrar este Proveedor, ¿Estás seguro?')
             .ariaLabel('Delete Provider')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Vendor, Are you sure?')
+            .ariaLabel('Delete Provider')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {
@@ -554,18 +554,18 @@ var catalogCtrl = function($mdDialog,$scope, $location,localeService, $cookies, 
     $scope.deletePlataform = function(ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this Platform, Are you sure?')
-            .ariaLabel('Delete Platform')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Vas a borrar esta Plataforma, ¿Estás seguro?')
             .ariaLabel('Delete Platform')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Platform, Are you sure?')
+            .ariaLabel('Delete Platform')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {
@@ -594,18 +594,18 @@ var catalogCtrl = function($mdDialog,$scope, $location,localeService, $cookies, 
     $scope.deleteCountry = function(ev) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this Country, Are you sure?')
-            .ariaLabel('Delete Country')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Vas a borrar este País, ¿Estás seguro?')
             .ariaLabel('Delete Country')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Country, Are you sure?')
+            .ariaLabel('Delete Country')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {

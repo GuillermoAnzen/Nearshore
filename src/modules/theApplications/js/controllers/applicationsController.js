@@ -361,18 +361,18 @@ var applicationCtrl = function($mdDialog, $scope, $rootScope ,domainService,vend
     $scope.deleteApplication = function(ev,_id) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('You are gonna delete this Application, Are you sure?')
-            .ariaLabel('Delete Application')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('Cancel');
-        if ($cookies.get("i") == "es-MX"){
-            confirm = $mdDialog.confirm()
             .title('Va a borrar esta Aplicación, ¿Estás seguro?')
             .ariaLabel('Delete Application')
             .targetEvent(ev)
             .ok('Si')
             .cancel('Cancelar');
+        if ($cookies.get("i") == "en-US"){
+            confirm = $mdDialog.confirm()
+            .title('You are gonna delete this Application, Are you sure?')
+            .ariaLabel('Delete Application')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
         }
 
         $mdDialog.show(confirm).then(function() {

@@ -1,14 +1,14 @@
 'use strict';
 var angular = require('angular');
 
-var applicationService = function ($http, $q, $cookies){
+var applicationService = function ($http, $q, $cookies, constantsService){
     
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
     var content_type = 'application/json; charset=utf-8';
 
    /* DETAILS APPLICATION PER ID */
     this.getApplicationDetails = function(_id){
-        var endpoint = server + "appsms/aplicaciones/idAplicacion/" + _id;
+        var endpoint = server + "/appsms/aplicaciones/idAplicacion/" + _id;
         var appID = $cookies.get('applicationId');    
         var defered=$q.defer();
         var promise= defered.promise;
@@ -28,7 +28,7 @@ var applicationService = function ($http, $q, $cookies){
      * ADD NEW APPLICATION
      */
     this.addAplication = function (_csiID,_idDom,_ptbId,_descCorta,_descLarga,_idL1,_idL2,_idL3,_idP1,_idP2,_idP3,_coment){
-        var endpoint = server + "catalogsms/aplicaciones/";
+        var endpoint = server + "/catalogsms/aplicaciones/";
         var appID = $cookies.get("applicationId");
         var defered = $q.defer();
         var promise = defered.promise;
@@ -59,7 +59,7 @@ var applicationService = function ($http, $q, $cookies){
     };
 
     this.updateApplication = function(_csiID,_idDom,_ptbId,_descCorta,_descLarga,_idL1,_idL2,_idL3,_idP1,_idP2,_idP3,_coment){
-        var endpoint = server + "catalogsms/aplicaciones/"+_csiID;
+        var endpoint = server + "/catalogsms/aplicaciones/"+_csiID;
         var appID = $cookies.get("applicationId");
         var defered = $q.defer();
         var promise = defered.promise;
@@ -89,7 +89,7 @@ var applicationService = function ($http, $q, $cookies){
     };
 
     this.getDetailsL = function(_idApp,_level){
-        var endpoint = server + "catalogsms/aplicaciones/detailsL"+_level+"/"+_idApp;
+        var endpoint = server + "/catalogsms/aplicaciones/detailsL"+_level+"/"+_idApp;
         var appID = $cookies.get("applicationId");
         var defered = $q.defer();
         var promise = defered.promise;
@@ -106,7 +106,7 @@ var applicationService = function ($http, $q, $cookies){
     };
 
     this.updateSupportL = function(_id, _resp_prov, _back_prov, _lider_prov, _p_man_prov, _d_man_prov, _man_bnmx, _lead_bnmx, _analista_bnmx,_level){
-        var endpoint = server + "catalogsms/aplicaciones/detailsSupport/"+_level;
+        var endpoint = server + "/catalogsms/aplicaciones/detailsSupport/"+_level;
         var appID = $cookies.get("applicationId");
         var defered = $q.defer();
         var promise = defered.promise;
@@ -134,7 +134,7 @@ var applicationService = function ($http, $q, $cookies){
     };
 
     this.deleteApplication = function(_id){
-        var endpoint = server + "catalogsms/aplicaciones/"+_id;
+        var endpoint = server + "/catalogsms/aplicaciones/"+_id;
         var appID = $cookies.get("applicationId");
         var defered = $q.defer();
         var promise = defered.promise;

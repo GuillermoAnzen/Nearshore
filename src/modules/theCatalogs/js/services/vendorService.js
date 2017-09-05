@@ -1,12 +1,12 @@
 'use strict';
 var angular = require('angular');
 
-var vendorCatService = function ($http, $q, $cookies){
+var vendorCatService = function ($http, $q, $cookies, constantsService){
 
-    var server = "http://54.153.120.183/";
+    var server = constantsService.server();
 
     this.addVendor = function(descripcion){
-        var endpoint= server + "catalogsms/proveedores/";
+        var endpoint= server + "/catalogsms/proveedores/";
         var applicationId= $cookies.get('applicationId');
         var  content_type='application/json; charset=utf-8';
         var defered = $q.defer();
@@ -27,7 +27,7 @@ var vendorCatService = function ($http, $q, $cookies){
     }
 
     this.getVendors = function(){
-        var endpoint = server + "catalogsms/proveedores/";
+        var endpoint = server + "/catalogsms/proveedores/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -45,7 +45,7 @@ var vendorCatService = function ($http, $q, $cookies){
     }
 
     this.getPlatforms = function(){
-        var endpoint = server +"catalogsms/plataformas/";
+        var endpoint = server +"/catalogsms/plataformas/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -63,7 +63,7 @@ var vendorCatService = function ($http, $q, $cookies){
     };
     
     this.getProviders = function(_index,_size){
-        var endpoint = server + "catalogsms/proveedores/providers/";
+        var endpoint = server + "/catalogsms/proveedores/providers/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -85,7 +85,7 @@ var vendorCatService = function ($http, $q, $cookies){
     };
 
     this.getDetailsProvider = function(_index, _rows, _id){
-        var endpoint = server + "catalogsms/proveedores/detailsProvider/";
+        var endpoint = server + "/catalogsms/proveedores/detailsProvider/";
         var appID = $cookies.get('applicationId');
         var content_type = 'application/json; charset=utf-8';
         var defered=$q.defer();
@@ -107,7 +107,7 @@ var vendorCatService = function ($http, $q, $cookies){
         return promise;
     };
     this.getProviderById= function(idVendor){
-    var endpoint= server + "catalogsms/proveedores/" + idVendor.toString();
+    var endpoint= server + "/catalogsms/proveedores/" + idVendor.toString();
     var applicationId= $cookies.get('applicationId');
     var content_type= 'application/json; charset=utf-8';
     var defered= $q.defer();
@@ -123,7 +123,7 @@ var vendorCatService = function ($http, $q, $cookies){
         return promise;
     }
     this.deleteProvider= function(idVendor){
-        var endpoint= server +"catalogsms/proveedores/" + idVendor.toString();
+        var endpoint= server +"/catalogsms/proveedores/" + idVendor.toString();
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
@@ -140,7 +140,7 @@ var vendorCatService = function ($http, $q, $cookies){
     }
     this.updateVendors= function(idVendor, descripcion)
     {
-        var endpoint= server + "catalogsms/proveedores/" + idVendor;
+        var endpoint= server + "/catalogsms/proveedores/" + idVendor;
         var applicationId= $cookies.get('applicationId');
         var content_type= 'application/json; charset=utf-8';
         var defered= $q.defer();
