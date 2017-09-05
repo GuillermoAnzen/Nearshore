@@ -1,8 +1,8 @@
 module.exports = {
     language: 'es-MX',
     translate: {
-        LANGUAGE_SPANISH: 'Spanish',
-        LANGUAGE_ENGLISH: 'English',
+        LANGUAGE_SPANISH: 'Español',
+        LANGUAGE_ENGLISH: 'Inglés',
         LOGOUT: 'Cerrar sesión',
         CLOSE_MESSAGES_HANDLER: 'Cerrar',
         SUCCESS_REGISTRY: 'Aplicación Registrada Exitosamente',
